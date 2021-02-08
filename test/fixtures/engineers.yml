@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  phone: MyString
+  enable: false
+  profile: one
+  profile_two: 1
+  profile_three: 1
+
+two:
+  name: MyString
+  email: MyString
+  phone: MyString
+  enable: false
+  profile: two
+  profile_two: 1
+  profile_three: 1

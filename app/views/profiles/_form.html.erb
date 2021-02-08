@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="card card-margin">
+
+      <div class="card-header">
+        <h5 class="card-title">
+          Datos
+        </h5>
+      </div>
+
+      <%= form_with(model: profile, local: true, class: "form-sample") do |form| %>
+        <div class="card-body">
+          <% if profile.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+              <ul>
+                <% profile.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group">
+            <%= form.label :profile, "Tipo de perfil" %>
+            <%= form.select(:profile_type, options_for_select(@profile_type, profile.profile_type), {:prompt => 'Selecciona un tipo'},{class: "form-control" }) %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :name, "Nombre"%>
+            <%= form.text_field :name,  class: "form-control" , required: true %>
+          </div>
+
+          <% if @profile.id? %>
+            <div class="form-group">
+             <label class="switch">
+               <input type="checkbox" name="enable" id="enable" value="true" <%= @profile.enable ? "checked='checked'":""%> >
+               <span class="slider round"></span>
+             </label>
+            </div>
+          <% end %>
+
+
+
+
+        </div>
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', profiles_path ,class: "btn btn-light btn-action"  %>
+
+          <% if @delete_ok == nil %>
+            <%= link_to 'Eliminar', profile, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
+          <% end %>
+
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

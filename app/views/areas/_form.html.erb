@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="card card-margin">
+
+      <div class="card-header">
+        <h5 class="card-title">
+          Datos
+        </h5>
+      </div>
+
+      <%= form_with(model: area, local: true, class: "form-sample") do |form| %>
+        <div class="card-body">
+          <% if area.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(area.errors.count, "error") %> prohibited this area from being saved:</h2>
+
+              <ul>
+                <% area.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="row no-gutters">
+            <div class="col-lg-10">
+              <div class="form-group">
+                <%= form.label :name, "Nombre" %>
+                <%= form.text_field :name, class: "form-control", required: true%>
+              </div>
+            </div>
+
+            <div class="col-lg-2 text-center">
+              <% if @area.id? %>
+                <div class="form-group">
+                  <%= form.label :enable, "Estado" %> <br>
+                  <label class="switch">
+                    <input type="checkbox" name="enable" id="enable" value="true" <%= @area.enable ? "checked='checked'":""%> >
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+
+         
+
+
+
+
+
+        </div>
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', areas_path ,class: "btn btn-light btn-action"  %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+<%= render 'layouts/shared/notice' %>
+
+<div class="row">
+  <div class="col-md-10 offset-md-2  text-center">
+    <h2 class="my-4">Modalidades</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th colspan="2"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @modalities.each_with_index  do |modality| %>
+
+          <tr>
+            <td><%= modality.name %></td>
+            <td>
+            </td>
+            <td><%= link_to 'Editar', edit_modality_path(modality) %></td>
+
+            <td><%#= link_to 'Eliminar', modality, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-10 offset-2 d-flex justify-content-center">
+    <%= link_to 'Nuevo modalidad', new_modality_path , class: "btn btn-primary mr-2" %>
+  </div>
+
+
+
+</div>

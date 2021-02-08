@@ -1,0 +1,63 @@
+<%= render 'layouts/shared/notice' %>
+<br>
+<div class="col-lg-9 offset-lg-3">
+  <div class="card card-margin mt-4">
+    <div class="card-header">
+      <h5 class="card-title">
+        Datos Ingenieros
+      </h5>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table center-aligned-table table-striped">
+
+
+          <tr>
+            <th><strong>Nombre:</strong></th>
+            <td class="td-white"><%= @engineer.name %></td>
+          </tr>
+
+          <tr>
+            <th><strong>telefono:</strong></th>
+            <td class="td-white"> <%= @engineer.phone %></td>
+          </tr>
+
+          <tr>
+            <th><strong> Correo electronico:</strong></th>
+            <td class="td-white"><%= @engineer.email %></td>
+          </tr>
+
+          <tr>
+            <th><strong> Perfil 1:</strong></th>
+            <td class="td-white"><%= @engineer.profile.name %></td>
+          </tr>
+
+          <tr>
+            <th><strong> Perfil 2:</strong></th>
+            <td class="td-white"><%= @profile_two %></td>
+          </tr>
+
+          <tr>
+            <th><strong> Perfil 3:</strong></th>
+            <td class="td-white"><%= @profile_three %></td>
+          </tr>
+
+
+
+
+
+
+        </table>
+      </div>
+    </div>
+
+    <div class="card-footer bg-white text-center">
+
+      <%= link_to 'Editar', edit_engineer_path(@engineer) ,class: "btn btn-primary mr-2" %>
+      <%= link_to 'Regresar', engineers_path, class: "btn btn-light "  %>
+
+    </div>
+  </div>
+</div>
+

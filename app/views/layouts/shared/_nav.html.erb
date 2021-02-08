@@ -1,0 +1,98 @@
+<div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556074849/avatar-1_tcnd60.png" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+      <div class="media-body">
+        <h4 class="m-0">Bienvenido</h4>
+        <p class="font-weight-light text-muted mb-0">Control y seguimiento</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+
+    <li class="nav-header mb-0 nav-item">
+      <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-designations" aria-expanded="false" aria-controls="ui-designations">
+        <span class="sm-icons-fa"> </span>
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i><span class="menu-title ">Designacion actividades y </span><span class="pl-3">responsables</span>
+      </a>
+
+
+      <div class="collapse" id="ui-designations">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= designations_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Lista de Actividades</span></a></li>
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= new_designation_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Nuevo Actividad</span></a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-header mb-0 nav-item">
+      <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-engineers" aria-expanded="false" aria-controls="ui-engineers">
+        <span class="sm-icons-fa"> </span>
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i><span class="menu-title ">Ingenieros</span>
+      </a>
+
+
+      <div class="collapse" id="ui-engineers">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= engineers_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Lista de ingenieros</span></a></li>
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= new_engineer_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Nuevo ingenieros</span></a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-header mb-0 nav-item">
+      <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-profiles" aria-expanded="false" aria-controls="ui-profiles">
+        <span class="sm-icons-fa"> </span>
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i><span class="menu-title ">Configuración</span>
+      </a>
+
+
+      <div class="collapse" id="ui-profiles">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= profiles_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Perfiles</span></a></li>
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= areas_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Areas</span></a></li>
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= modalities_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Modalidades</span></a></li>
+        </ul>
+      </div>
+    </li>
+
+
+
+
+
+
+<!--
+    <li class="nav-header mb-0 nav-item">
+      <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-states" aria-expanded="false" aria-controls="ui-states">
+        <span class="sm-icons-fa"> </span>
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i><span class="menu-title ">Estados del Aspirante</span>
+      </a>
+
+
+      <div class="collapse" id="ui-states">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<% %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Lista de Estados</span></a></li>
+        </ul>
+      </div>
+    </li>
+
+
+    <li class="nav-header mb-0 nav-item">
+      <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-leader" aria-expanded="false" aria-controls="ui-leader">
+        <span class="sm-icons-fa"> </span>
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i><span class="menu-title ">Lideres a cargo</span>
+      </a>
+
+
+      <div class="collapse" id="ui-leader">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<% %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Lista de encargado</span></a></li>
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<% %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Nuevo encargado</span></a></li>
+        </ul>
+      </div>
+    </li>
+-->
+  </ul>
+</div>

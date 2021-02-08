@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="card card-margin">
+
+      <div class="card-header">
+        <h5 class="card-title">
+          Datos
+        </h5>
+      </div>
+
+      <%= form_with(model: engineer, local: true,class: "form-sample") do |form|  %>
+        <div class="card-body">
+          <% if engineer.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(engineer.errors.count, "error") %> prohibited this engineer from being saved:</h2>
+
+              <ul>
+                <% engineer.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+<div class="row no-gutters">
+  <div class="col-lg-4">
+    <div class="form-group">
+      <%= form.label :profile_id, "Perfil" %>
+      <%= form.select(:profile_id, options_for_select(@profiles, engineer.profile_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="form-group">
+      <%= form.label :profile_two, "Perfil 2" %>
+      <%= form.select(:profile_two, options_for_select(@profiles, engineer.profile_two), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="form-group">
+      <%= form.label :profile_three, "Perfil 3" %>
+      <%= form.select(:profile_three, options_for_select(@profiles_three, engineer.profile_three), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+          <div class="form-group">
+            <%= form.label :name, "Nombre" %>
+            <%= form.text_field :name , class:"form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :phone, "telefono" %>
+            <%= form.text_field :phone ,class:"form-control"%>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :email, "email" %>
+            <%= form.text_field :email,class: "form-control" %>
+          </div>
+
+          <% if @engineer.id? %>
+            <div class="form-group">
+              <label class="switch">
+                <input type="checkbox" name="enable" id="enable" value="true" <%= @engineer.enable ? "checked='checked'":""%> >
+                <span class="slider round"></span>
+              </label>
+            </div>
+          <% end %>
+
+
+
+
+        </div>
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', engineers_path ,class: "btn btn-light btn-action"  %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
