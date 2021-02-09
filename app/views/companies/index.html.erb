@@ -1,0 +1,46 @@
+<%= render 'layouts/shared/notice' %>
+
+<div class="row">
+  <div class="col-md-10 offset-md-2  text-center">
+    <h2 class="my-4">Entidad</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th colspan="2"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @companies.each_with_index  do |company| %>
+
+          <tr>
+            <td><%= company.name %></td>
+            <td>
+            </td>
+            <td><%= link_to 'Editar', edit_company_path(company) %></td>
+
+            <td><%#= link_to 'Eliminar', company, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-10 offset-2 d-flex justify-content-center">
+    <%= link_to 'Nuevo Entidad', new_company_path , class: "btn btn-primary mr-2" %>
+  </div>
+
+
+
+</div>

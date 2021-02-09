@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="card card-margin">
+
+      <div class="card-header">
+        <h5 class="card-title">
+          Datos
+        </h5>
+      </div>
+
+      <%= form_with(model: company, local: true, class: "form-sample") do |form| %>
+        <div class="card-body">
+          <% if company.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+              <ul>
+                <% company.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+
+          <div class="form-group">
+            <%= form.label :name, "Identificación"%>
+            <%= form.text_field :name,  class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :name, "Nombre de la entidad"%>
+            <%= form.text_field :name,  class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <div class="row no-gutters">
+              <div class="col-lg-6 pr-2">
+                <%= form.label :phone, "Telefono"%>
+                <%= form.text_field :phone,  class: "form-control" %>
+              </div>
+              <div class="col-lg-6">
+                <%= form.label :email, "Correo Electronico"%>
+                <%= form.email_field :email,  class: "form-control"  %>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <%= form.label :address , "Direccion" %>
+            <%= form.text_field :address, class: "form-control" %>
+          </div>
+
+
+          <% if @company.id? %>
+            <div class="form-group d-flex justify-content-center">
+              <div><label for=""> Habilitado / inhabilitado </label> </div>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+
+               <label class="switch">
+                <input type="checkbox" name="enable" id="enable" value="true" <%= @company.enable ? "checked='checked'":""%> >
+                <span class="slider round"></span>
+              </label>
+            </div>
+          <% end %>
+
+
+
+
+
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', companies_path ,class: "btn btn-light btn-action"  %>
+
+        </div>
+
+
+        </div>
+        </div>
+        </div>
+        </div>
+      <% end %>
+
+
+
+

@@ -1,0 +1,71 @@
+
+<%= render 'layouts/shared/notice' %>
+<br>
+<div class="col-lg-9 offset-lg-3">
+  <div class="card card-margin mt-4">
+    <div class="card-header">
+      <h5 class="card-title">
+        Datos compañia
+      </h5>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table center-aligned-table table-striped">
+
+          <tr>
+            <th><strong>Identificacion:</strong></th>
+            <td class="td-white"><%= @company.identification %></td>
+          </tr>
+          <tr>
+            <th><strong>Nombre:</strong></th>
+            <td class="td-white"><%= @company.name %></td>
+          </tr>
+
+          <tr>
+            <th><strong>telefono:</strong></th>
+            <td class="td-white"> <%= @company.phone %></td>
+          </tr>
+
+          <tr>
+            <th><strong> Correo electronico:</strong></th>
+            <td class="td-white"><%= @company.email %></td>
+          </tr>
+
+          <tr>
+            <th><strong> Direccion:</strong></th>
+            <td class="td-white"><%= @company.address %></td>
+          </tr>
+
+          <tr>
+            <th><strong> Estado:</strong></th>
+            <td>
+              <% if  @company.enable %>
+                Habilitado
+              <% else %>
+                inhabilitado
+              <% end %>
+            </td>
+          </tr>
+
+
+
+
+
+
+
+
+
+        </table>
+      </div>
+    </div>
+
+    <div class="card-footer bg-white text-center">
+
+      <%= link_to 'Editar', edit_company_path(@company) ,class: "btn btn-primary mr-2" %>
+      <%= link_to 'Regresar', companies_path, class: "btn btn-light "  %>
+
+    </div>
+  </div>
+</div>
+

@@ -27,6 +27,22 @@
       </div>
     </li>
 
+
+    <li class="nav-header mb-0 nav-item">
+      <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-company" aria-expanded="false" aria-controls="ui-company">
+        <span class="sm-icons-fa"> </span>
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i><span class="menu-title ">Entidades</span>
+      </a>
+
+
+      <div class="collapse" id="ui-company">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= companies_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Lista de Entidades</span></a></li>
+        </ul>
+      </div>
+    </li>
+
+
     <li class="nav-header mb-0 nav-item">
       <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-engineers" aria-expanded="false" aria-controls="ui-engineers">
         <span class="sm-icons-fa"> </span>
@@ -54,9 +70,25 @@
           <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= profiles_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Perfiles</span></a></li>
           <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= areas_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Areas</span></a></li>
           <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<%= modalities_path %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Modalidades</span></a></li>
+          <li class="nav-item">
+            <a style="padding-left: 22px" class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-s-admin" aria-expanded="false" aria-controls="ui-s-admin">
+              <span class="sm-icons-fa"> </span>
+              <i class="fa fa-th-large mr-3 text-primary fa-fw"></i><span class="menu-title ">Seguimiento Administrador</span>
+            </a>
+
+            <div class="collapse" id="ui-s-admin">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a style="font-size: 15px; padding-left:22px" class="nav-link text-dark font-italic bg-light" href="<% %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Item especificos</span></a></li>
+              </ul>
+            </div>
+
+          </li>
+
         </ul>
       </div>
     </li>
+
+
 
 
 
@@ -64,20 +96,6 @@
 
 
 <!--
-    <li class="nav-header mb-0 nav-item">
-      <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-states" aria-expanded="false" aria-controls="ui-states">
-        <span class="sm-icons-fa"> </span>
-        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i><span class="menu-title ">Estados del Aspirante</span>
-      </a>
-
-
-      <div class="collapse" id="ui-states">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link text-dark font-italic bg-light" href="<% %>"><i class="fa fa-th-large mr-4 text-primary fa-fw"></i><span>Lista de Estados</span></a></li>
-        </ul>
-      </div>
-    </li>
-
 
     <li class="nav-header mb-0 nav-item">
       <a class="nav-link text-dark font-italic bg-light" data-toggle="collapse" href="#ui-leader" aria-expanded="false" aria-controls="ui-leader">

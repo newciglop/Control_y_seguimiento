@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :areas
   resources :designations
   resources :modalities
+  resources :companies
 
   root "modalities#index"
 end
