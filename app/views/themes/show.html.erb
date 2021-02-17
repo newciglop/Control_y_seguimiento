@@ -1,0 +1,51 @@
+
+<%= render 'layouts/shared/notice' %>
+<br>
+<div class="col-lg-9 offset-lg-3">
+  <div class="card card-margin mt-4">
+    <div class="card-header">
+      <h5 class="card-title">
+        Datos de la Asuntos
+      </h5>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table center-aligned-table table-striped">
+
+
+          <tr>
+            <th><strong>Nombre:</strong></th>
+            <td class="td-white"><%= @theme.name %></td>
+          </tr>
+
+          <tr>
+            <th><strong>Description:</strong></th>
+            <td class="td-white"> <%= @theme.annexed %></td>
+          </tr>
+
+          <tr>
+            <th><strong>Estado:</strong></th>
+            <td class="td-white">
+            <% if  @theme.enable %>
+              Habilitado
+            <% else %>
+              Deshabilitado
+            <% end %>
+            </td>
+          </tr>
+
+
+        </table>
+      </div>
+    </div>
+
+    <div class="card-footer bg-white text-center">
+
+      <%= link_to 'Editar', edit_theme_path(@theme) ,class: "btn btn-primary mr-2" %>
+      <%= link_to 'Regresar', themes_path, class: "btn btn-light "  %>
+
+    </div>
+  </div>
+</div>
+

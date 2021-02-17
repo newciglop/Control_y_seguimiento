@@ -4,10 +4,6 @@ class ProfilesController < ApplicationController
 
   def index
     @profiles = Profile.all
-    ids = @profiles.ids.first
-    @delete_ok = Engineer.where(profile_id: ids).first
-    @delete_ok_2 = Engineer.where(profile_two: ids).first
-    @delete_ok_3 =  Engineer.where(profile_three: ids).first
   end
 
 
@@ -24,8 +20,6 @@ class ProfilesController < ApplicationController
   def edit
     profile_type()
     @delete_ok = Engineer.where(profile_id: @profile.id).first
-    @delete_ok_2 = Engineer.where(profile_two:@profile.id).first
-    @delete_ok_3 =  Engineer.where(profile_three:@profile.id).first
   end
 
 
@@ -56,7 +50,7 @@ class ProfilesController < ApplicationController
 
   def destroy
     if @profile.destroy
-         redirect_to profiles_path, notice: "Profile was successfully destroyed."
+      redirect_to profiles_path, notice: "Profile was successfully destroyed."
     else
       redirect_to profiles_path, notice: "Algo salio mal."
     end
@@ -64,7 +58,7 @@ class ProfilesController < ApplicationController
 
   private
   def profile_type
-    @profile_type = Profile.PROFILE_TYPE.map{|type| [type[0], type[1]]}
+    @profile_type = Profile.PROFILE_TYPE.map{|type| [type[0], type[1]]}.sort
   end
     def set_profile
       @profile = Profile.find(params[:id])

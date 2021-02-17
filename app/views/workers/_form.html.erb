@@ -1,0 +1,220 @@
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="card card-margin">
+
+      <%= form_with(model: worker, local: true,class: "form-sample") do |form|  %>
+        <div class="card-body p-0">
+          <% if worker.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
+
+              <ul>
+                <% worker.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div id="accordion">
+
+
+          <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Datos Personales
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+
+                  <div class="row no-gutters">
+
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <%= form.label :type_identification_id, "Tipo de identificación" %>
+                        <%= form.select(:type_identification_id, options_for_select(@identification_types, worker.type_identification_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                      <div class="form-group">
+                        <%= form.label :identification, "identificación" %>
+                        <%= form.text_field :identification, class:"form-control", required:true %>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-lg-6 pr-2">
+                      <div class="form-group">
+                        <%= form.label :first_name, "Nombres" %>
+                        <%= form.text_field :first_name , class:"form-control",required:true %>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :last_name, "Apellidos" %>
+                        <%= form.text_field :last_name , class:"form-control",required:true %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-lg-6 pr-2">
+                      <div class="form-group">
+                        <%= form.label :phone, "Telefono 1" %>
+                        <%= form.text_field :phone , class:"form-control" %>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :phone_2, "Telefono 2" %>
+                        <%= form.text_field :phone_2, class:"form-control" %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <%= form.label :email, "email" %>
+                        <%= form.text_field :email,class: "form-control" %>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+          <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Funcionalidades y Caracteristica
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="row no-gutters">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :profile_id, "Caracteristica 1" %>
+                        <%= form.select(:profile_id, options_for_select(@profiles, worker.profile_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :profile_2, "Caracteristica 2" %>
+                        <%= form.select(:profile_2, options_for_select(@profiles, worker.profile_2), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :profile_3, "Caracteristica 3" %>
+                        <%= form.select(:profile_3, options_for_select(@profiles, worker.profile_3), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :profile_4, "Caracteristica 4" %>
+                        <%= form.select(:profile_4, options_for_select(@profiles, worker.profile_4), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <%= form.label :function, "funciones" %>
+                      <%= form.rich_text_area :function, class: "control-form" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <% if @worker.id? %>
+             <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Estado
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="row no-gutters">
+                    <div class="col-lg-12 ">
+                        <div class="form-group text-center">
+                          <label for="enable">
+                            Habilitar / Inhabilitar
+                          </label>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 d-flex justify-content-center">
+                      <div class="form-group">
+                        <label class="switch">
+                          <input type="checkbox" name="enable" id="enable" value="true" <%= @worker.enable ? "checked='checked'":""%> >
+                          <span class="slider round"></span>
+                        </label>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div><!-- accordion -->
+
+
+
+        </div>
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', workers_path ,class: "btn btn-light btn-action"  %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

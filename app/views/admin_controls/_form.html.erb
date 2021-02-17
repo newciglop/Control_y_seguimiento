@@ -1,0 +1,225 @@
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="card card-margin">
+
+      <%= form_with(model: admin_control, local: true,class: "form-sample") do |form|  %>
+        <div class="card-body p-0">
+          <% if admin_control.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(admin_control.errors.count, "error") %> prohibited this admin_control from being saved:</h2>
+
+              <ul>
+                <% admin_control.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div id="accordion">
+
+
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Datos Personales
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+
+                  <div class="row no-gutters">
+
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <% if admin_control.id? %>
+                          <%= form.text_field :code, class: "form-control"   %>
+                        <% else %>
+                          <%= form.text_field :code, class: "form-control" , value: @suggest_code.to_i  %>
+                        <% end %>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                      <div class="form-group">
+                        <%= form.label :concept_id, "conceptos" %>
+                        <%= form.select(:concept_id, options_for_select(@concepts, admin_control.concept_id), {:prompt => 'Selecciona un concepto'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-lg-6 pr-2">
+                      <div class="form-group">
+                        <%= form.label :theme_id, "conceptos" %>
+                        <%= form.select(:theme_id, options_for_select(@themes, admin_control.theme_id), {:prompt => 'Selecciona un asunto'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :type_id, "tipos" %>
+                        <%= form.select(:type_id, options_for_select(@types, admin_control.type_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <%= form.label :item_id, "items Especificos" %>
+                        <%= form.select(:item_id, options_for_select(@items, admin_control.item_id), {:prompt => 'Selecciona un asunto'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :start_date, "Fecha inicio" %>
+                        <%= datepicker_input form, :start_date %>
+                      </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :final_date, "Fecha final" %>
+                        <%= datepicker_input form, :final_date %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :tracking_type, "Estado de seguimiento" %>
+                        <%= form.select(:tracking_type, options_for_select(@tracking_types, admin_control.tracking_type), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :state, "Estado de seguimiento" %>
+                        <%= form.select(:state, options_for_select(@states, admin_control.state), {:prompt => 'Selecciona un Estado'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                   Entidad y localidad
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="row no-gutters">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :company_id, "Entidad" %>
+                        <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :city_id, "ciudad" %>
+                        <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <% if @admin_control.id? %>
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <a class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                      Estado
+                    </a>
+                  </h5>
+                </div>
+
+                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="row no-gutters">
+                      <div class="col-lg-12 ">
+                        <div class="form-group text-center">
+                          <label for="enable">
+                            Habilitar / Inhabilitar
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-12 d-flex justify-content-center">
+                        <div class="form-group">
+                          <label class="switch">
+                            <input type="checkbox" name="enable" id="enable" value="true" <%= @admin_control.enable ? "checked='checked'":""%> >
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div><!-- accordion -->
+
+
+
+        </div>
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', admin_controls_path ,class: "btn btn-light btn-action"  %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

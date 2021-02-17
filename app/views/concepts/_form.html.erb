@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="card card-margin">
+
+      <div class="card-header">
+        <h5 class="card-title">
+          Datos
+        </h5>
+      </div>
+
+      <%= form_with(model: concept, local: true, class: "form-sample") do |form| %>
+        <div class="card-body">
+          <% if concept.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(concept.errors.count, "error") %> prohibited this concept from being saved:</h2>
+
+              <ul>
+                <% concept.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+
+          <div class="row no-gutters">
+            <div class="<%= @concept.id? ? "col-lg-10":"col-lg-12" %>">
+              <div class="form-group">
+                <%= form.label :name, "Nombre" %>
+                <%= form.text_field :name, class: "form-control", required: true%>
+              </div>
+            </div>
+
+            <% if @concept.id? %>
+              <div class="col-lg-2 text-center">
+                <div class="form-group">
+                  <%= form.label :enable, "Estado" %> <br>
+                  <label class="switch">
+                    <input type="checkbox" name="enable" id="enable" value="true" <%= @concept.enable ? "checked='checked'":""%> >
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+              </div>
+            <% end %>
+          </div>
+
+
+        </div>
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', concepts_path ,class: "btn btn-light btn-action"  %>
+
+          <%# if @delete_ok == nil %>
+          <%#= link_to 'Eliminar', concept, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
+          <%# end %>
+
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

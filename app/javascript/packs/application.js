@@ -7,9 +7,16 @@ require("@rails/ujs").start()
 require("turbolinks")
 require("@rails/activestorage").start()
 require("channels")
+//= require bootstrap-datepicker
 
 import 'bootstrap';
 require("../customize/bootstrap-select.min")
 
+
+
+
 import 'css/styles'
 
+
+require("trix")
+require("@rails/actiontext")

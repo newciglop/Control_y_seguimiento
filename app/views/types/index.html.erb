@@ -1,0 +1,56 @@
+<%= render 'layouts/shared/notice' %>
+
+<div class="row">
+  <div class="col-md-10 offset-md-2  text-center">
+    <h2 class="my-4">Tipos</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Estado</th>
+          <th colspan="2"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @types.each_with_index  do |type, index | %>
+
+          <tr>
+            <td> <%= index + 1  %></td>
+            <td><%= type.name %> </td>
+            <td>
+              <% if  type.enable %>
+                Habilitado
+              <% else %>
+                Deshabilitado
+              <% end %>
+
+            </td>
+            <td><%= link_to 'Editar', edit_type_path(type) %></td>
+
+            <td>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-10 offset-2 d-flex justify-content-center">
+    <%= link_to 'Nuevo tipo', new_type_path , class: "btn btn-primary mr-2" %>
+  </div>
+
+
+
+</div>

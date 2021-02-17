@@ -1,0 +1,62 @@
+<%= render 'layouts/shared/notice' %>
+
+
+<div class="row">
+  <div class="col-md-10 offset-md-2  text-center">
+    <h2 class="my-4">Empleados</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nombres</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Email</th>
+          <th scope="col">Estado</th>
+          <th colspan="2"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @workers.each do |worker| %>
+          <tr>
+            <td><%= worker.full_name %> <%= worker.last_name %> </td>
+            <td><%= worker.phone %></td>
+            <td><%= worker.email %></td>
+            <td>
+              <% if  worker.enable %>
+                Habilitado
+              <% else %>
+                Deshabilitado
+              <% end %>
+
+            </td>
+            <td>
+              <%= link_to 'Mostrar', worker_path(worker) %>
+            </td>
+            <td><%= link_to 'Editar', edit_worker_path(worker) %></td>
+            <td>
+              <%# if profile.editable   %>
+              <%= link_to 'Eliminar', worker, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %></td>
+            <%# end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-10 offset-2 d-flex justify-content-center">
+    <%= link_to 'Nuevo Empleado', new_worker_path , class: "btn btn-primary mr-2" %>
+  </div>
+
+
+
+</div>

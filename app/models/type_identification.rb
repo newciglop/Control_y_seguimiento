@@ -1,0 +1,2 @@
+class TypeIdentification < ApplicationRecord
+end
