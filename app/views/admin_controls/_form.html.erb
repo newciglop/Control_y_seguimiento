@@ -33,8 +33,9 @@
 
                   <div class="row no-gutters">
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 pr-2">
                       <div class="form-group">
+                        <%= form.label :code , "Codigo" %>
                         <% if admin_control.id? %>
                           <%= form.text_field :code, class: "form-control"   %>
                         <% else %>
@@ -45,7 +46,7 @@
 
                     <div class="col-lg-8">
                       <div class="form-group">
-                        <%= form.label :concept_id, "conceptos" %>
+                        <%= form.label :concept_id, "Concepto" %>
                         <%= form.select(:concept_id, options_for_select(@concepts, admin_control.concept_id), {:prompt => 'Selecciona un concepto'},{class: "form-control width-95" }) %>
                       </div>
                     </div>
@@ -55,13 +56,13 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6 pr-2">
                       <div class="form-group">
-                        <%= form.label :theme_id, "conceptos" %>
+                        <%= form.label :theme_id, "Asunto" %>
                         <%= form.select(:theme_id, options_for_select(@themes, admin_control.theme_id), {:prompt => 'Selecciona un asunto'},{class: "form-control width-95" }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :type_id, "tipos" %>
+                        <%= form.label :type_id, "Tipos" %>
                         <%= form.select(:type_id, options_for_select(@types, admin_control.type_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
                       </div>
                     </div>
@@ -77,10 +78,11 @@
                   </div>
 
                   <div class="row no-gutters">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 pr-2">
                       <div class="form-group">
                         <%= form.label :start_date, "Fecha inicio" %>
-                        <%= datepicker_input form, :start_date %>
+                        <%= form.text_field :start_date ,{ class: 'datepicker form-control' , placeholder: "yyyy-mm-dd"} %>
+
                       </div>
                     </div>
 
@@ -88,7 +90,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <%= form.label :final_date, "Fecha final" %>
-                        <%= datepicker_input form, :final_date %>
+                        <%= form.text_field :final_date, { class: 'datepicker form-control' , placeholder: "yyyy-mm-dd"} %>
                       </div>
                     </div>
                   </div>
@@ -96,7 +98,7 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :tracking_type, "Estado de seguimiento" %>
+                        <%= form.label :tracking_type, "Tipo de seguimiento" %>
                         <%= form.select(:tracking_type, options_for_select(@tracking_types, admin_control.tracking_type), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
                       </div>
                     </div>
@@ -145,7 +147,42 @@
               </div>
             </div>
 
-            <% if @admin_control.id? %>
+            <div class="card">
+              <div class="card-header" id="headingFive">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseFive">
+                    Rol Responsable y Personal a Cargo
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="row no-gutters">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <%= form.label :responsible_function_id, "Rol de Responsable" %>
+                        <%= form.select(:responsible_function_id, options_for_select(@responsible_functions, admin_control.responsible_function_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <%= form.label :responsible, "responsable" %>
+                        <%= form.select(:responsible, options_for_select(@worker_responsible, admin_control.responsible), {:prompt => 'Selecciona un Responsable'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <%= form.label :support, "Apoyo" %>
+                        <%= form.select(:support, options_for_select(@worker_support, admin_control.support), {:prompt => 'Selecciona un apoyo'},{class: "form-control width-95" }) %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
               <div class="card">
                 <div class="card-header" id="headingThree">
                   <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -157,6 +194,36 @@
 
                 <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
                   <div class="card-body">
+
+
+                    <div class="row no-gutters">
+                      <div class="col-lg-6">
+                        <%= form.label :advance %>
+                        <%= form.range_field :advance, {class: "form-control" , max:100 }%>
+                      </div>
+
+                      <div class="col-lg-6">
+                        <%= form.label :process %>
+                        <%= form.text_field :process, {class: "form-control" }%>
+                      </div>
+
+                      <div class="col-lg-12">
+                        <%= form.label :description_advance , "Descripcion de los avances del proceso o servicio" %>
+                        <%= form.rich_text_area :description_advance %>
+                      </div>
+
+                      <div class="col-lg-6 pr-2">
+                        <%= form.label :link_process , "link del proceso" %>
+                        <%= form.text_field :link_process , class: "form-control" %>
+                      </div>
+                      <div class="col-lg-6">
+                        <%= form.label :link_drive , "link del drive" %>
+                        <%= form.text_field :link_drive, class: "form-control" %>
+                      </div>
+
+                    </div>
+
+                    <% if @admin_control.id? %>
                     <div class="row no-gutters">
                       <div class="col-lg-12 ">
                         <div class="form-group text-center">
@@ -175,10 +242,12 @@
                       </div>
 
                     </div>
+                    <% end %>
+
                   </div>
                 </div>
               </div>
-            <% end %>
+
 
 
 

@@ -1,4 +1,173 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/shared/notice" %>
 
-<%= link_to 'Edit', edit_admin_control_path(@admin_control) %> |
-<%= link_to 'Back', admin_controls_path %>
+<div class="row">
+  <div class="col-lg-8 offset-lg-3" style="padding-top: 30px">
+    <nav>
+      <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-general-data-tab" data-toggle="tab" href="#nav-general-data" role="tab" aria-controls="nav-general-data" aria-selected="true">Datos Personales</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Personal a cargado e información de avance</a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      
+
+      <div class="tab-pane fade show active" id="nav-general-data" role="tabpanel" aria-labelledby="nav-general-data-tab">
+        <div class="card card-margin">
+          <div class="card-header">
+            <h5 class="card-title mb-0">
+              Datos Generales
+            </h5>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table center-aligned-table table-striped">
+
+                <tr>
+                  <th class="bg-success text-light"><strong>Codigo</strong></th>
+                  <td class="bg-success text-light"><%= @admin_control.code %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Concepto</strong></th>
+                  <td class="td-white"><%= @admin_control.concept.name %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Asunto:</strong></th>
+                  <td class="td-white"><%= @admin_control.theme.name %> </td>
+                </tr>
+
+                <tr>
+                  <th><strong>Tipo:</strong></th>
+                  <td class="td-white"><%= @admin_control.type.name %> </td>
+                </tr>
+
+
+                <tr>
+                  <th><strong>Item Especifico:</strong></th>
+                  <td class="td-white"><%= @admin_control.item.name %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Fecha de inicio</strong></th>
+                  <td class="td-white"><%= @admin_control.start_date %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Fecha Final</strong></th>
+                  <td class="td-white"><%= @admin_control.final_date %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Tipo de seguimiento</strong></th>
+                  <td class="td-white"><%= @show_tracking_type %></td>
+                </tr>
+
+
+                <tr>
+                  <th><strong>Estado</strong></th>
+                  <td class="td-white"><%= @show_state %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Compañia</strong></th>
+                  <td class="td-white"><%= @admin_control.company.name %> </td>
+                </tr>
+
+                <tr>
+                  <th><strong>localizacion</strong></th>
+                  <td class="td-white"><%= @admin_control.city.state.name %> - <%= @admin_control.city.name %> </td>
+                </tr>
+
+
+              </table>
+            </div>
+          </div>
+
+          <div class="card-footer bg-white text-center">
+
+            <%= link_to 'Editar', edit_admin_control_path(@admin_control) ,class: "btn btn-primary mr-2" %>
+            <%= link_to 'Regresar', admin_controls_path, class: "btn btn-light "  %>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="card card-margin">
+          <div class="card-header">
+            <h5 class="card-title mb-0">
+              Roles,estado e información adicional
+            </h5>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table center-aligned-table table-striped">
+                <tr>
+                  <th><strong>Rol Responsable</strong></th>
+                  <td class="td-white"><%= @admin_control.responsible_function.name %></td>
+                </tr>
+                <tr>
+                  <th><strong>Responsable</strong></th>
+                  <td class="td-white"><%=  @show_responsible %></td>
+                </tr>
+                <tr>
+                  <th><strong>Apoyo</strong></th>
+                  <td class="td-white"><%= @show_support %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Avance</strong></th>
+                  <td class="td-white"><%=  @admin_control.advance %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Proceso</strong></th>
+                  <td><%= @admin_control.process %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Descripcion del avance</strong></th>
+                  <td><%= @admin_control.description_advance %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Link del proceso</strong></th>
+                  <td><%= @admin_control.link_process %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Link del drive</strong></th>
+                  <td><%= @admin_control.link_drive %></td>
+                </tr>
+
+
+
+
+              </table>
+            </div>
+          </div>
+
+          <div class="card-footer bg-white text-center">
+
+            <%= link_to 'Editar', edit_admin_control_path(@admin_control) ,class: "btn btn-primary mr-2" %>
+            <%= link_to 'Regresar', admin_controls_path, class: "btn btn-light "  %>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>

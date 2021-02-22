@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  #
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+
+
+  authenticated :user do
+
   resources  :profiles
   resources :engineers
   resources :areas
@@ -12,6 +21,7 @@ Rails.application.routes.draw do
   resources :concepts
   resources :responsible_functions
   resources :workers
+  resources :admin_controls
 
 
 
@@ -24,7 +34,9 @@ Rails.application.routes.draw do
   end
 
 
-  root "modalities#index"
+
+  end
+
 end
 
 

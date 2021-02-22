@@ -3,20 +3,28 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+
 require("@rails/ujs").start()
 require("turbolinks")
 require("@rails/activestorage").start()
 require("channels")
-//= require bootstrap-datepicker
 
 import 'bootstrap';
-require("../customize/bootstrap-select.min")
-
-
-
-
 import 'css/styles'
+require("../customize/bootstrap-select.min")
+import flatpickr from "flatpickr";
+import { Spanish } from "flatpickr/dist/l10n/es.js"
+
+
 
 
 require("trix")
 require("@rails/actiontext")
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr(".datepicker", {
+        "locale": Spanish // locale for this instance only
+    });
+
+})

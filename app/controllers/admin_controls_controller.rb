@@ -1,7 +1,8 @@
 class AdminControlsController < ApplicationController
-  include ComboBoxHelper
-  before_action :set_admin_control, only: %i[ show edit update destroy ]
 
+  before_action :set_admin_control, only: %i[ show edit update destroy ]
+  include AdminControlsHelper
+  include ComboBoxHelper
 
   def index
     @admin_controls = AdminControl.all
@@ -9,58 +10,69 @@ class AdminControlsController < ApplicationController
 
 
   def show
+    combo_box_data
+    show_tracking_type(@admin_control)
+    show_state_admin_control(@admin_control)
+    show_responsible_and_support(@admin_control)
   end
 
 
   def new
-    generate_code()
-    combo_box_general_data()
     @admin_control = AdminControl.new
+    combo_box_data
   end
 
 
   def edit
-    combo_box_general_data()
+    combo_box_data
   end
 
 
   def create
+    combo_box_data()
     @admin_control = AdminControl.new(admin_control_params)
       if @admin_control.save
          redirect_to @admin_control, notice: "Admin control was successfully created."
       else
+        combo_box_data()
          render :new, status: :unprocessable_entity
-         generate_code()
-         combo_box_general_data()
+
       end
   end
 
 
   def update
-    respond_to do |format|
+       combo_box_data()
+       enable_resources(@admin_control,params)
       if @admin_control.update(admin_control_params)
-        format.html { redirect_to @admin_control, notice: "Admin control was successfully updated." }
-        format.json { render :show, status: :ok, location: @admin_control }
+        redirect_to @admin_control, notice: "Admin control was successfully updated."
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @admin_control.errors, status: :unprocessable_entity }
+        combo_box_data()
+      render :edit, status: :unprocessable_entity
       end
-    end
+
   end
 
-  # DELETE /admin_controls/1 or /admin_controls/1.json
+
   def destroy
-    @admin_control.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_controls_url, notice: "Admin control was successfully destroyed." }
-      format.json { head :no_content }
+    if @admin_control.destroy
+       redirect_to admin_controls_url, notice: "Admin control was successfully destroyed."
     end
   end
 
   private
 
+  def combo_box_data
+    generate_code()
+    combo_box_general_data()
+    combo_box_company()
+    combo_box_responsible()
+    combo_box_personal()
+    combo_box_support()
+  end
+
   def generate_code
-     admin_control = AdminControl.map{|x| x.code}
+     admin_control = AdminControl.all.map{|x| x.code}
      @suggest_code = admin_control.max == nil ? 1 : admin_control.max + 1
   end
 
@@ -73,6 +85,8 @@ class AdminControlsController < ApplicationController
     def admin_control_params
       params.require(:admin_control).permit(:code,:concept_id,:theme_id,
                                             :type_id,:item_id,:start_date,:final_date,
-                                            :tracking_type,:state,:company_id,:city_id)
+                                            :tracking_type,:state,:company_id,:city_id,
+                                            :responsible_function_id,:responsible,:support,
+                                            :description_advance,:advance,:process,:link_process,:link_drive)
     end
 end

@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="#">Navbar scroll</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarScroll">
+    <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="Companies" role="button" data-toggle="dropdown" aria-expanded="false">
+          Seguimiento Admin
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="Companies">
+          <li><a class="dropdown-item" href="<%= admin_controls_path %>">Lista de Seguimientos</a></li>
+          <li><a class="dropdown-item" href="<%= new_admin_control_path %>">Nuevo Seguimiento</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="Companies" role="button" data-toggle="dropdown" aria-expanded="false">
+        Entidades
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="Companies">
+          <li><a class="dropdown-item" href="<%= companies_path %>">Lista de entidades</a></li>
+          <li><a class="dropdown-item" href="<%= new_company_path %>">Nuevo entidad</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="Workers" role="button" data-toggle="dropdown" aria-expanded="false">
+          Empleados
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="Workers">
+          <li><a class="dropdown-item" href="<%= workers_path %>">Lista de Empleados</a></li>
+          <li><a class="dropdown-item" href="<%= new_worker_path %>">Nuevo Empleados</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="settings" role="button" data-toggle="dropdown" aria-expanded="false">
+          Configuración
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="settings">
+          <li><a class="dropdown-item" href="<%= themes_path %>">Asuntos</a> </li>
+          <li><a class="dropdown-item" href="<%= concepts_path %>">Conceptos</a></li>
+          <li><a class="dropdown-item" href="<%= items_path %>">Items Especificos</a></li>
+          <li><a class="dropdown-item" href="<%= profiles_path %>">Roles</a></li>
+        </ul>
+      </li>
+
+
+
+    </ul>
+    <form class="d-flex" style="width:200px">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Usuario
+        </button>
+        <div class="dropdown-menu">
+          <% if user_signed_in? %>
+            <h6 class="dropdown-header" ><%= current_user.email %></h6>
+            <%= link_to "Cerrar sesion", destroy_user_session_path , method: :delete , class:"dropdown-item"%>
+          <% end %>
+        <a class="dropdown-item" href="#">Another action</a>
+      </div>
+      </div>
+    </form>
+  </div>
+</nav>

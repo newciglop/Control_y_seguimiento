@@ -14,8 +14,8 @@ module ComboBoxHelper
     @themes = Theme.where(enable: true).order("name").map{|theme| [theme.name , theme.id]}
     @types = Type.where(enable:true).order("name").map{|type| [type.name , type.id]}
     @items = Item.where(enable:true).order("name").map{|item| [item.name , item.id]}
-    @tracking_types = AdminControl.COMBO_TRACKING_TYPES.map{|type| [type.name , type.id]}
-    @states = AdminControl.COMBO_STATES.map { |state| [state.name , state.id] }
+    @tracking_types = AdminControl.COMBO_TRACKING_TYPES.map{|type| [type[0], type[1]]}
+    @states = AdminControl.COMBO_STATES.map { |state| [state[0], state[1]] }
   end
 
   def combo_box_company
@@ -24,18 +24,22 @@ module ComboBoxHelper
   end
 
   def combo_box_personal
-    profiles = Profile.where('(enable=? AND profile_type=?) OR (enable=? AND profile_type=?)',true,Profile.RESPONSIBLE_ROL,true,Profile.WILDCARD).map{|x| [x.name,x.id]}
-    responsible_functions = ResponsibleFunction.where(enable:true).map{|x| [x.name, x.id]}
     @responsible_functions = []
-    profiles.each do |profile|
-      @responsible_functions << profile
-    end
+    responsible_functions = ResponsibleFunction.where(enable:true).map{|x| [x.name, x.id]}
     responsible_functions.each  do |responsible|
       @responsible_functions << responsible
     end
 
-
-
   end
 
+  def combo_box_responsible
+    profiles_responsible = Profile.where('(enable=? AND profile_type=?) OR (enable=? AND profile_type=?)',true,Profile.RESPONSIBLE,true,Profile.WILDCARD).pluck(:id)
+    ids_profile = profiles_responsible
+    @worker_responsible = Worker.where('(profile_id IN (?)) or (profile_2 IN (?)) or (profile_3 IN (?)) or (profile_4 IN (?))',ids_profile,ids_profile,ids_profile,ids_profile).map{|employee| [employee.full_name,employee.id]}
+  end
+  def combo_box_support
+    profiles_responsible = Profile.where('(enable=? AND profile_type=?) OR (enable=? AND profile_type=?)',true,Profile.SUPPORT,true,Profile.WILDCARD).pluck(:id)
+    ids_profile = profiles_responsible
+    @worker_support = Worker.where('(profile_id IN (?)) or (profile_2 IN (?)) or (profile_3 IN (?)) or (profile_4 IN (?))',ids_profile,ids_profile,ids_profile,ids_profile).map{|employee| [employee.full_name,employee.id]}
+  end
 end

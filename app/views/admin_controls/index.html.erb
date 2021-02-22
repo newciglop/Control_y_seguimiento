@@ -1,25 +1,62 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/shared/notice' %>
 
-<h1>Admin Controls</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-md-10 offset-md-2  text-center">
+    <h2 class="my-4">Seguimiento Administrador</h2>
+  </div>
+</div>
 
-  <tbody>
-    <% @admin_controls.each do |admin_control| %>
-      <tr>
-        <td><%= link_to 'Show', admin_control %></td>
-        <td><%= link_to 'Edit', edit_admin_control_path(admin_control) %></td>
-        <td><%= link_to 'Destroy', admin_control, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="offset-sm-3 col-sm-9">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col" class="text-center">Concepto</th>
+          <th scope="col" class="text-center">Asunto</th>
+          <th scope="col" class="text-center">Estado</th>
+          <th colspan="2"></th>
+        </tr>
+        </thead>
 
-<br>
+        <tbody>
+        <% @admin_controls.each do |admin_control| %>
+          <tr>
+            <td class="text-center"><%= admin_control.code %> </td>
+            <td class="text-center"><%= admin_control.concept.name %></td>
+            <td class="text-center"><%= admin_control.theme.name %></td>
+            <td class="text-center">
+              <% if  admin_control.enable %>
+                Habilitado
+              <% else %>
+                Deshabilitado
+              <% end %>
 
-<%= link_to 'New Admin Control', new_admin_control_path %>
+            </td>
+            <td>
+              <%= link_to 'Mostrar', admin_control_path(admin_control) %>
+            </td>
+            <td><%= link_to 'Editar', edit_admin_control_path(admin_control) %></td>
+            <td>
+              <%# if profile.editable   %>
+              <%= link_to 'Eliminar', admin_control, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %></td>
+            <%# end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-10 offset-2 d-flex justify-content-center">
+    <%= link_to 'Nuevo Seguimiento Administrador', new_admin_control_path , class: "btn btn-primary mr-2" %>
+  </div>
+
+
+
+</div>

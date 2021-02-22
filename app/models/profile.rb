@@ -3,8 +3,8 @@ class Profile < ApplicationRecord
 
   def self.PROFILE_TYPE
     [["Lider",1],["Ingeniero Encargado",2],["Ingeniero acompañante",3],
-     ["Responsable",4],["Apoyo",5],["Rol Responsable",6],["Comodin",7],
-     ["Practicante",8],["Empleado",9],["Ingeniero",10]]
+     ["Responsable",4],["Apoyo",5],["Comodin",6],
+     ["Practicante",7],["Empleado",8],["Ingeniero",9]]
   end
 
 
@@ -23,20 +23,17 @@ class Profile < ApplicationRecord
   def self.SUPPORT
     5
   end
-  def self.RESPONSIBLE_ROL
+  def self.WILDCARD
     6
   end
-  def self.WILDCARD
+  def self.INTERN
     7
   end
-  def self.INTERN
+  def self.EMPLOYEE
     8
   end
-  def self.EMPLOYEE
-    9
-  end
   def self.ENGINEER
-    10
+    9
   end
 
 
