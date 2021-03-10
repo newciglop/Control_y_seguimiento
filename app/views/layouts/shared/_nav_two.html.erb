@@ -4,8 +4,12 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarScroll">
+
+
     <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
 
+
+      <% if user_signed_in? %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="Companies" role="button" data-toggle="dropdown" aria-expanded="false">
           Seguimiento Admin
@@ -49,19 +53,26 @@
       </li>
 
 
-
+<% end %>
     </ul>
+
+
+
+
     <form class="d-flex" style="width:200px">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Usuario
         </button>
         <div class="dropdown-menu">
+          <% unless user_signed_in? %>
+          <%= link_to "Iniciar Sesion", "/users/sign_in" , class: "form-control" %>
+          <% end %>
           <% if user_signed_in? %>
             <h6 class="dropdown-header" ><%= current_user.email %></h6>
+            <%= link_to "Cambiar contraseña",edit_user_registration_path(current_user.id) , class:"dropdown-item" %>
             <%= link_to "Cerrar sesion", destroy_user_session_path , method: :delete , class:"dropdown-item"%>
           <% end %>
-        <a class="dropdown-item" href="#">Another action</a>
       </div>
       </div>
     </form>

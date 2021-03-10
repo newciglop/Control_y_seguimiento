@@ -31,6 +31,7 @@ class AdminControlsController < ApplicationController
   def create
     combo_box_data()
     @admin_control = AdminControl.new(admin_control_params)
+    @admin_control.user_id = current_user.id
       if @admin_control.save
          redirect_to @admin_control, notice: "Admin control was successfully created."
       else
@@ -43,7 +44,7 @@ class AdminControlsController < ApplicationController
 
   def update
        combo_box_data()
-       enable_resources(@admin_control,params)
+
       if @admin_control.update(admin_control_params)
         redirect_to @admin_control, notice: "Admin control was successfully updated."
       else
@@ -87,6 +88,6 @@ class AdminControlsController < ApplicationController
                                             :type_id,:item_id,:start_date,:final_date,
                                             :tracking_type,:state,:company_id,:city_id,
                                             :responsible_function_id,:responsible,:support,
-                                            :description_advance,:advance,:process,:link_process,:link_drive)
+                                            :description_advance,:advance,:process,:link_process,:link_drive,:user_id)
     end
 end

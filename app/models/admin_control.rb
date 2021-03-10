@@ -6,6 +6,7 @@ class AdminControl < ApplicationRecord
   belongs_to :company, optional: true
   belongs_to :city , optional: true
   belongs_to :responsible_function , optional: true
+  belongs_to :user, optional: true
 
   has_rich_text :description_advance
 

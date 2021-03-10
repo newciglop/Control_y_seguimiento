@@ -1,14 +1,12 @@
-<%= render 'layouts/shared/notice' %>
-
-
 <div class="row">
-  <div class="col-md-10 offset-md-2  text-center">
+  <div class="col-md-10 offset-md-1  text-center">
     <h2 class="my-4">Seguimiento Administrador</h2>
   </div>
+  <div class="offset-md-1"></div>
 </div>
 
 <div class="row">
-  <div class="offset-sm-3 col-sm-9">
+  <div class="offset-sm-1 col-sm-10">
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -27,23 +25,18 @@
             <td class="text-center"><%= admin_control.code %> </td>
             <td class="text-center"><%= admin_control.concept.name %></td>
             <td class="text-center"><%= admin_control.theme.name %></td>
-            <td class="text-center">
-              <% if  admin_control.enable %>
-                Habilitado
-              <% else %>
-                Deshabilitado
-              <% end %>
-
-            </td>
+            <td class="text-center"><%= show_state_admin_control(admin_control) %></td>
+            <td></td>
             <td>
               <%= link_to 'Mostrar', admin_control_path(admin_control) %>
             </td>
+            <% if (admin_control.user.email == current_user.email) || (current_user.role_id == User.ADMINISTRATOR) %>
             <td><%= link_to 'Editar', edit_admin_control_path(admin_control) %></td>
             <td>
-              <%# if profile.editable   %>
-              <%= link_to 'Eliminar', admin_control, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %></td>
-            <%# end %>
-          </tr>
+              <%= link_to 'Eliminar', admin_control, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
+            </td>
+             </tr>
+              <% end %>
         <% end %>
         </tbody>
       </table>
@@ -53,7 +46,7 @@
   </div>
 </div>
 <div class="row justify-content-center">
-  <div class="col-lg-10 offset-2 d-flex justify-content-center">
+  <div class="col-sm-10 offset-sm-1 d-flex justify-content-center">
     <%= link_to 'Nuevo Seguimiento Administrador', new_admin_control_path , class: "btn btn-primary mr-2" %>
   </div>
 

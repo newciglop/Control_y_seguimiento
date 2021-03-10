@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="offset-sm-3 col-sm-9">
+  <div class="offset-sm-2 col-sm-8">
     <div class="card card-margin">
 
       <%= form_with(model: admin_control, local: true,class: "form-sample") do |form|  %>
@@ -47,7 +47,7 @@
                     <div class="col-lg-8">
                       <div class="form-group">
                         <%= form.label :concept_id, "Concepto" %>
-                        <%= form.select(:concept_id, options_for_select(@concepts, admin_control.concept_id), {:prompt => 'Selecciona un concepto'},{class: "form-control width-95" }) %>
+                        <%= form.select(:concept_id, options_for_select(@concepts, admin_control.concept_id), {:prompt => 'Selecciona un concepto'},{class: "form-control " }) %>
                       </div>
                     </div>
 
@@ -57,13 +57,13 @@
                     <div class="col-lg-6 pr-2">
                       <div class="form-group">
                         <%= form.label :theme_id, "Asunto" %>
-                        <%= form.select(:theme_id, options_for_select(@themes, admin_control.theme_id), {:prompt => 'Selecciona un asunto'},{class: "form-control width-95" }) %>
+                        <%= form.select(:theme_id, options_for_select(@themes, admin_control.theme_id), {:prompt => 'Selecciona un asunto'},{class: "form-control " }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <%= form.label :type_id, "Tipos" %>
-                        <%= form.select(:type_id, options_for_select(@types, admin_control.type_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
+                        <%= form.select(:type_id, options_for_select(@types, admin_control.type_id), {:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -72,7 +72,7 @@
                     <div class="col-lg-12">
                       <div class="form-group">
                         <%= form.label :item_id, "items Especificos" %>
-                        <%= form.select(:item_id, options_for_select(@items, admin_control.item_id), {:prompt => 'Selecciona un asunto'},{class: "form-control width-95" }) %>
+                        <%= form.select(:item_id, options_for_select(@items, admin_control.item_id), {:prompt => 'Selecciona un asunto'},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -99,13 +99,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <%= form.label :tracking_type, "Tipo de seguimiento" %>
-                        <%= form.select(:tracking_type, options_for_select(@tracking_types, admin_control.tracking_type), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
+                        <%= form.select(:tracking_type, options_for_select(@tracking_types, admin_control.tracking_type), {:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <%= form.label :state, "Estado de seguimiento" %>
-                        <%= form.select(:state, options_for_select(@states, admin_control.state), {:prompt => 'Selecciona un Estado'},{class: "form-control width-95" }) %>
+                        <%= form.select(:state, options_for_select(@states, admin_control.state), {:prompt => 'Selecciona un Estado'},{class: "form-control " }) %>
                       </div>
                     </div>
 
@@ -133,13 +133,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <%= form.label :company_id, "Entidad" %>
-                        <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                        <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control " }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <%= form.label :city_id, "ciudad" %>
-                        <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                        <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -162,19 +162,19 @@
                     <div class="col-lg-4">
                       <div class="form-group">
                         <%= form.label :responsible_function_id, "Rol de Responsable" %>
-                        <%= form.select(:responsible_function_id, options_for_select(@responsible_functions, admin_control.responsible_function_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
+                        <%= form.select(:responsible_function_id, options_for_select(@responsible_functions, admin_control.responsible_function_id), {:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <%= form.label :responsible, "responsable" %>
-                        <%= form.select(:responsible, options_for_select(@worker_responsible, admin_control.responsible), {:prompt => 'Selecciona un Responsable'},{class: "form-control width-95" }) %>
+                        <%= form.select(:responsible, options_for_select(@worker_responsible, admin_control.responsible), {:prompt => 'Selecciona un Responsable'},{class: "form-control " }) %>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <%= form.label :support, "Apoyo" %>
-                        <%= form.select(:support, options_for_select(@worker_support, admin_control.support), {:prompt => 'Selecciona un apoyo'},{class: "form-control width-95" }) %>
+                        <%= form.select(:support, options_for_select(@worker_support, admin_control.support), {:prompt => 'Selecciona un apoyo'},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -223,26 +223,7 @@
 
                     </div>
 
-                    <% if @admin_control.id? %>
-                    <div class="row no-gutters">
-                      <div class="col-lg-12 ">
-                        <div class="form-group text-center">
-                          <label for="enable">
-                            Habilitar / Inhabilitar
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-lg-12 d-flex justify-content-center">
-                        <div class="form-group">
-                          <label class="switch">
-                            <input type="checkbox" name="enable" id="enable" value="true" <%= @admin_control.enable ? "checked='checked'":""%> >
-                            <span class="slider round"></span>
-                          </label>
-                        </div>
-                      </div>
 
-                    </div>
-                    <% end %>
 
                   </div>
                 </div>
@@ -281,6 +262,7 @@
 
     </div>
   </div>
+  <div class="offset-sm-2"></div>
 </div>
 
 

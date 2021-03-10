@@ -4,6 +4,7 @@ module ComboBoxHelper
     @profiles = Profile.where(enable: true).map{|x| [x.name , x.id]}
   end
 
+
   def combo_box_type_identification
     @identification_types = TypeIdentification.all
     @identification_types = @identification_types.map{|x| [x.name , x.id]}

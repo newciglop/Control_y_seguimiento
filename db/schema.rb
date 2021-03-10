@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_231607) do
+ActiveRecord::Schema.define(version: 2021_03_07_221057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2021_02_21_231607) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "enable"
     t.bigint "responsible_function_id", null: false
+    t.bigint "user_id"
     t.index ["city_id"], name: "index_admin_controls_on_city_id"
     t.index ["company_id"], name: "index_admin_controls_on_company_id"
     t.index ["concept_id"], name: "index_admin_controls_on_concept_id"
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_02_21_231607) do
     t.index ["responsible_function_id"], name: "index_admin_controls_on_responsible_function_id"
     t.index ["theme_id"], name: "index_admin_controls_on_theme_id"
     t.index ["type_id"], name: "index_admin_controls_on_type_id"
+    t.index ["user_id"], name: "index_admin_controls_on_user_id"
   end
 
   create_table "areas", force: :cascade do |t|
@@ -207,6 +209,7 @@ ActiveRecord::Schema.define(version: 2021_02_21_231607) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "role_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -238,6 +241,7 @@ ActiveRecord::Schema.define(version: 2021_02_21_231607) do
   add_foreign_key "admin_controls", "responsible_functions"
   add_foreign_key "admin_controls", "themes"
   add_foreign_key "admin_controls", "types"
+  add_foreign_key "admin_controls", "users"
   add_foreign_key "cities", "states"
   add_foreign_key "designations", "areas"
   add_foreign_key "engineers", "profiles"

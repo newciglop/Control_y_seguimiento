@@ -23,13 +23,15 @@ module AdminControlsHelper
   def show_state_admin_control(admin_control)
     case admin_control.state
     when AdminControl.STATE_STOPPED
-      @show_state = "Detenido"
+      return @show_state = "Detenido"
     when AdminControl.STATE_FINISH
-      @show_state = "Finalizado"
+      return @show_state = "Finalizado"
     when AdminControl.IN_PROCESS
-      @show_state = "En proceso"
-    when
-      @show_state = "No tiene un estado asginado"
+      return @show_state = "En proceso"
+    when nil
+    return @show_state = "No tiene un estado asginado"
+    when ""
+      return @show_state = "No tiene un estado asginado"
     end
   end
 
