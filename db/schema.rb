@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_221057) do
+ActiveRecord::Schema.define(version: 2021_03_14_132421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,33 @@ ActiveRecord::Schema.define(version: 2021_03_07_221057) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "enable", default: true
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.integer "code"
+    t.bigint "worker_id", null: false
+    t.bigint "modality_id", null: false
+    t.string "status"
+    t.datetime "publication_date"
+    t.datetime "date_submission_obs"
+    t.integer "remaining_hour_obs"
+    t.integer "remaining_days_obs"
+    t.string "status_obs"
+    t.bigint "city_id", null: false
+    t.bigint "company_id", null: false
+    t.decimal "presented_value"
+    t.decimal "budget_value"
+    t.string "official_page"
+    t.string "email_company"
+    t.string "email_alternative"
+    t.string "link_document"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_offers_on_city_id"
+    t.index ["company_id"], name: "index_offers_on_company_id"
+    t.index ["modality_id"], name: "index_offers_on_modality_id"
+    t.index ["worker_id"], name: "index_offers_on_worker_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -247,6 +274,10 @@ ActiveRecord::Schema.define(version: 2021_03_07_221057) do
   add_foreign_key "engineers", "profiles"
   add_foreign_key "has_engineers", "designations"
   add_foreign_key "has_engineers", "engineers"
+  add_foreign_key "offers", "cities"
+  add_foreign_key "offers", "companies"
+  add_foreign_key "offers", "modalities"
+  add_foreign_key "offers", "workers"
   add_foreign_key "workers", "profiles"
   add_foreign_key "workers", "type_identifications"
 end

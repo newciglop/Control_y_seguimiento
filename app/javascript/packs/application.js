@@ -24,7 +24,8 @@ require("@rails/actiontext")
 
 document.addEventListener('DOMContentLoaded', function() {
     flatpickr(".datepicker", {
-        "locale": Spanish // locale for this instance only
+        "locale": Spanish, // locale for this instance only
+        dateFormat: "Y-m-d H:i:s",
     });
 
 })

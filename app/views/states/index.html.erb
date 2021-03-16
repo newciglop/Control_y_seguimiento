@@ -17,8 +17,9 @@
   </thead>
 
   <tbody>
-    <% @states.each do |state| %>
+    <% @states.each.with_index do |state, index|  %>
       <tr>
+        <td><%= index + 1 %></td>
         <td><%= state.name %></td>
         <td><%= link_to 'Show', state %></td>
         <td><%= link_to 'Edit', edit_state_path(state) %></td>

@@ -1,4 +1,5 @@
 class ModalitiesController < ApplicationController
+  include ModalitiesHelper
   before_action :set_modality, only: %i[ show edit update destroy ]
 
 
@@ -31,6 +32,7 @@ class ModalitiesController < ApplicationController
 
 
   def update
+    enable_resources(@modality,params)
       if @modality.update(modality_params)
         redirect_to @modality, notice: "Modality was successfully updated."
       else

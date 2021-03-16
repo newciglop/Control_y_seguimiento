@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
 
-
+  resources :offers
   resources :users
   resources  :profiles
   resources :engineers

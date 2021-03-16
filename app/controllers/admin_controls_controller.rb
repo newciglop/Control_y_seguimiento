@@ -13,7 +13,9 @@ class AdminControlsController < ApplicationController
     combo_box_data
     show_tracking_type(@admin_control)
     show_state_admin_control(@admin_control)
+    if @admin_control.support != nil  && @admin_control.support != ""
     show_responsible_and_support(@admin_control)
+    end
   end
 
 

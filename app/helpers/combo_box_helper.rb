@@ -43,4 +43,23 @@ module ComboBoxHelper
     ids_profile = profiles_responsible
     @worker_support = Worker.where('(profile_id IN (?)) or (profile_2 IN (?)) or (profile_3 IN (?)) or (profile_4 IN (?))',ids_profile,ids_profile,ids_profile,ids_profile).map{|employee| [employee.full_name,employee.id]}
   end
+
+  def combo_box_leader
+    profiles_responsible = Profile.where('(enable=? AND profile_type=?) OR (enable=? AND profile_type=?)',true,Profile.PROFILE_LEADER,true,Profile.WILDCARD).pluck(:id)
+    ids_profile = profiles_responsible
+    @worker_leader = Worker.where('(profile_id IN (?)) or (profile_2 IN (?)) or (profile_3 IN (?)) or (profile_4 IN (?))',ids_profile,ids_profile,ids_profile,ids_profile).map{|employee| [employee.full_name,employee.id]}
+  end
+
+  def combo_box_modalities
+    @modalities = Modality.where(enable:true).map{|m| [m.name, m.id ]}
+  end
+
+  def combo_box_status_offers
+    @status = Offer.STATUS.map{|o| [o[0] , o[1]]}
+  end
+
+  def combo_box_status_yes_or_not
+    @status_yes_not = Offer.STATUS_YES_OR_NOT.map{|s| [s[0],s[1]]  }
+  end
+
 end

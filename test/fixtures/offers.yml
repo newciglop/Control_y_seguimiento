@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: 1
+  worker: one
+  modality: one
+  status: MyString
+  publication_date: 2021-03-13 11:48:15
+  date_submission_obs: 2021-03-13 11:48:15
+  remaining_hour_obs: 1
+  remaining_days_obs: 1
+  status_obs: MyString
+  city: one
+  company: one
+  presented_value: 9.99
+  budget_value: 9.99
+  official_page: MyString
+  email_company: MyString
+  email_alternative: MyString
+  link_document: MyString
+
+two:
+  code: 1
+  worker: two
+  modality: two
+  status: MyString
+  publication_date: 2021-03-13 11:48:15
+  date_submission_obs: 2021-03-13 11:48:15
+  remaining_hour_obs: 1
+  remaining_days_obs: 1
+  status_obs: MyString
+  city: two
+  company: two
+  presented_value: 9.99
+  budget_value: 9.99
+  official_page: MyString
+  email_company: MyString
+  email_alternative: MyString
+  link_document: MyString

@@ -14,8 +14,10 @@ module AdminControlsHelper
     responsible = Worker.where(id: admin_control.responsible).map{ |w| [w.first_name,w.last_name]}
     @show_responsible = "#{responsible[0][0]} #{responsible[0][1]}"
 
+    if admin_control.support != nil && admin_control.support != ""
     support = Worker.where(id: admin_control.support).map{ |w| [w.first_name,w.last_name]}
     @show_support = "#{support[0][0]} #{support[0][1]}"
+    end
   end
 
 
