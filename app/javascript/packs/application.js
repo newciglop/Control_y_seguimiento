@@ -4,11 +4,11 @@
 // that code so it'll be compiled.
 
 
+
 require("@rails/ujs").start()
 require("turbolinks")
 require("@rails/activestorage").start()
 require("channels")
-
 import 'bootstrap';
 import 'css/styles'
 require("../customize/bootstrap-select.min")
@@ -22,10 +22,25 @@ require("trix")
 require("@rails/actiontext")
 
 
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     flatpickr(".datepicker", {
         "locale": Spanish, // locale for this instance only
-        dateFormat: "Y-m-d H:i:s",
+        dateFormat: "Y-m-d",
     });
 
 })
+
+
+
+
+
+
+
+
+
+
+

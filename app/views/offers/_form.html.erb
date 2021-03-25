@@ -37,15 +37,15 @@
                       <% if offer.id? %>
                         <%= form.text_field :code, class: "form-control"   %>
                       <% else %>
-                        <%= form.text_field :code, class: "form-control" , value: @suggest_code.to_i  %>
+                        <%= form.text_field :code, class: "form-control" , value: @suggest_code %>
                       <% end %>
                     </div>
                   </div>
 
                   <div class="col-lg-8">
                     <div class="form-group">
-                      <%= form.label :worker_id ,"lider" %>
-                      <%= form.select(:worker_id, options_for_select(@worker_leader, offer.worker_id), {:prompt => 'Selecciona un lider'},{class: "form-control " }) %>
+                      <%= form.label :worker_id ,"Lider" %>
+                      <%= form.select(:worker_id, options_for_select(@worker_leader, offer.worker_id), {:prompt => 'Selecciona un lider'},{class: "form-control " ,required: true }) %>
                     </div>
                   </div>
 
@@ -54,14 +54,14 @@
                 <div class="row no-gutters">
                   <div class="col-lg-6 pr-2">
                     <div class="form-group">
-                      <%= form.label :modality_id, "" %>
-                      <%= form.select(:modality_id, options_for_select(@modalities, offer.modality_id), {:prompt => 'Selecciona un modalidad'},{class: "form-control " }) %>
+                      <%= form.label :modality_id, "Modalidad" %>
+                      <%= form.select(:modality_id, options_for_select(@modalities, offer.modality_id), {:prompt => 'Selecciona un modalidad'},{class: "form-control " ,required: true  }) %>
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group">
                       <%= form.label :status, "Estado" %>
-                      <%= form.select(:status, options_for_select(@status, offer.status), {:prompt => 'Selecciona un estado'},{class: "form-control " }) %>
+                      <%= form.select(:status, options_for_select(@status, offer.status), {:prompt => 'Selecciona un estado'},{class: "form-control " ,required: true  }) %>
                     </div>
                   </div>
                 </div>
@@ -87,45 +87,211 @@
             <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
 
-                <div class="row no-gutters">
-                  <div class="col-lg-6 pr-2">
+                <div class="row">
+                  <div class="col-lg-6 offset-3">
                     <div class="form-group">
-                      <%= form.label :publication_date, "Fecha inicio" %>
-                      <%= form.text_field :publication_date ,{ class: 'datepicker form-control' , placeholder: "yyyy-mm-dd" , readonly: false} %>
+                      <%= form.label :publication_date, "Fecha publicación" %>
+                      <%= form.text_field :publication_date ,{ class: 'datepicker form-control' , placeholder: "yyyy-mm-dd" , readonly: false , required: true } %>
                     </div>
                   </div>
+                </div>
 
 
-                  <div class="col-lg-6">
+                <fieldset>
+                  <legend>Fecha De Presentacion De Observaciones</legend>
+                <div class="row no-gutters">
+
+                  <div class="col-lg-6 pr-2">
                     <div class="form-group">
                       <%= form.label :date_submission_obs, "Fecha final" %>
                       <%= form.text_field :date_submission_obs, { class: 'datepicker form-control' , placeholder: "yyyy-mm-dd"} %>
                     </div>
                   </div>
-                </div>
 
-                <div class="row no-gutters">
-                  <div class="col-lg-4">
+                  <div class="col-lg-6">
                     <div class="form-group">
-                      <%= form.label :remaining_days_obs, "Dias restantes" %>
-                      <%= form.text_field :remaining_days_obs, class: "form-control"   %>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <%= form.label :remaining_hour_obs, "Horas restante" %>
-                      <%= form.text_field :remaining_hour_obs, class: "form-control"   %>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <%= form.label :status_obs %>
+                      <%= form.label :status_obs , "Estado" %>
                       <%= form.select(:status_obs, options_for_select(@status_yes_not, offer.status_obs), {:prompt => 'Selecciona un lider'},{class: "form-control " }) %>
                     </div>
                   </div>
-
                 </div>
 
+                <div class="row no-gutters">
+                  <div class="col-sm-12 col-md-12 text-center">
+                    <h3>Tiempo restante</h3>
+                    <p id="demo" class="mb-0 count-down"></p>
+                  </div>
+                </div>
+
+
+                <% if @offer.id? %>
+                <div class="row no-gutters display-none">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <%= form.label :remaining_days_obs, "Dias restantes", class: "display-none  pr-2" %>
+                      <%= form.hidden_field :remaining_days_obs, class: "form-control" , value: @remaining_days_obs  %>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <%= form.label :remaining_hour_obs, "Horas restante" , class: "display-none"%>
+                      <%= form.hidden_field :remaining_hour_obs, class: "form-control" , value: @remaining_hours_obs   %>
+                    </div>
+                  </div>
+
+
+                </div>
+                <% end  %>
+                </fieldset>
+
+
+                <fieldset>
+                  <legend> publicacion de informe de observaciones</legend>
+                  <div class="row no-gutters">
+
+                    <div class="col-lg-6 pr-2">
+                      <div class="form-group">
+                        <%= form.label :date_publication_observations_report, "Fecha final" %>
+                        <%= form.text_field :date_publication_observations_report, { class: 'datepicker form-control' , placeholder: "yyyy-mm-dd" , required: true } %>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :status_obs_report , "Estado" %>
+                        <%= form.select(:status_obs_report, options_for_select(@status_yes_not, offer.status_obs_report), {:prompt => 'Selecciona un lider'},{class: "form-control " }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-sm-12 col-md-12 text-center">
+                      <h3>Tiempo restante</h3>
+                      <p id="obs_report" class="mb-0 count-down"></p>
+                    </div>
+                  </div>
+
+
+                  <% if @offer.id? %>
+                    <div class="row no-gutters display-none">
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <%= form.label :remaining_day_obs_report, "Dias restantes", class: "display-none  pr-2" %>
+                          <%= form.hidden_field :remaining_day_obs_report, class: "form-control" , value: @remaining_days_obs_report  %>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <%= form.label :remaining_hour_obs_report, "Horas restante" , class: "display-none"%>
+                          <%= form.hidden_field :remaining_hour_obs_report, class: "form-control" , value:@remaining_hours_obs_report  %>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  <% end  %>
+                </fieldset>
+
+                <!-- DeadLine Offer -->
+
+                <fieldset>
+                  <legend> Fecha limite para presentacion de ofertas</legend>
+                  <div class="row no-gutters">
+
+                    <div class="col-lg-6 pr-2">
+                      <div class="form-group">
+                        <%= form.label :date_deadline_submission_offers, "Fecha final" %>
+                        <%= form.text_field :date_deadline_submission_offers, { class: 'datepicker form-control' , placeholder: "yyyy-mm-dd" , required: true } %>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :status_submission_offers , "Estado" %>
+                        <%= form.select(:status_submission_offers, options_for_select(@status_yes_not, offer.status_submission_offers), {:prompt => 'Selecciona un lider'},{class: "form-control " }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-sm-12 col-md-12 text-center">
+                      <h3>Tiempo restante</h3>
+                      <p id="deadline_offer" class="mb-0 count-down"></p>
+                    </div>
+                  </div>
+
+
+                  <% if @offer.id? %>
+                    <div class="row no-gutters display-none">
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <%= form.label :remaining_day_submission_offers, "Dias restantes", class: "display-none  pr-2" %>
+                          <%= form.hidden_field :remaining_day_submission_offers, class: "form-control" , value: @remaining_days_dead_sub_offers  %>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <%= form.label :remaining_hour_submission_offers, "Horas restante" , class: "display-none"%>
+                          <%= form.hidden_field :remaining_hour_submission_offers, class: "form-control" , value: @remaining_hours_dead_sub_offers  %>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  <% end  %>
+                </fieldset>
+
+                <!--  -->
+
+                <fieldset>
+                  <legend> Fecha limite para presentacion de ofertas</legend>
+                  <div class="row no-gutters">
+
+                    <div class="col-lg-6 pr-2">
+                      <div class="form-group">
+                        <%= form.label :date_deadline_submission_offers, "Fecha final" %>
+                        <%= form.text_field :date_deadline_submission_offers, { class: 'datepicker form-control' , placeholder: "yyyy-mm-dd" , required: true } %>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <%= form.label :status_submission_offers , "Estado" %>
+                        <%= form.select(:status_submission_offers, options_for_select(@status_yes_not, offer.status_submission_offers), {:prompt => 'Selecciona un lider'},{class: "form-control " }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row no-gutters">
+                    <div class="col-sm-12 col-md-12 text-center">
+                      <h3>Tiempo restante</h3>
+                      <p id="deadline_offer" class="mb-0 count-down"></p>
+                    </div>
+                  </div>
+
+
+                  <% if @offer.id? %>
+                    <div class="row no-gutters display-none">
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <%= form.label :remaining_day_submission_offers, "Dias restantes", class: "display-none  pr-2" %>
+                          <%= form.hidden_field :remaining_day_submission_offers, class: "form-control" , value: @remaining_days_dead_sub_offers  %>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <%= form.label :remaining_hour_submission_offers, "Horas restante" , class: "display-none"%>
+                          <%= form.hidden_field :remaining_hour_submission_offers, class: "form-control" , value: @remaining_hours_dead_sub_offers  %>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  <% end  %>
+                </fieldset>
+
+                :date_offer_evaluation_report, :remaining_day_offer_evaluation_report,
+                :remaining_hour_offer_evaluation_report, :status_offer_evaluation_report,
 
 
 
@@ -145,7 +311,7 @@
             <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-parent="#accordion">
               <div class="card-body">
                 <div class="row no-gutters">
-                  <div class="col-lg-8">
+                  <div class="col-lg-8 pr-2">
                     <div class="form-group">
                       <%= form.label :company_id, "Entidad" %>
                       <%= form.select(:company_id, options_for_select(@companies, offer.company_id), {:prompt => 'Selecciona una entidad'},{class: "form-control " }) %>
@@ -153,18 +319,18 @@
                   </div>
                   <div class="col-lg-4">
                     <div class="form-group">
-                      <%= form.label :city_id, "localizacion" %>
+                      <%= form.label :city_id, "Localizacion" %>
                       <%= form.select(:city_id, options_for_select(@cities, offer.city_id), {:prompt => 'Selecciona un ciudad'},{class: "form-control " }) %>
                     </div>
                   </div>
                 </div>
 
                 <div class="row no-gutters">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 pr-2">
                     <%= form.label :budget_value, "Valor presupuestal" %>
                     <%= form.text_field :budget_value , class: "form-control" %>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 pr-2">
                     <%= form.label :presented_value, "Valor Presentado" %>
                     <%= form.text_field :presented_value, class: "form-control" %>
                   </div>
@@ -179,11 +345,11 @@
                   </div>
                 </div>
                 <div class="row no-gutters">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 pr-2">
                     <%= form.label :email_company, "Correo de la entidad" %>
                     <%= form.text_field :email_company , class: "form-control" %>
                   </div>
-                  <div class="col-lg-6 no-gutters">
+                  <div class="col-lg-6  pr-2">
                     <%= form.label :email_alternative, "Correo alternativo de la entidad" %>
                     <%= form.text_field :email_alternative , class: "form-control" %>
                   </div>
@@ -225,10 +391,111 @@
 
 
 
-        <div class="actions">
-      <%= form.submit %>
-     </div>
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', offers_path ,class: "btn btn-light btn-action"  %>
+        </div>
    <% end %>
     </div>
   </div>
 </div>
+
+
+
+
+
+<script>
+  
+  year_obs = <%= @year %>
+  month_obs =  <%= @month %>
+  day_obs = <%= @day %>
+  var obs =  function (y,m,d)  {
+        var countDownDate = new Date(`${m} ${d}, ${y} 00:00:00`).getTime();
+        var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+// Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+// Output the result in an element with id="demo"
+
+            document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    };
+  obs(year_obs,month_obs,day_obs);
+/*______*/
+  year_obs_report = <%= @year_obs_report %>
+  month_obs_report = <%= @month_obs_report %>
+  day_obs_report = <%= @day_obs_report %>
+  obs_report =  function (y,m,d)  {
+                  var countDownDate_obs_report = new Date(`${m} ${d}, ${y} 00:00:00`).getTime();
+                  var x = setInterval(function () {
+                      var now = new Date().getTime();
+                      var distance = countDownDate_obs_report - now;
+
+// Time calculations for days, hours, minutes and seconds
+                      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+// Output the result in an element with id="demo"
+
+                      document.getElementById("obs_report").innerHTML = days + "d " + hours + "h "
+                          + minutes + "m " + seconds + "s ";
+
+                      // If the count down is over, write some text
+                      if (distance < 0) {
+                          clearInterval(x);
+                          document.getElementById("obs_report").innerHTML = "EXPIRED";
+                      }
+                  }, 1000);
+              };
+  obs_report(year_obs_report,month_obs_report,day_obs_report);
+
+  /* ----------*/
+
+  year_deadline_offer = <%= @year_deadline_sub_offers %>
+  month_deadline_offer = <%=  @month_deadline_sub_offers %>
+  day_deadline_offer = <%= @day_deadline_sub_offers %>
+
+  deadline_sub_offer =  function (y,m,d)  {
+                  var countDownDate_obs_report = new Date(`${m} ${d}, ${y} 00:00:00`).getTime();
+                  var x = setInterval(function () {
+                      var now = new Date().getTime();
+                      var distance = countDownDate_obs_report - now;
+
+// Time calculations for days, hours, minutes and seconds
+                      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+// Output the result in an element with id="demo"
+
+                      document.getElementById("deadline_offer").innerHTML = days + "d " + hours + "h "
+                          + minutes + "m " + seconds + "s ";
+
+                      // If the count down is over, write some text
+                      if (distance < 0) {
+                          clearInterval(x);
+                          document.getElementById("deadline_offer").innerHTML = "EXPIRED";
+                      }
+                  }, 1000);
+              };
+  deadline_sub_offer(year_deadline_offer,month_deadline_offer,day_deadline_offer);
+
+</script>
+
+

@@ -1,10 +1,12 @@
 class OffersController < ApplicationController
   include ComboBoxHelper
+  include OffersHelper
   before_action :set_offer, only: %i[ show edit update destroy ]
 
 
   def index
     @offers = Offer.all
+
   end
 
 
@@ -13,12 +15,14 @@ class OffersController < ApplicationController
 
 
   def new
+    generate_code
     combo_box_leader
     combo_box_modalities
     combo_box_status_offers
     combo_box_status_yes_or_not
     combo_box_company
     @offer = Offer.new
+
   end
 
 
@@ -28,6 +32,11 @@ class OffersController < ApplicationController
     combo_box_status_offers
     combo_box_status_yes_or_not
     combo_box_company
+    generate_code
+    submission_obs(@offer.id)
+    observations_report(@offer.id)
+    deadline_submission_offers(@offer.id)
+
   end
 
 
@@ -44,8 +53,7 @@ class OffersController < ApplicationController
 
 
   def update
-
-      if @offer.update(offer_params)
+    if @offer.update(offer_params)
        redirect_to @offer, notice: "Offer was successfully updated."
       else
       render :edit, status: :unprocessable_entity
@@ -60,12 +68,16 @@ class OffersController < ApplicationController
     end
   end
 
-  private
-
   def generate_code
     offer = Offer.all.map{|x| x.code}
-    @suggest_code = offer.max == nil ? 1 : offer.max + 1
+  @suggest_code = offer.max == nil ? 1 : offer.max + 1
   end
+
+  private
+
+
+
+
 
     def set_offer
       @offer = Offer.find(params[:id])
@@ -77,7 +89,18 @@ class OffersController < ApplicationController
                                   :publication_date, :date_submission_obs,
                                   :remaining_hour_obs, :remaining_days_obs, :status_obs,
                                   :city_id, :company_id, :presented_value, :budget_value, :official_page,
-                                  :email_company, :email_alternative, :link_document)
+                                  :email_company, :email_alternative, :link_document,
+                                  :date_publication_observations_report, :remaining_day_obs_report,
+                                  :remaining_hour_obs_report,:status_obs_report,
+                                  :date_deadline_submission_offers,:remaining_day_submission_offers,
+                                  :remaining_hour_submission_offers,:status_submission_offers,
+                                  :date_offer_evaluation_report, :remaining_day_offer_evaluation_report,
+                                  :remaining_hour_offer_evaluation_report, :status_offer_evaluation_report,
+                                  :date_obs_offer_evaluation_report, :remaining_day_obs_offer_evaluation_report,
+                                  :remaining_hour_obs_offer_evaluation_report,:status_obs_offer_evaluation_report,
+                                  :date_acceptance_offers,  :remaining_day_acceptance_offers,
+                                  :remaining_hour_acceptance_offers, :status_acceptance_offers ,:object )
+
 
   end
 end

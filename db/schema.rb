@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_14_132421) do
+ActiveRecord::Schema.define(version: 2021_03_23_045236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,26 @@ ActiveRecord::Schema.define(version: 2021_03_14_132421) do
     t.string "link_document"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "date_publication_observations_report"
+    t.integer "remaining_day_obs_report"
+    t.integer "remaining_hour_obs_report"
+    t.string "status_obs_report"
+    t.datetime "date_deadline_submission_offers"
+    t.integer "remaining_day_submission_offers"
+    t.integer "remaining_hour_submission_offers"
+    t.string "status_submission_offers"
+    t.datetime "date_offer_evaluation_report"
+    t.integer "remaining_day_offer_evaluation_report"
+    t.integer "remaining_hour_offer_evaluation_report"
+    t.string "status_offer_evaluation_report"
+    t.datetime "date_obs_offer_evaluation_report"
+    t.integer "remaining_day_obs_offer_evaluation_report"
+    t.integer "remaining_hour_obs_offer_evaluation_report"
+    t.string "status_obs_offer_evaluation_report"
+    t.datetime "date_acceptance_offers"
+    t.integer "remaining_day_acceptance_offers"
+    t.integer "remaining_hour_acceptance_offers"
+    t.string "status_acceptance_offers"
     t.index ["city_id"], name: "index_offers_on_city_id"
     t.index ["company_id"], name: "index_offers_on_company_id"
     t.index ["modality_id"], name: "index_offers_on_modality_id"
