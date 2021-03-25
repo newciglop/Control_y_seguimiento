@@ -112,7 +112,9 @@
                 </tr>
                 <tr>
                   <th><strong>Responsable</strong></th>
+                  <% if @show_support != nil && @show_support != "" %>
                   <td class="td-white"><%=  @show_responsible %></td>
+                    <% end %>
                 </tr>
                 <tr>
                   <th><strong>Apoyo</strong></th>
