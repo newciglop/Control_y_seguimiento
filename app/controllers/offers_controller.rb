@@ -1,8 +1,7 @@
 class OffersController < ApplicationController
+  before_action :set_offer, only: %i[ show edit update destroy ]
   include ComboBoxHelper
   include OffersHelper
-  before_action :set_offer, only: %i[ show edit update destroy ]
-
 
   def index
     @offers = Offer.all
@@ -36,17 +35,26 @@ class OffersController < ApplicationController
     submission_obs(@offer.id)
     observations_report(@offer.id)
     deadline_submission_offers(@offer.id)
+    offer_evaluation_report(@offer.id)
+    obs_offer_evaluation_report(@offer.id)
+    date_acceptance_offers(@offer.id)
 
   end
 
 
   def create
     @offer = Offer.new(offer_params)
-
-
+    @offer.user_id = current_user.id
       if @offer.save
-         redirect_to @offer, notice: "Offer was successfully created."
+         redirect_to offers_path, notice: "Offer was successfully created."
       else
+        combo_box_company
+        generate_code
+        combo_box_leader
+        combo_box_modalities
+        combo_box_status_offers
+        combo_box_status_yes_or_not
+
          render :new, status: :unprocessable_entity
       end
   end
@@ -55,7 +63,14 @@ class OffersController < ApplicationController
   def update
     if @offer.update(offer_params)
        redirect_to @offer, notice: "Offer was successfully updated."
-      else
+    else
+      combo_box_company
+      combo_box_leader
+      combo_box_modalities
+      combo_box_status_offers
+      combo_box_status_yes_or_not
+      generate_code
+
       render :edit, status: :unprocessable_entity
       end
 
@@ -85,10 +100,10 @@ class OffersController < ApplicationController
 
 
   def  offer_params
-    params.require(:offer).permit(:code, :worker_id ,:modality_id ,:status,
+    params.require(:offer).permit(:code, :worker_id ,:modality_id ,:status,:company_id,
                                   :publication_date, :date_submission_obs,
                                   :remaining_hour_obs, :remaining_days_obs, :status_obs,
-                                  :city_id, :company_id, :presented_value, :budget_value, :official_page,
+                                  :city_id,:presented_value, :budget_value, :official_page,
                                   :email_company, :email_alternative, :link_document,
                                   :date_publication_observations_report, :remaining_day_obs_report,
                                   :remaining_hour_obs_report,:status_obs_report,

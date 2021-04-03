@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="offset-sm-3 col-sm-9">
+  <div class="offset-sm-1 col-sm-10 ">
     <div class="card card-margin">
 
       <div class="card-header">
@@ -8,10 +8,10 @@
         </h5>
       </div>
 
-      <%= form_with(model: type, local: true, class: "form-sample") do |form| %>
+      <%= bootstrap_form_with(model: type, local: true, html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
         <div class="card-body">
           <% if type.errors.any? %>
-            <div id="error_explanation">
+            <div id="error_explanation" style="display: none">
               <h2><%= pluralize(type.errors.count, "error") %> prohibited this type from being saved:</h2>
 
               <ul>
@@ -22,14 +22,13 @@
             </div>
           <% end %>
 
-
           <div class="form-group">
-            <%= form.label :name, "Nombre"%>
-            <%= form.text_field :name,  class: "form-control" , required: true %>
+            <%= form.text_field :name, label: t('type.name') ,class: "form-control" , required: true%>
           </div>
 
           <% if @type.id? %>
             <div class="form-group">
+              <h4><%= t('commons.disabled&enabled') %></h4>
               <label class="switch">
                 <input type="checkbox" name="enable" id="enable" value="true" <%= @type.enable ? "checked='checked'":""%> >
                 <span class="slider round"></span>
@@ -47,7 +46,7 @@
           <%= link_to 'Regresar', types_path ,class: "btn btn-light btn-action"  %>
 
           <%# if @delete_ok == nil %>
-            <%#= link_to 'Eliminar', type, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
+          <%#= link_to 'Eliminar', type, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
           <%# end %>
 
         </div>
@@ -57,6 +56,12 @@
   </div>
 </div>
 
+
+
+
+<script>
+
+</script>
 
 
 

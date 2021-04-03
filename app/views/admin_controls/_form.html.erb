@@ -2,7 +2,7 @@
   <div class="offset-sm-2 col-sm-8">
     <div class="card card-margin">
 
-      <%= form_with(model: admin_control, local: true,class: "form-sample") do |form|  %>
+      <%= bootstrap_form_with(model: admin_control, local: true,html: { class: "forms-sample needs-validation", novalidate: true }) do |form|  %>
         <div class="card-body p-0">
           <% if admin_control.errors.any? %>
             <div id="error_explanation">
@@ -47,7 +47,7 @@
                     <div class="col-lg-8">
                       <div class="form-group">
                         <%= form.label :concept_id, "Concepto" %>
-                        <%= form.select(:concept_id, options_for_select(@concepts, admin_control.concept_id), {:prompt => 'Selecciona un concepto'},{class: "form-control " }) %>
+                        <%= form.select(:concept_id, options_for_select(@concepts, admin_control.concept_id), {:prompt => 'Selecciona un concepto'},{class: "form-control " ,required:true }) %>
                       </div>
                     </div>
 
@@ -212,11 +212,8 @@
                         <%= form.rich_text_area :description_advance %>
                       </div>
 
-                      <div class="col-lg-6 pr-2">
-                        <%= form.label :link_process , "link del proceso" %>
-                        <%= form.text_field :link_process , class: "form-control" %>
-                      </div>
-                      <div class="col-lg-6">
+
+                      <div class="col-lg-12">
                         <%= form.label :link_drive , "link del drive" %>
                         <%= form.text_field :link_drive, class: "form-control" %>
                       </div>

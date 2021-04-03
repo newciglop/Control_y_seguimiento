@@ -8,10 +8,10 @@
         </h5>
       </div>
 
-      <%= form_with(model: theme, local: true, class: "form-sample") do |form| %>
+      <%= bootstrap_form_with(model: theme, local: true,html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
         <div class="card-body">
           <% if theme.errors.any? %>
-            <div id="error_explanation">
+            <div id="error_explanation" style="display: none">
               <h2><%= pluralize(theme.errors.count, "error") %> prohibited this theme from being saved:</h2>
 
               <ul>
@@ -26,8 +26,7 @@
           <div class="row no-gutters">
             <div class="<%= @theme.id? ? "col-lg-10":"col-lg-12" %>">
               <div class="form-group">
-                <%= form.label :name, "Nombre" %>
-                <%= form.text_field :name, class: "form-control", required: true%>
+                <%= form.text_field :name , label: t('theme.name'), class: "form-control", required: true %>
               </div>
             </div>
 
@@ -47,8 +46,7 @@
 
 
           <div class="form-group">
-            <%= form.label :annexed ,"Anexo" %>
-            <%= form.text_field :annexed ,class: "form-control" %>
+            <%= form.text_field :annexed , label: t('theme.annexed') ,class: "form-control" %>
           </div>
 
          

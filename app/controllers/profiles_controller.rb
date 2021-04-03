@@ -24,13 +24,15 @@ class ProfilesController < ApplicationController
 
 
   def create
+
     @profile = Profile.new(profile_params)
 
 
       if @profile.save
         redirect_to edit_profile_path(@profile), notice: "Profile was successfully created."
       else
-        redirect_to new_profile_path
+        profile_type()
+        render :new, status: :unprocessable_entity
       end
 
   end
@@ -42,7 +44,8 @@ class ProfilesController < ApplicationController
       if @profile.update(profile_params)
          redirect_to edit_profile_path(@profile), notice: "Profile was successfully updated."
       else
-        redirect_to edit_profile_path(@profile), notice: "Algo salio mal"
+        profile_type()
+        render :edit, status: :unprocessable_entity
       end
 
   end

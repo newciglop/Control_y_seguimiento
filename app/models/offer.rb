@@ -1,14 +1,13 @@
 class Offer < ApplicationRecord
-  belongs_to :worker , optional: true
-  belongs_to :modality , optional: true
+
+  belongs_to :worker
+  belongs_to :modality
   belongs_to :city, optional: true
   belongs_to :company, optional: true
 
-
-  validates :date_deadline_submission_offers , presence: true
-  validates :date_publication_observations_report ,presence: true
-  validates :publication_date, presence: true
-
+  validates :code,:worker_id ,:modality_id, :status, :publication_date, presence: true
+  validates :date_submission_obs, :status_obs , presence: true
+  #solo date y status
   has_rich_text :object
 
 

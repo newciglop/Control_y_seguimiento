@@ -10,6 +10,18 @@
 
 
       <% if user_signed_in? %>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="licitation" role="button" data-toggle="dropdown" aria-expanded="false">
+            Seguimiento licitaciones
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="licitation">
+            <li><a class="dropdown-item" href="<%= offers_path %>">Lista de licitaciones</a></li>
+            <li><a class="dropdown-item" href="<%= new_offer_path %>">Nuevo licitacion</a></li>
+          </ul>
+        </li>
+
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="Companies" role="button" data-toggle="dropdown" aria-expanded="false">
           Seguimiento Admin

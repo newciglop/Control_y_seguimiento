@@ -47,6 +47,66 @@ module OffersHelper
 
   end
 
+  def offer_evaluation_report(offer)
+
+    @public_date = Offer.where(id:offer).map{|x| x.publication_date}[0]
+    @date_offer_evaluation_report = Offer.where(id:offer).map{|x| x.date_offer_evaluation_report}[0]
+    o = Offer.where(id:offer).map{|x| x.date_offer_evaluation_report}.to_a[0].to_s
+
+    @year_offer_evaluation_report =  o[0..3]
+    @month_offer_evaluation_report =  o[5..6]
+    @day_offer_evaluation_report = o[8..9]
+
+    n1 = @date_offer_evaluation_report
+    n2 = @public_date
+
+    @remaining_days_offer_e_report = (n1 - n2)/86400
+    @remaining_hours_offer_e_report = (n1 - n2)/3600
+
+
+  end
+
+  #---------------------------------------------
+
+  def obs_offer_evaluation_report(offer)
+
+    @public_date = Offer.where(id:offer).map{|x| x.publication_date}[0]
+    @date_obs_offer_evaluation_report = Offer.where(id:offer).map{|x| x.date_obs_offer_evaluation_report}[0]
+    o = Offer.where(id:offer).map{|x| x.date_obs_offer_evaluation_report}.to_a[0].to_s
+
+    @year_obs_offer_evaluation_report =  o[0..3]
+    @month_obs_offer_evaluation_report =  o[5..6]
+    @day_obs_offer_evaluation_report = o[8..9]
+
+    n1 = @date_obs_offer_evaluation_report
+    n2 = @public_date
+
+    @remaining_obs_days_offer_e_report = (n1 - n2)/86400
+    @remaining_obs_hours_offer_e_report = (n1 - n2)/3600
+
+  end
+
+  #----------------------------------------------
+
+
+
+  def date_acceptance_offers(offer)
+
+    @public_date = Offer.where(id:offer).map{|x| x.publication_date}[0]
+    @date_acceptance_offers = Offer.where(id:offer).map{|x| x.date_acceptance_offers}[0]
+    o = Offer.where(id:offer).map{|x| x.date_acceptance_offers}.to_a[0].to_s
+
+    @year_acceptance_offers =  o[0..3]
+    @month_acceptance_offers =  o[5..6]
+    @day_acceptance_offers = o[8..9]
+
+    n1 = @date_acceptance_offers
+    n2 = @public_date
+
+    @remaining_d_acceptance_offers = (n1 - n2)/86400
+    @remaining_h_acceptance_offers = (n1 - n2)/3600
+
+  end
 
 
 end

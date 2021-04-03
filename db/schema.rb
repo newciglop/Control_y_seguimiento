@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_045236) do
+ActiveRecord::Schema.define(version: 2021_04_03_033001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,16 @@ ActiveRecord::Schema.define(version: 2021_03_23_045236) do
     t.boolean "enable", default: true
   end
 
+  create_table "my_translations", force: :cascade do |t|
+    t.string "locale"
+    t.string "key"
+    t.text "value"
+    t.text "interpolations"
+    t.boolean "is_proc", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "offers", force: :cascade do |t|
     t.integer "code"
     t.bigint "worker_id", null: false
@@ -198,9 +208,11 @@ ActiveRecord::Schema.define(version: 2021_03_23_045236) do
     t.integer "remaining_day_acceptance_offers"
     t.integer "remaining_hour_acceptance_offers"
     t.string "status_acceptance_offers"
+    t.bigint "user_id"
     t.index ["city_id"], name: "index_offers_on_city_id"
     t.index ["company_id"], name: "index_offers_on_company_id"
     t.index ["modality_id"], name: "index_offers_on_modality_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
     t.index ["worker_id"], name: "index_offers_on_worker_id"
   end
 
@@ -233,6 +245,16 @@ ActiveRecord::Schema.define(version: 2021_03_23_045236) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "annexed"
+  end
+
+  create_table "translations", force: :cascade do |t|
+    t.string "locale"
+    t.string "key"
+    t.text "value"
+    t.text "interpolations"
+    t.boolean "is_proc", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "type_identifications", force: :cascade do |t|
@@ -297,6 +319,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_045236) do
   add_foreign_key "offers", "cities"
   add_foreign_key "offers", "companies"
   add_foreign_key "offers", "modalities"
+  add_foreign_key "offers", "users"
   add_foreign_key "offers", "workers"
   add_foreign_key "workers", "profiles"
   add_foreign_key "workers", "type_identifications"

@@ -1,12 +1,16 @@
 class AdminControl < ApplicationRecord
-  belongs_to :concept, optional: true
-  belongs_to :theme, optional: true
-  belongs_to :type, optional: true
-  belongs_to :item, optional: true
-  belongs_to :company, optional: true
-  belongs_to :city , optional: true
-  belongs_to :responsible_function , optional: true
+  belongs_to :concept
+  belongs_to :theme
+  belongs_to :type
+  belongs_to :item
+  belongs_to :company
+  belongs_to :city
+  belongs_to :responsible_function
   belongs_to :user, optional: true
+
+  validates :company_id,:type_id,:theme_id,presence: true
+  validates :concept_id, :city_id,:item_id,:responsible_function_id , presence: true
+
 
   has_rich_text :description_advance
 

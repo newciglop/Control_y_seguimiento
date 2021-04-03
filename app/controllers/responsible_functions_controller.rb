@@ -24,7 +24,7 @@ class ResponsibleFunctionsController < ApplicationController
       if @responsible_function.save
          redirect_to @responsible_function, notice: "Responsible function was successfully created."
       else
-         render :new, status: :unprocessable_entity
+         render :new, status: :unprocessable_entity , notice: "algo salio mal"
     end
   end
 

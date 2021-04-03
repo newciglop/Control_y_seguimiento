@@ -1,5 +1,6 @@
 class Profile < ApplicationRecord
-
+  validates :name, presence: true
+  validates :profile_type, presence: true
 
   def self.PROFILE_TYPE
     [["Lider",1],["Ingeniero Encargado",2],["Ingeniero acompañante",3],

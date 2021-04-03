@@ -8,10 +8,10 @@
         </h5>
       </div>
 
-      <%= form_with(model: company, local: true, class: "form-sample") do |form| %>
+      <%= bootstrap_form_with(model: company, local: true, html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
         <div class="card-body">
           <% if company.errors.any? %>
-            <div id="error_explanation">
+            <div id="error_explanation" style="display: none">
               <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
               <ul>
@@ -24,32 +24,27 @@
 
 
           <div class="form-group">
-            <%= form.label :name, "Identificación"%>
-            <%= form.text_field :name,  class: "form-control" %>
+            <%= form.text_field :identification, label: t('company.identification'), class: "form-control" , required: true %>
           </div>
 
           <div class="form-group">
-            <%= form.label :name, "Nombre de la entidad"%>
-            <%= form.text_field :name,  class: "form-control" %>
+            <%= form.text_field :name, label: t('company.name') ,class: "form-control" , required: true %>
           </div>
 
           <div class="form-group">
             <div class="row no-gutters">
               <div class="col-lg-6 pr-2">
-                <%= form.label :phone, "Telefono"%>
-                <%= form.text_field :phone,  class: "form-control" %>
+                <%= form.text_field :phone,label: t('company.phone') ,  class: "form-control" %>
               </div>
               <div class="col-lg-6">
-                <%= form.label :email, "Correo Electronico"%>
-                <%= form.email_field :email,  class: "form-control"  %>
+                <%= form.email_field :email,label: t('company.email') , class: "form-control"  %>
               </div>
             </div>
 
           </div>
 
           <div class="form-group">
-            <%= form.label :address , "Direccion" %>
-            <%= form.text_field :address, class: "form-control" %>
+              <%= form.text_field :address, label: t('company.address') , class: "form-control" %>
           </div>
 
 

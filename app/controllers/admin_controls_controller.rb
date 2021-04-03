@@ -50,6 +50,7 @@ class AdminControlsController < ApplicationController
       if @admin_control.update(admin_control_params)
         redirect_to @admin_control, notice: "Admin control was successfully updated."
       else
+
         combo_box_data()
       render :edit, status: :unprocessable_entity
       end
