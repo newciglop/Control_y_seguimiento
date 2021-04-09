@@ -33,3 +33,16 @@ label {
 h5 > .btn-link:hover {
   text-decoration: none;
 }
+
+nav a {
+  font-size: 15px;
+}
+
+h5 > a {
+  background-color: transparent !important;
+}
+
+nav a:hover{
+  background-color: transparent !important;
+  text-decoration: none;
+}
