@@ -231,5 +231,21 @@ es:
     email_company: Correo de la entidad
     email_alternative: Correo alternativo de la entidad
     link_document: Link de documento
+  admin_control:
+    code: Codigo
+    leader: Lider
+    concept: Concepto
+    theme: Asunto
+    type: Tipos
+    item: items Especificos
+    start_date: Fecha inicio
+    finish_date: Fecha final
+    tracking_type: Tipo de seguimiento
+    state: Estado de seguimiento
+    company: Entidad
+    location: localización
+    link_drive: link drive
+    esponsible_function_id: Rol de Responsable
+
 
 

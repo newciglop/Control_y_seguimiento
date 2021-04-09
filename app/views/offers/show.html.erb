@@ -1,4 +1,54 @@
 <p id="notice"><%= notice %></p>
 
+
+
+<%= form_with(model: [@offer,@checklist]) do |form|%>
+  <%= form.submit "Add submmit", class: "btn-primary" %>
+  <% end %>
+
+<% @offer.checklists.each do |checklist| %>
+  <% if checklist.persisted? %>
+    <div class="text-content">
+      <label for="">title</label>
+      <h4><%= checklist.title %></h4>
+    </div>
+    <div  id="target" class="form-content d-none">
+      <%= form_with(model: [@offer,checklist]) do |form|%>
+        <%= form.text_field :title %>
+        <%= form.submit "Save", class: "btn-primary" %>
+        <a href="" class="cancel btn btn-light">Cancel</a>
+      <% end %>
+    </div>
+
+    <% end %>
+  <% end %>
 <%= link_to 'Edit', edit_offer_path(@offer) %> |
 <%= link_to 'Back', offers_path %>
+
+
+<script>
+/*
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('Hola mundo')
+        document.addEventListener('click',() => {
+            var element = document.querySelector('.text-content');
+            element.classList.add('d-none')
+            element.nextElementSibling.classList.remove('d-none')
+        })
+        console.log('hola mundo')
+        document.addEventListener('click',() => {
+            if (!document.querySelector('.cancel')) return;
+       $('.cancel').preventDefault()
+            let element = document.querySelector('.form-content')
+
+            element.classList.add('d-none')
+            element.nextElementSibling.classList.remove('d-none')
+            /*element.previousElementSibling.classList.remove('d-none')
+
+        })
+    })
+*/
+
+
+
+</script>

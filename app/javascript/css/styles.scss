@@ -25,3 +25,11 @@ label {
   padding: 5px;
   margin: 5px;
 }
+
+.btn-primary {
+  color: white !important;
+}
+
+h5 > .btn-link:hover {
+  text-decoration: none;
+}

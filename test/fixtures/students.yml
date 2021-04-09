@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  last_name: MyString
+  phone: MyString
+  mail: MyString
+  address: MyString
+  score: 9.99
+  semester: MyString
+  career: MyString
+  comment: MyString
+  leader_first: 1
+  leader_second: 1
+  mail_2: MyString
+  phone_2: MyString
+  age: MyString
+  birthday: MyString
+  link_university: MyString
+  link_data: MyString
+  identification: MyString
+  issued_in: MyString
+
+two:
+  name: MyString
+  last_name: MyString
+  phone: MyString
+  mail: MyString
+  address: MyString
+  score: 9.99
+  semester: MyString
+  career: MyString
+  comment: MyString
+  leader_first: 1
+  leader_second: 1
+  mail_2: MyString
+  phone_2: MyString
+  age: MyString
+  birthday: MyString
+  link_university: MyString
+  link_data: MyString
+  identification: MyString
+  issued_in: MyString

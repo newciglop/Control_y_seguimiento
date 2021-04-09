@@ -1,0 +1,276 @@
+<div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    <div class="card card-margin">
+
+      <%= bootstrap_form_with(model: student, local: true,html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
+
+        <% if student.errors.any? %>
+          <div id="error_explanation" style="display: none">
+            <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+            <ul>
+              <% student.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div id="accordion">
+
+
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Datos Personales
+                </a>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row no-gutters">
+
+
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <%= form.label :state_id, "Estado"  %>
+                    </div>
+                  </div>
+
+                  <div class=" col-lg-6 pr-2">
+                    <div class="form-group">
+                      <%= form.label :name , "Nombres" %>
+                      <%= form.text_field :name, class: "form-control", required: "true"  %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <%= form.label :last_name , "Apellidos" %>
+                      <%= form.text_field :last_name, class: "form-control", required: "true"  %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <%= form.label :identification_type_id, "Tipo de documentos"  %>
+                     </div>
+                  </div>
+
+                  <div class="col-lg-6 pr-2">
+                    <div class="form-group">
+                      <%= form.label :identification, "No de identificacion"  %>
+                      <%= form.text_field :identification, class: "form-control", required: "true"   %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <%= form.label :issued_in, "Expedida en " %>
+                      <%= form.text_field :issued_in , class: "form-control"  %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 pr-2">
+                    <div class="form-group">
+                      <label for="birthday">Fecha de Nacimiento</label>
+                       <%= form.text_field :birthday , {label: t('offer.date_published'),class: 'datepicker form-control' , placeholder: "yyyy-mm-dd" , readonly: false , required: true}  %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <%= form.label :age , "Edad" %>
+                      <%= form.text_field :age, class: "form-control" %>
+
+                    </div>
+                  </div>
+
+
+                  <div class="col-lg-6 pr-2">
+                    <div class="form-group">
+                      <%= form.label :city , "Ciudad" %>
+                      <%#= form.text_field :city , class: "form-control"  %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg 6">
+                    <%= form.label :address , "Dirección" %>
+                    <%= form.text_field :address , { class: "form-control" , required: "true"} %>
+                  </div>
+
+                  <div class="col-lg-6 pr-2">
+                    <div class="form-group">
+                      <%= form.label :phone , "Telefono 1" %>
+                      <%= form.text_field :phone, {class: "form-control" ,required: "true"} %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <%= form.label :phone_2 , "Telefono 2" %>
+                      <%= form.text_field :phone_2, class: "form-control"  %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 pr-2">
+                    <div class="form-group">
+                      <%= form.label :mail , "Correo Electronico 1" %>
+                      <%= form.text_field :mail , class: "form-control", required: "true"  %>
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <%= form.label :mail_2 , "Correo Electronico 2" %>
+                      <%= form.text_field :mail_2 , class: "form-control"  %>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Datos Universidad
+                </a>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row no-gutters">
+                  <div class="col-lg-12">
+
+
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <%= form.label :university_id, "Nombre"  %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 pr-2">
+                    <div class="form-group">
+                      <%= form.label :title_id, "TItulacion"  %>
+
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 ">
+                    <div class="form-group">
+                      <%= form.label :semester , "Semestre" %>
+                      <%= form.text_field :semester , class: "form-control"  %>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <%= form.label :career , "Carrera" %>
+                    <%= form.text_field :career , class: "form-control"  %>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <%= form.label :link_university , "Link de carpeta de la universidad" , class: 'mt-3'%>
+                    <%= form.text_field :link_university , class: "form-control"  %>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <%= form.label :body_1 , "Proceso" , class: 'mt-3' %>
+
+                  </div>
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Empresa
+                </a>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row no-gutters">
+
+                  <div class="col-lg-6 pr-2">
+                    <%= form.label :leader_first, "Encargado 1"  %>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <%= form.label :leader_second, "Encargado 2"  %>
+
+                  </div>
+
+                  <div class="col-lg-12">
+                    <%= form.label :link_data , "Link de carpeta datos" , class: 'mt-3'%>
+                    <%= form.text_field :link_data , class: "form-control"  %>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <%= form.label :body_2 , "Funciones:" , class: 'mt-3' %>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header" id="headingFour">
+              <h5 class="mb-0" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Calificacíón
+                </a>
+              </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row no-gutters">
+                  <div class="col-lg-12">
+                    <%= form.label :score , "Puntaje" , class: 'mt-3' %>
+                    <%= form.text_field :score , class: "form-control"  %>
+                  </div>
+                  <div class="col-lg-12">
+                    <%= form.label :comment , "Comentario:" , class: 'mt-3' %>
+                    <%= form.text_area :comment, size: '20x3', maxlength: "140" ,class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="actions text-center my-4">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', students_path ,class: "btn btn-light"  %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+

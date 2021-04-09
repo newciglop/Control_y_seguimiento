@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_033001) do
+ActiveRecord::Schema.define(version: 2021_04_09_022028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 2021_04_03_033001) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "checklists", force: :cascade do |t|
+    t.bigint "offer_id", null: false
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["offer_id"], name: "index_checklists_on_offer_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.bigint "state_id", null: false
@@ -108,6 +116,11 @@ ActiveRecord::Schema.define(version: 2021_04_03_033001) do
   create_table "concepts", force: :cascade do |t|
     t.string "name"
     t.boolean "enable"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "controller_students", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -239,6 +252,30 @@ ActiveRecord::Schema.define(version: 2021_04_03_033001) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "mail"
+    t.string "address"
+    t.decimal "score"
+    t.string "semester"
+    t.string "career"
+    t.string "comment"
+    t.integer "leader_first"
+    t.integer "leader_second"
+    t.string "mail_2"
+    t.string "phone_2"
+    t.string "age"
+    t.string "birthday"
+    t.string "link_university"
+    t.string "link_data"
+    t.string "identification"
+    t.string "issued_in"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "themes", force: :cascade do |t|
     t.string "name"
     t.boolean "enable"
@@ -311,6 +348,7 @@ ActiveRecord::Schema.define(version: 2021_04_03_033001) do
   add_foreign_key "admin_controls", "themes"
   add_foreign_key "admin_controls", "types"
   add_foreign_key "admin_controls", "users"
+  add_foreign_key "checklists", "offers"
   add_foreign_key "cities", "states"
   add_foreign_key "designations", "areas"
   add_foreign_key "engineers", "profiles"

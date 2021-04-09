@@ -5,7 +5,7 @@
       <%= bootstrap_form_with(model: admin_control, local: true,html: { class: "forms-sample needs-validation", novalidate: true }) do |form|  %>
         <div class="card-body p-0">
           <% if admin_control.errors.any? %>
-            <div id="error_explanation">
+            <div id="error_explanation" style="display: none">
               <h2><%= pluralize(admin_control.errors.count, "error") %> prohibited this admin_control from being saved:</h2>
 
               <ul>
@@ -35,19 +35,17 @@
 
                     <div class="col-lg-4 pr-2">
                       <div class="form-group">
-                        <%= form.label :code , "Codigo" %>
                         <% if admin_control.id? %>
-                          <%= form.text_field :code, class: "form-control"   %>
+                          <%= form.text_field :code,label:t('admin_control.code') ,class: "form-control"   %>
                         <% else %>
-                          <%= form.text_field :code, class: "form-control" , value: @suggest_code.to_i  %>
+                          <%= form.text_field :code, label:t('admin_control.code'),class: "form-control" , value: @suggest_code.to_i  %>
                         <% end %>
                       </div>
                     </div>
 
                     <div class="col-lg-8">
                       <div class="form-group">
-                        <%= form.label :concept_id, "Concepto" %>
-                        <%= form.select(:concept_id, options_for_select(@concepts, admin_control.concept_id), {:prompt => 'Selecciona un concepto'},{class: "form-control " ,required:true }) %>
+                        <%= form.select(:concept_id, options_for_select(@concepts, admin_control.concept_id), {label: t('admin_control.concept'),:prompt => 'Selecciona un concepto'},{class: "form-control " ,required:true }) %>
                       </div>
                     </div>
 
@@ -56,14 +54,12 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6 pr-2">
                       <div class="form-group">
-                        <%= form.label :theme_id, "Asunto" %>
-                        <%= form.select(:theme_id, options_for_select(@themes, admin_control.theme_id), {:prompt => 'Selecciona un asunto'},{class: "form-control " }) %>
+                        <%= form.select(:theme_id, options_for_select(@themes, admin_control.theme_id), {label:t('admin_control.theme'),:prompt => 'Selecciona un asunto'},{class: "form-control " }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :type_id, "Tipos" %>
-                        <%= form.select(:type_id, options_for_select(@types, admin_control.type_id), {:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
+                        <%= form.select(:type_id, options_for_select(@types, admin_control.type_id), {label:t('admin_control.type'),:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -71,8 +67,7 @@
                   <div class="row no-gutters">
                     <div class="col-lg-12">
                       <div class="form-group">
-                        <%= form.label :item_id, "items Especificos" %>
-                        <%= form.select(:item_id, options_for_select(@items, admin_control.item_id), {:prompt => 'Selecciona un asunto'},{class: "form-control " }) %>
+                           <%= form.select(:item_id, options_for_select(@items, admin_control.item_id), {:prompt => 'Selecciona un asunto'},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -80,17 +75,14 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6 pr-2">
                       <div class="form-group">
-                        <%= form.label :start_date, "Fecha inicio" %>
-                        <%= form.text_field :start_date ,{ class: 'datepicker form-control' , placeholder: "yyyy-mm-dd"} %>
-
+                        <%= form.text_field :start_date ,{ label:t('admin_control.start_date'),class: 'datepicker form-control' , placeholder: "yyyy-mm-dd"} %>
                       </div>
                     </div>
 
 
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :final_date, "Fecha final" %>
-                        <%= form.text_field :final_date, { class: 'datepicker form-control' , placeholder: "yyyy-mm-dd"} %>
+                        <%= form.text_field :final_date, { label: t('admin_control.finish_date'), class: 'datepicker form-control' , placeholder: "yyyy-mm-dd"} %>
                       </div>
                     </div>
                   </div>
@@ -98,14 +90,12 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :tracking_type, "Tipo de seguimiento" %>
-                        <%= form.select(:tracking_type, options_for_select(@tracking_types, admin_control.tracking_type), {:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
+                        <%= form.select(:tracking_type, options_for_select(@tracking_types, admin_control.tracking_type), {label:t('admin_control.tracking_type'),:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :state, "Estado de seguimiento" %>
-                        <%= form.select(:state, options_for_select(@states, admin_control.state), {:prompt => 'Selecciona un Estado'},{class: "form-control " }) %>
+                        <%= form.select(:state, options_for_select(@states, admin_control.state), {label:t('admin_control.state'),:prompt => 'Selecciona un Estado'},{class: "form-control " }) %>
                       </div>
                     </div>
 
@@ -132,14 +122,12 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :company_id, "Entidad" %>
-                        <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control " }) %>
+                                           <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {label:t('admin_control.company'),:prompt => 'Selecciona un Perfil'},{class: "form-control " }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :city_id, "ciudad" %>
-                        <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control " }) %>
+                                     <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {label:t('admin_control.location'),:prompt => 'Selecciona un Perfil'},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -214,8 +202,8 @@
 
 
                       <div class="col-lg-12">
-                        <%= form.label :link_drive , "link del drive" %>
-                        <%= form.text_field :link_drive, class: "form-control" %>
+
+                        <%= form.text_field :link_drive, label:t('admin_control.link_drive'),class: "form-control" %>
                       </div>
 
                     </div>

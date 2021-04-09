@@ -10,6 +10,7 @@ class OffersController < ApplicationController
 
 
   def show
+    @checklist =  @offer.checklists.build
   end
 
 

@@ -1,0 +1,2 @@
+class ControllerStudent < ApplicationRecord
+end

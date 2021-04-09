@@ -425,15 +425,15 @@
                 <div class="row no-gutters">
                   <div class="col-lg-6 pr-2">
 
-                    <%= form.text_field :email_company , class: "form-control" , required: true%>
+                    <%= form.text_field :email_company ,label:t('offer.email_company') , class: "form-control" , required: true%>
                   </div>
                   <div class="col-lg-6  pr-2">
-                    <%= form.text_field :email_alternative , class: "form-control", required: true %>
+                    <%= form.text_field :email_alternative , label:t('offer.email_company'),class: "form-control", required: true %>
                   </div>
                 </div>
                 <div class="row no-gutters">
                   <div class="col-lg-12">
-                    <%= form.text_field :link_document , class: "form-control", required: true %>
+                    <%= form.text_field :link_document ,label:t('offer.link_document') ,class: "form-control", required: true %>
                   </div>
                 </div>
               </div>

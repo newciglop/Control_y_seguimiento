@@ -12,10 +12,16 @@
  *
  *= require_tree .
  *= require_self
- *= require flatpickr
  *= require  rails_bootstrap_forms
+ *= require flatpickr
+
 
 
  */
 
+
+
+nav .navbar > a:hover {
+    background-color: transparent !important;
+}
 

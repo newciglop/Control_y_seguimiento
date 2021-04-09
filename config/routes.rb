@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+
+
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #
@@ -9,9 +12,14 @@ Rails.application.routes.draw do
 
   authenticated :user do
 
-  resources :offers
+
+  resources :offers do
+    resources :checklists
+  end
+
+  resources :students
   resources :users
-  resources  :profiles
+  resources :profiles
   resources :engineers
   resources :areas
   resources :designations
