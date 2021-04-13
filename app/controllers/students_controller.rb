@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[ show edit update destroy ]
   include ComboBoxHelper
+  before_action :set_student, only: %i[ show edit update destroy ]
+
 
   # GET /students or /students.json
   def index
@@ -16,7 +17,7 @@ class StudentsController < ApplicationController
   def new
     combo_box_company
     worker_all
-    combo_box_type_identification
+    combo_box_type_identification()
     states_students
     @student = Student.new
   end
@@ -26,7 +27,7 @@ class StudentsController < ApplicationController
     combo_box_company
     worker_all
     states_students
-    combo_box_type_identification
+    combo_box_type_identification()
   end
 
   # POST /students or /students.json

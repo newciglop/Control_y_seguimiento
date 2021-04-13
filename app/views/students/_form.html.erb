@@ -54,6 +54,7 @@
 
                   <div class="col-lg-12">
                     <div class="form-group">
+                      <%= form.select(:type_identification_id, options_for_select(@identification_types, student.type_identification_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95", required: true }) %>
                       <%#= form.select(:type_identification_id, options_for_select(@identification_types, student.type_identification_id), { label: t('students.type_identification') ,:prompt => 'Selecciona un Tipo de identificacion',class: "form-control " ,required: true}) %>
                      </div>
                   </div>
