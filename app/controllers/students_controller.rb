@@ -51,11 +51,11 @@ class StudentsController < ApplicationController
       if @student.update(student_params)
         redirect_to @student, notice: "Student was successfully updated."
       else
+        combo_box_type_identification
         combo_box_company
         worker_all
         states_students
-        combo_box_type_identification
-        render :edit, status: :unprocessable_entity
+               render :edit, status: :unprocessable_entity
       end
 
   end
@@ -79,7 +79,6 @@ class StudentsController < ApplicationController
                                       :career, :comment, :leader_first,
                                       :leader_second, :mail_2, :phone_2,
                                       :age, :birthday, :link_university,
-                                      :link_data, :identification, :issued_in ,
-                                      :type_identification_id,:states_student_id,:city_id)
+                                      :link_data, :identification, :issued_in ,:type_identification_id,:states_student_id,:city_id)
     end
 end

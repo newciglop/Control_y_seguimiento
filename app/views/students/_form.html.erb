@@ -34,6 +34,7 @@
 
                   <div class="col-lg-12">
                     <div class="form-group">
+                      <%= form.select(:type_identification_id, options_for_select(@identification_types, student.type_identification_id), :prompt => 'Selecciona un tipo',class: "form-control width-95", required: true ) %>
                       <%= form.select(:states_student_id, options_for_select(@c_states_students, student.states_student_id), { label: t('students.states_student') ,:prompt => 'Selecciona un estado',class: "form-control " ,required: true}) %>
                     </div>
                   </div>
@@ -54,7 +55,7 @@
 
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <%= form.select(:type_identification_id, options_for_select(@identification_types, student.type_identification_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95", required: true }) %>
+
                       <%#= form.select(:type_identification_id, options_for_select(@identification_types, student.type_identification_id), { label: t('students.type_identification') ,:prompt => 'Selecciona un Tipo de identificacion',class: "form-control " ,required: true}) %>
                      </div>
                   </div>
