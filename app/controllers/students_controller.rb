@@ -1,8 +1,10 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
+  include ComboBoxHelper
 
   # GET /students or /students.json
   def index
+
     @students = Student.all
   end
 
@@ -12,11 +14,19 @@ class StudentsController < ApplicationController
 
   # GET /students/new
   def new
+    combo_box_company
+    worker_all
+    combo_box_type_identification
+    states_students
     @student = Student.new
   end
 
   # GET /students/1/edit
   def edit
+    combo_box_company
+    worker_all
+    states_students
+    combo_box_type_identification
   end
 
   # POST /students or /students.json
@@ -26,6 +36,10 @@ class StudentsController < ApplicationController
       redirect_to @student, notice: "Student was successfully created."
 
       else
+        combo_box_company
+        worker_all
+        states_students
+        combo_box_type_identification
        render :new, status: :unprocessable_entity
       end
   end
@@ -36,6 +50,10 @@ class StudentsController < ApplicationController
       if @student.update(student_params)
         redirect_to @student, notice: "Student was successfully updated."
       else
+        combo_box_company
+        worker_all
+        states_students
+        combo_box_type_identification
         render :edit, status: :unprocessable_entity
       end
 
@@ -60,6 +78,7 @@ class StudentsController < ApplicationController
                                       :career, :comment, :leader_first,
                                       :leader_second, :mail_2, :phone_2,
                                       :age, :birthday, :link_university,
-                                      :link_data, :identification, :issued_in)
+                                      :link_data, :identification, :issued_in ,
+                                      :type_identification_id,:states_student_id,:city_id)
     end
 end

@@ -10,6 +10,11 @@ module ComboBoxHelper
     @identification_types = @identification_types.map{|x| [x.name , x.id]}
   end
 
+  def states_students
+    @c_states_students = StatesStudent.where("enable=?",true).map{|ss| [ss.name, ss.id]}
+  end
+
+
   def combo_box_general_data
     @concepts = Concept.where(enable: true).order("name").map{|concept| [concept.name , concept.id]}
     @themes = Theme.where(enable: true).order("name").map{|theme| [theme.name , theme.id]}
@@ -48,6 +53,10 @@ module ComboBoxHelper
     profiles_responsible = Profile.where('(enable=? AND profile_type=?) OR (enable=? AND profile_type=?)',true,Profile.PROFILE_LEADER,true,Profile.WILDCARD).pluck(:id)
     ids_profile = profiles_responsible
     @worker_leader = Worker.where('(profile_id IN (?)) or (profile_2 IN (?)) or (profile_3 IN (?)) or (profile_4 IN (?))',ids_profile,ids_profile,ids_profile,ids_profile).map{|employee| [employee.full_name,employee.id]}
+  end
+
+  def worker_all
+    @workers =  Worker.where(enable:true).map{|w| [w.full_name, w.id]}
   end
 
   def combo_box_modalities

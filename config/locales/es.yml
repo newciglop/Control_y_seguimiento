@@ -246,6 +246,13 @@ es:
     location: localización
     link_drive: link drive
     esponsible_function_id: Rol de Responsable
+  students:
+    leader_1: Encargado 1
+    leader_2: Encargado 2
+    type_identification: Tipo de documentos
+    states_student: Estados
+    location: Localización
+
 
 
 

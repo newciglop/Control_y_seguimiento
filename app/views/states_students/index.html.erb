@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-8 offset-lg-2 text-center">
+    <img src="https://media4.giphy.com/media/fZDXPWad3Rhx0H0gDp/giphy.gif" alt="" width="200">
+  </div>
+</div>
+<h1>States Students</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Enable</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @states_students.each do |states_student| %>
+      <tr>
+        <td><%= states_student.name %></td>
+        <td><%= states_student.enable %></td>
+        <td><%= link_to 'Show', states_student %></td>
+        <td><%= link_to 'Edit', edit_states_student_path(states_student) %></td>
+        <td><%= link_to 'Destroy', states_student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New States Student', new_states_student_path %>

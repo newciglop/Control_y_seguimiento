@@ -34,7 +34,7 @@
 
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <%= form.label :state_id, "Estado"  %>
+                      <%= form.select(:states_student_id, options_for_select(@c_states_students, student.states_student_id), { label: t('students.states_student') ,:prompt => 'Selecciona un estado',class: "form-control " ,required: true}) %>
                     </div>
                   </div>
 
@@ -54,7 +54,7 @@
 
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <%= form.label :identification_type_id, "Tipo de documentos"  %>
+                                <%= form.select(:type_identification_id, options_for_select(@identification_types, student.type_identification_id), { label: t('students.type_identification') ,:prompt => 'Selecciona un Tipo de identificacion',class: "form-control " ,required: true}) %>
                      </div>
                   </div>
 
@@ -90,8 +90,7 @@
 
                   <div class="col-lg-6 pr-2">
                     <div class="form-group">
-                      <%= form.label :city , "Ciudad" %>
-                      <%#= form.text_field :city , class: "form-control"  %>
+                       <%= form.select(:city_id, options_for_select(@cities, student.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{class: "form-control selectpicker" , required: true , data: { live_search: 'true' }}) %>
                     </div>
                   </div>
 
@@ -212,12 +211,11 @@
                 <div class="row no-gutters">
 
                   <div class="col-lg-6 pr-2">
-                    <%= form.label :leader_first, "Encargado 1"  %>
+                    <%= form.select(:leader_first , options_for_select(@workers, student.leader_first), { label: t('students.leader_1') ,:prompt => 'Selecciona un lider',class: "form-control " ,required: true}) %>
                   </div>
 
                   <div class="col-lg-6">
-                    <%= form.label :leader_second, "Encargado 2"  %>
-
+                       <%= form.select(:leader_second , options_for_select(@workers, student.leader_second), { label: t('students.leader_2') ,:prompt => 'Selecciona un lider',class: "form-control " ,required: true}) %>
                   </div>
 
                   <div class="col-lg-12">

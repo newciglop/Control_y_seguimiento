@@ -1,0 +1,2 @@
+class StatesStudent < ApplicationRecord
+end

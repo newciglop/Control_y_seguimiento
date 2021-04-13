@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_022028) do
+ActiveRecord::Schema.define(version: 2021_04_13_045626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,6 +252,13 @@ ActiveRecord::Schema.define(version: 2021_04_09_022028) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "states_students", force: :cascade do |t|
+    t.string "name"
+    t.boolean "enable", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.string "last_name"
@@ -274,6 +281,12 @@ ActiveRecord::Schema.define(version: 2021_04_09_022028) do
     t.string "issued_in"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "type_identification_id"
+    t.bigint "states_student_id", null: false
+    t.bigint "city_id", null: false
+    t.index ["city_id"], name: "index_students_on_city_id"
+    t.index ["states_student_id"], name: "index_students_on_states_student_id"
+    t.index ["type_identification_id"], name: "index_students_on_type_identification_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -359,6 +372,9 @@ ActiveRecord::Schema.define(version: 2021_04_09_022028) do
   add_foreign_key "offers", "modalities"
   add_foreign_key "offers", "users"
   add_foreign_key "offers", "workers"
+  add_foreign_key "students", "cities"
+  add_foreign_key "students", "states_students"
+  add_foreign_key "students", "type_identifications"
   add_foreign_key "workers", "profiles"
   add_foreign_key "workers", "type_identifications"
 end

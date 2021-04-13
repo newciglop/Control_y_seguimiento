@@ -1,99 +1,256 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-8 offset-sm-2" style="padding-top: 30px">
+    <nav>
+      <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Datos Personales</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Datos Universidad</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Datos Empresas</a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="card card-margin">
+          <div class="card-header">
+            <h5 class="card-title mb-0">
+              Datos Personales
+            </h5>
+          </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @student.name %>
-</p>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table center-aligned-table table-striped">
+                <% case @student.states_student.name %>
+                <% when "Aprobado" %>
+                  <tr>
+                    <th class="bg-success text-light"><strong>Estado</strong></th>
+                    <td class="bg-success text-light"><%= @student.states_student.name %></td>
+                  </tr>
+                <% when "Sin Entrevista" %>
+                  <th class="text-light" style="background-color: coral"><strong>Estado</strong></th>
+                  <td class="text-light" style="background-color: coral"><%= @student.states_student.name %></td>
+                <% when "Entrevista Inicial" %>
+                  <th class="bg-info text-light" ><strong>Estado</strong></th>
+                  <td class="text-light bg-info"  ><%= @student.states_student.name %></td>
+                <% when "Listo Para Psicotecnica" %>
+                  <th style="background-color: orange" class="text-light" ><strong>Estado</strong></th>
+                  <td  style="background-color: orange" class="text-light" ><%= @student.states_student.name %></td>
+                <% when "Datos Listos Pero Sin Entrevista" %>
+                  <th class=" bg-warning text-dark" ><strong>Estado</strong></th>
+                  <td  class="bg-warning text-dark" ><%= @student.states_student.name %></td>
+                <% else %>
+                  <th class="bg-success text-light"><strong>Estado</strong></th>
+                  <td><%= @student.states_student.name %></td>
+                <%end %>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @student.last_name %>
-</p>
+                <tr>
+                  <th><strong>Tipo de Identificación:</strong></th>
+                  <td class="td-white"><%= @student.type_identification.name %></td>
+                </tr>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @student.phone %>
-</p>
+                <tr>
+                  <th><strong>No de Identificación:</strong></th>
+                  <td class="td-white"><%= @student.identification %> </td>
+                </tr>
 
-<p>
-  <strong>Mail:</strong>
-  <%= @student.mail %>
-</p>
+                <tr>
+                  <th><strong>Expedidad en :</strong></th>
+                  <td class="td-white"><%= @student.issued_in %> </td>
+                </tr>
 
-<p>
-  <strong>Address:</strong>
-  <%= @student.address %>
-</p>
 
-<p>
-  <strong>Score:</strong>
-  <%= @student.score %>
-</p>
+                <tr>
+                  <th><strong> Nombres:</strong></th>
+                  <td class="td-white"><%= @student.name %></td>
+                </tr>
 
-<p>
-  <strong>Semester:</strong>
-  <%= @student.semester %>
-</p>
+                <tr>
+                  <th><strong>Apellidos:</strong></th>
+                  <td class="td-white"><%= @student.last_name%></td>
+                </tr>
 
-<p>
-  <strong>Career:</strong>
-  <%= @student.career %>
-</p>
+                <tr>
+                  <th><strong>Fecha de nacimiento:</strong></th>
+                  <td class="td-white"><%= @student.birthday %></td>
+                </tr>
 
-<p>
-  <strong>Comment:</strong>
-  <%= @student.comment %>
-</p>
+                <tr>
+                  <th><strong>Edad:</strong></th>
+                  <td class="td-white"><%= @student.age %></td>
+                </tr>
 
-<p>
-  <strong>Leader first:</strong>
-  <%= @student.leader_first %>
-</p>
+                <tr>
+                  <th><strong><%= t('students.location') %>:</strong></th>
+                  <td class="td-white"><%= @student.city.state.name %></td>
+                </tr>
 
-<p>
-  <strong>Leader second:</strong>
-  <%= @student.leader_second %>
-</p>
+                <tr>
+                  <th><strong>Direccion:</strong></th>
+                  <td class="td-white"><%= @student.address %></td>
+                </tr>
 
-<p>
-  <strong>Mail 2:</strong>
-  <%= @student.mail_2 %>
-</p>
+                <tr>
+                  <th><strong>telefono 1:</strong></th>
+                  <td class="td-white"><%= @student.phone %></td>
+                </tr>
 
-<p>
-  <strong>Phone 2:</strong>
-  <%= @student.phone_2 %>
-</p>
+                <tr>
+                  <th><strong>telefono 2:</strong></th>
+                  <td class="td-white"><%= @student.phone_2 %></td>
+                </tr>
 
-<p>
-  <strong>Age:</strong>
-  <%= @student.age %>
-</p>
 
-<p>
-  <strong>Birthday:</strong>
-  <%= @student.birthday %>
-</p>
+                <tr>
+                  <th><strong>Correo Electronico 1:</strong></th>
+                  <td class="td-white"><%= @student.mail %></td>
+                </tr>
 
-<p>
-  <strong>Link university:</strong>
-  <%= @student.link_university %>
-</p>
+                <tr>
+                  <th><strong>Correo Electronico 2:</strong></th>
+                  <td class="td-white"><%= @student.mail_2 %></td>
+                </tr>
 
-<p>
-  <strong>Link data:</strong>
-  <%= @student.link_data %>
-</p>
+                <tr>
+                  <th><strong>Puntaje:</strong></th>
+                  <td class="td-white"><%= @student.score %></td>
+                </tr>
 
-<p>
-  <strong>Identification:</strong>
-  <%= @student.identification %>
-</p>
+                <tr>
+                  <th><strong>Comentario:</strong></th>
+                  <td class="td-white"><%= @student.comment%></td>
+                </tr>
 
-<p>
-  <strong>Issued in:</strong>
-  <%= @student.issued_in %>
-</p>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+
+
+              </table>
+            </div>
+          </div>
+
+          <div class="card-footer bg-white text-center">
+
+            <%= link_to 'Editar', edit_student_path(@student) ,class: "btn btn-primary mr-2" %>
+            <%= link_to 'Regresar', students_path, class: "btn btn-light "  %>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="card card-margin">
+          <div class="card-header">
+            <h5 class="card-title mb-0">
+              Datos Universidad
+            </h5>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table center-aligned-table table-striped">
+
+
+                <tr>
+                  <th><strong>Convenio Vigente:</strong></th>
+                  <td class="td-white"><%#= @n_agreement %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Nombre:</strong></th>
+                  <td class="td-white"><%#= @student.university.name %> </td>
+                </tr>
+
+                <tr>
+                  <th><strong>Titulacion del Estudiante:</strong></th>
+                  <td class="td-white" style="padding-top:25px"><%#= @student.title.name %> </td>
+                </tr>
+
+
+                <tr>
+                  <th><strong> Semestre:</strong></th>
+                  <td class="td-white"><%= @student.semester %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Carrera:</strong></th>
+                  <td class="td-white"><%= @student.career %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Link de la carpeta de la universidad</strong></th>
+                  <td class="td-white"><%= @student.link_university %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Proceso con la universidad:</strong></th>
+                  <td class="td-white"><%#= @student.body_1 %></td>
+                </tr>
+
+
+              </table>
+            </div>
+          </div>
+
+          <div class="card-footer bg-white text-center">
+
+            <%= link_to 'Editar', edit_student_path(@student) ,class: "btn btn-primary mr-2" %>
+            <%= link_to 'Regresar', students_path, class: "btn btn-light "  %>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <div class="card card-margin">
+          <div class="card-header">
+            <h5 class="card-title mb-0">
+              Datos Empresas
+            </h5>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table center-aligned-table table-striped">
+
+
+                <tr>
+                  <th><strong>Encargado 1:</strong></th>
+                  <td class="td-white"><%#= @f_name %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Encargado 2:</strong></th>
+                  <td class="td-white"> <%#= @f_name2 %></td>
+                </tr>
+
+                <tr>
+                  <th><strong> Link de la carpeta de datos:</strong></th>
+                  <td class="td-white"><%#= @student.link_date %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Funciones:</strong></th>
+                  <td class="td-white"><%#= @student.body_2 %></td>
+                </tr>
+
+
+
+
+              </table>
+            </div>
+          </div>
+
+          <div class="card-footer bg-white text-center">
+
+            <%= link_to 'Editar', edit_student_path(@student) ,class: "btn btn-primary mr-2" %>
+            <%= link_to 'Regresar', students_path, class: "btn btn-light "  %>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
