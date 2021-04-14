@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
-  include ComboBoxHelper
-  before_action :set_student, only: %i[ show edit update destroy ]
 
+  before_action :set_student, only: %i[ show edit update destroy ]
+  include ComboBoxHelper
 
   # GET /students or /students.json
   def index
@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
 
   # GET /students/new
   def new
+    @identification_types = TypeIdentification.all.map{|x| [x.name , x.id]}
     combo_box_company
     worker_all
     combo_box_type_identification()
