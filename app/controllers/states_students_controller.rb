@@ -27,7 +27,7 @@ class StatesStudentsController < ApplicationController
     @states_student = StatesStudent.new(states_student_params)
 
          if @states_student.save
-         redirect_to @states_student, notice: "States student was successfully created."
+         redirect_to edit_states_student_path(@states_student), notice: "States student was successfully created."
          else
             render :new, status: :unprocessable_entity
          end
@@ -37,7 +37,7 @@ class StatesStudentsController < ApplicationController
   def update
     enable_resources(@states_student,params)
       if @states_student.update(states_student_params)
-       redirect_to @states_student, notice: "States student was successfully updated."
+       redirect_to states_students_path, notice: "States student was successfully updated."
       else
      render :edit, status: :unprocessable_entity
      end
