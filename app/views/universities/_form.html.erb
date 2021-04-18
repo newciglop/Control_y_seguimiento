@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="offset-sm-2 col-sm-8">
+    <div class="card card-margin">
+
+      <div class="card-header">
+        <h5 class="card-title">
+          Datos
+        </h5>
+      </div>
+
+      <%= bootstrap_form_with(model: university, local: true, html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
+        <div class="card-body">
+          <% if university.errors.any? %>
+            <div id="error_explanation" style="display: none">
+              <h2><%= pluralize(university.errors.count, "error") %> prohibited this university from being saved:</h2>
+
+              <ul>
+                <% university.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+
+          <div class="row no-gutters">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <%= form.select(:agreement, options_for_select(@agreement, university.agreement), {label:t('universities.agreement'),:prompt => 'Selecciona un estado de convenio'},{class: "form-control" , required: true }) %>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <%= form.text_field :name, label: t('universities.name') ,class: "form-control" , required: true %>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row no-gutters">
+            <div class="col-sm-4 pr-2">
+              <div class="form-group">
+                <%= form.text_field :address, label: t('universities.address') ,class: "form-control" , required: true %>
+              </div>
+            </div>
+
+            <div class="col-sm-4 pr-2">
+              <div class="form-group">
+                <%= form.select(:city_id, options_for_select(@cities, university.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{class: "form-control selectpicker" , required: true , data: { live_search: 'true' }}) %>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <%= form.text_field :phone, label: t('universities.phone') ,class: "form-control" , required: true %>
+              </div>
+            </div>
+          </div>
+
+          <div class="row no-gutters">
+
+            <div class="col-sm-6 pr-2">
+              <div class="form-group">
+                <%= form.text_field :contact, label: t('universities.contact') ,class: "form-control" , required: true %>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= form.text_field :contact_phone, label: t('universities.contact_phone') ,class: "form-control" , required: true %>
+              </div>
+            </div>
+          </div>
+
+
+          <% if @university.id? %>
+            <div class="form-group">
+              <h4><%= t('commons.disabled&enabled') %></h4>
+              <label class="switch">
+                <input type="checkbox" name="enable" id="enable" value="true" <%= @university.enable ? "checked='checked'":""%> >
+                <span class="slider round"></span>
+              </label>
+            </div>
+          <% end %>
+
+
+
+
+        </div>
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', universities_path ,class: "btn btn-light btn-action"  %>
+
+
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+

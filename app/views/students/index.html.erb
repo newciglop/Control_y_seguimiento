@@ -1,67 +1,54 @@
-<p id="notice"><%= notice %></p>
-<h1>Students</h1>
 <div class="row">
-  <div class="col-lg-8 offset-lg-2 text-center">
-    <img src="https://media4.giphy.com/media/fZDXPWad3Rhx0H0gDp/giphy.gif" alt="" width="200">
+  <div class="col-md-10 offset-md-1  text-center">
+    <h2 class="my-4">Practicantes</h2>
   </div>
+  <div class="offset-md-1"></div>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Last name</th>
-      <th>Phone</th>
-      <th>Mail</th>
-      <th>Address</th>
-      <th>Score</th>
-      <th>Semester</th>
-      <th>Career</th>
-      <th>Comment</th>
-      <th>Leader first</th>
-      <th>Leader second</th>
-      <th>Mail 2</th>
-      <th>Phone 2</th>
-      <th>Age</th>
-      <th>Birthday</th>
-      <th>Link university</th>
-      <th>Link data</th>
-      <th>Identification</th>
-      <th>Issued in</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="offset-sm-1 col-sm-10">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col" class="text-center">Nombre</th>
+          <th scope="col" class="text-center">Telefono</th>
+          <th scope="col" class="text-center">correo electronico </th>
+          <th colspan="2"></th>
+        </tr>
+        </thead>
 
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.name %></td>
-        <td><%= student.last_name %></td>
-        <td><%= student.phone %></td>
-        <td><%= student.mail %></td>
-        <td><%= student.address %></td>
-        <td><%= student.score %></td>
-        <td><%= student.semester %></td>
-        <td><%= student.career %></td>
-        <td><%= student.comment %></td>
-        <td><%= student.leader_first %></td>
-        <td><%= student.leader_second %></td>
-        <td><%= student.mail_2 %></td>
-        <td><%= student.phone_2 %></td>
-        <td><%= student.age %></td>
-        <td><%= student.birthday %></td>
-        <td><%= student.link_university %></td>
-        <td><%= student.link_data %></td>
-        <td><%= student.identification %></td>
-        <td><%= student.issued_in %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+        <% @students.each_with_index  do |student, index| %>
+          <tr>
+            <td> <%= index + 1  %></td>
+            <td class="text-center"><%= student.name + " " + student.last_name %></td>
+            <td class="text-center"><%= student.phone %></td>
+            <td class="text-center"><%= student.mail %></td>
+            <td></td>
+            <td>
+              <%= link_to 'Mostrar', student_path(student) %>
+            </td>
+            <td><%= link_to 'Editar', edit_student_path(student) %></td>
+            <td>
+              <%= link_to 'Eliminar', student, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
+            </td>
+          </tr>
 
-<br>
+        <% end %>
+        </tbody>
+      </table>
 
-<%= link_to 'New Student', new_student_path %>
+      <br>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-sm-12 d-flex justify-content-center">
+    <%= link_to 'Nueva practicante', new_student_path , class: "btn btn-primary mr-2" %>
+  </div>
+
+
+
+</div>

@@ -2,6 +2,7 @@ class StudentsController < ApplicationController
 
   before_action :set_student, only: %i[ show edit update destroy ]
   include ComboBoxHelper
+  include StudentsHelper
 
   # GET /students or /students.json
   def index
@@ -11,6 +12,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1 or /students/1.json
   def show
+    show_leader
   end
 
   # GET /students/new
@@ -35,8 +37,13 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
       if @student.save
-      redirect_to @student, notice: "Student was successfully created."
-
+        if @student.current_worker
+          profile_practice = Profile.where('(enable=? AND profile_type=?)',true,Profile.INTERN).pluck(:id)[0]
+          w = Worker.create(first_name: @student.name, last_name: @student.last_name, phone: @student.phone,
+                        phone_2: @student.phone_2 , email: @student.mail, profile_id: profile_practice,
+                        identification:@student.identification,type_identification_id:@student.type_identification_id,enable:true)
+                   redirect_to @student, notice: "Student was successfully created."
+          end
       else
         combo_box_company
         worker_all
@@ -77,9 +84,10 @@ class StudentsController < ApplicationController
     def student_params
       params.require(:student).permit(:name, :last_name, :phone,
                                       :mail, :address, :score, :semester,
-                                      :career, :comment, :leader_first,
+                                      :career, :comment, :leader_first,:title_id,
                                       :leader_second, :mail_2, :phone_2,
-                                      :age, :birthday, :link_university,
-                                      :link_data, :identification, :issued_in ,:type_identification_id,:states_student_id,:city_id)
+                                      :age, :birthday, :link_university, :current_worker,
+                                      :link_data, :identification,:body_2,:body_1 ,
+                                      :issued_in ,:type_identification_id,:states_student_id,:city_id,:university_id)
     end
 end

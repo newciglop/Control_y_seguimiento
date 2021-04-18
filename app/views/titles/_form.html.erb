@@ -1,0 +1,60 @@
+
+<div class="row">
+  <div class="offset-sm-1 col-sm-10 ">
+    <div class="card card-margin">
+
+      <div class="card-header">
+        <h5 class="card-title">
+          Datos
+        </h5>
+      </div>
+
+      <%= bootstrap_form_with(model: title, local: true, html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
+        <div class="card-body">
+          <% if title.errors.any? %>
+            <div id="error_explanation" style="display: none">
+              <h2><%= pluralize(title.errors.count, "error") %> prohibited this title from being saved:</h2>
+
+              <ul>
+                <% title.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="row no-gutters">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <%= form.text_field :name, label: t('titles.name') ,class: "form-control" , required: true %>
+              </div>
+            </div>
+          </div>
+
+
+          <% if @title.id? %>
+            <div class="form-group">
+              <h4><%= t('commons.disabled&enabled') %></h4>
+              <label class="switch">
+                <input type="checkbox" name="enable" id="enable" value="true" <%= @title.enable ? "checked='checked'":""%> >
+                <span class="slider round"></span>
+              </label>
+            </div>
+          <% end %>
+
+
+
+
+        </div>
+
+        <div class="card-footer bg-white">
+          <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
+          <%= link_to 'Regresar', titles_path ,class: "btn btn-light btn-action"  %>
+
+
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,64 @@
+<div class="col-lg-8 offset-lg-2">
+<div class="card card-margin">
+  <div class="card-header">
+    <h5 class="card-title">
+      Datos
+    </h5>
+  </div>
+
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table center-aligned-table table-striped">
+
+
+        <tr>
+          <th><strong> convenio:</strong></th>
+          <td class="td-white"><%= @university.agreement %></td>
+        </tr>
+        <tr>
+          <th><strong> Nombre:</strong></th>
+          <td class="td-white"><%= @university.name %></td>
+        </tr>
+
+
+
+        <tr>
+          <th><strong>Teléfono:</strong></th>
+          <td class="td-white"><%= @university.phone %></td>
+        </tr>
+
+        <tr>
+          <th><strong>Dirección:</strong></th>
+          <td class="td-white"><%= @university.address %></td>
+        </tr>
+
+
+        <tr>
+          <th><strong>Localización:</strong></th>
+          <td class="td-white"><%= @university.city.name %></td>
+        </tr>
+
+        <tr>
+          <th><strong>Contacto:</strong></th>
+          <td class="td-white"><%= @university.contact %></td>
+        </tr>
+
+        <tr>
+          <th><strong>teléfono del Contacto:</strong></th>
+          <td class="td-white"><%= @university.contact_phone %></td>
+        </tr>
+
+
+      </table>
+    </div>
+  </div>
+
+  <div class="card-footer bg-white text-center">
+
+    <%= link_to 'Editar', edit_university_path(@university) ,class: "btn btn-primary mr-2" %>
+    <%= link_to 'Regresar', universities_path, class: "btn btn-light "  %>
+
+  </div>
+
+</div>
+</div>

@@ -19,29 +19,11 @@
           <div class="card-body">
             <div class="table-responsive">
               <table class="table center-aligned-table table-striped">
-                <% case @student.states_student.name %>
-                <% when "Aprobado" %>
-                  <tr>
-                    <th class="bg-success text-light"><strong>Estado</strong></th>
-                    <td class="bg-success text-light"><%= @student.states_student.name %></td>
-                  </tr>
-                <% when "Sin Entrevista" %>
-                  <th class="text-light" style="background-color: coral"><strong>Estado</strong></th>
-                  <td class="text-light" style="background-color: coral"><%= @student.states_student.name %></td>
-                <% when "Entrevista Inicial" %>
-                  <th class="bg-info text-light" ><strong>Estado</strong></th>
-                  <td class="text-light bg-info"  ><%= @student.states_student.name %></td>
-                <% when "Listo Para Psicotecnica" %>
-                  <th style="background-color: orange" class="text-light" ><strong>Estado</strong></th>
-                  <td  style="background-color: orange" class="text-light" ><%= @student.states_student.name %></td>
-                <% when "Datos Listos Pero Sin Entrevista" %>
-                  <th class=" bg-warning text-dark" ><strong>Estado</strong></th>
-                  <td  class="bg-warning text-dark" ><%= @student.states_student.name %></td>
-                <% else %>
-                  <th class="bg-success text-light"><strong>Estado</strong></th>
-                  <td><%= @student.states_student.name %></td>
-                <%end %>
+            <tr>
+                  <th style="background-color: <%= @student.states_student.color %>; color:white"><strong>Estado</strong></th>
+                  <td style="background-color: <%= @student.states_student.color %>; color:white"><%= @student.states_student.name %></td>
 
+            </tr>
                 <tr>
                   <th><strong>Tipo de Identificación:</strong></th>
                   <td class="td-white"><%= @student.type_identification.name %></td>
@@ -150,17 +132,16 @@
 
                 <tr>
                   <th><strong>Convenio Vigente:</strong></th>
-                  <td class="td-white"><%#= @n_agreement %></td>
-                </tr>
+                  <td class="td-white"><%=  @student.university.agreement %>
 
                 <tr>
                   <th><strong>Nombre:</strong></th>
-                  <td class="td-white"><%#= @student.university.name %> </td>
+                  <td class="td-white"><%= @student.university.name %> </td>
                 </tr>
 
                 <tr>
                   <th><strong>Titulacion del Estudiante:</strong></th>
-                  <td class="td-white" style="padding-top:25px"><%#= @student.title.name %> </td>
+                  <td class="td-white" style="padding-top:25px"><%= @student.title.name %> </td>
                 </tr>
 
 
@@ -181,7 +162,7 @@
 
                 <tr>
                   <th><strong>Proceso con la universidad:</strong></th>
-                  <td class="td-white"><%#= @student.body_1 %></td>
+                  <td class="td-white"><%= @student.body_1 %></td>
                 </tr>
 
 
@@ -213,22 +194,32 @@
 
                 <tr>
                   <th><strong>Encargado 1:</strong></th>
-                  <td class="td-white"><%#= @f_name %></td>
+                  <td class="td-white"><%= @f_name %></td>
                 </tr>
 
                 <tr>
                   <th><strong>Encargado 2:</strong></th>
-                  <td class="td-white"> <%#= @f_name2 %></td>
+                  <td class="td-white"> <%= @f_name2 %></td>
                 </tr>
 
                 <tr>
                   <th><strong> Link de la carpeta de datos:</strong></th>
-                  <td class="td-white"><%#= @student.link_date %></td>
+                  <td class="td-white"><%= @student.link_data %></td>
                 </tr>
 
                 <tr>
                   <th><strong>Funciones:</strong></th>
-                  <td class="td-white"><%#= @student.body_2 %></td>
+                  <td class="td-white"><%= @student.body_2 %></td>
+                </tr>
+
+                <tr>
+                  <th><strong>Trabajador_actual:</strong></th>
+                  <td class="td-white"><% if @student.current_worker %>
+                    Si
+                      <% else %>
+                      No
+                      <% end %>
+                      </td>
                 </tr>
 
 

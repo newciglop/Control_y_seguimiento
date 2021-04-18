@@ -191,7 +191,13 @@ es:
       short: ! '%d de %b %H:%M'
     pm: pm
   commons:
+   what_wrong: alog malo ocurrrio
    disabled&enabled: Estado
+  action:
+    create_success: Creado con exito
+    update_success: Actualizado con exito
+    destroy_success: Eliminado con exito
+    destroy_error: Este item se encuentra relacionado con otro item, no puede ser eliminado.
   type:
     name: Nombre
   theme:
@@ -247,11 +253,51 @@ es:
     link_drive: link drive
     esponsible_function_id: Rol de Responsable
   students:
+    name: Nombre
+    last_name: Apellido
+    university: Universidad
+    student: Practicante
     leader_1: Encargado 1
     leader_2: Encargado 2
     type_identification: Tipo de documentos
-    states_student: Estados
+    states_student: Estado del practicante
     location: Localización
+    title: Grado Academico
+    identification: No de identificación
+    issued_in: Expedida en
+    birthday: Fecha de nacimiento
+    age: Edad
+    address: Dirección
+    mail: Correo Electronico 1
+    mail_2: Correo Electronico 2
+    phone: Telefono 1
+    phone_2: Telefono 2
+    semester : Semestre
+    Link_university: Link de carpeta de la universidad
+    career : Carrera
+    process : Proceso
+    link_data: Link de carpeta datos
+    function: Funciones
+  states_students:
+    name: Nombre
+    color: Color
+    states_students: Estado del practicante
+  titles:
+    titles: Grado Academico
+    name: Nombre
+  universities:
+    university: Universidad
+    name: Nombre
+    enable: Estado
+    address: Direccion
+    location: localización
+    phone: Telefono
+    contact: Contacto de universidad
+    contact_phone: Telefono del contacto
+    agreement: Convenio
+
+
+
 
 
 

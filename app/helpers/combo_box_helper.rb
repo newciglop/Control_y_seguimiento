@@ -11,6 +11,8 @@ module ComboBoxHelper
 
   def states_students
     @c_states_students = StatesStudent.where("enable=?",true).map{|ss| [ss.name, ss.id]}
+    @titles = Title.where(enable: true).map{|x| [x.name , x.id]}
+    @universities = University.where(enable: true).map{|x| [x.name , x.id]}
   end
 
 

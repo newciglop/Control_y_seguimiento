@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_021116) do
+ActiveRecord::Schema.define(version: 2021_04_18_032549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -257,6 +257,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_021116) do
     t.boolean "enable", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "color"
   end
 
   create_table "students", force: :cascade do |t|
@@ -284,9 +285,14 @@ ActiveRecord::Schema.define(version: 2021_04_14_021116) do
     t.bigint "states_student_id", null: false
     t.bigint "city_id", null: false
     t.bigint "type_identification_id", null: false
+    t.bigint "title_id", null: false
+    t.bigint "university_id", null: false
+    t.boolean "current_worker"
     t.index ["city_id"], name: "index_students_on_city_id"
     t.index ["states_student_id"], name: "index_students_on_states_student_id"
+    t.index ["title_id"], name: "index_students_on_title_id"
     t.index ["type_identification_id"], name: "index_students_on_type_identification_id"
+    t.index ["university_id"], name: "index_students_on_university_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -295,6 +301,13 @@ ActiveRecord::Schema.define(version: 2021_04_14_021116) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "annexed"
+  end
+
+  create_table "titles", force: :cascade do |t|
+    t.string "name"
+    t.boolean "enable"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "translations", force: :cascade do |t|
@@ -318,6 +331,20 @@ ActiveRecord::Schema.define(version: 2021_04_14_021116) do
     t.boolean "enable"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "universities", force: :cascade do |t|
+    t.string "name"
+    t.boolean "enable"
+    t.string "address"
+    t.string "phone"
+    t.string "contact"
+    t.string "contact_phone"
+    t.string "agreement"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "city_id", null: false
+    t.index ["city_id"], name: "index_universities_on_city_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -374,7 +401,10 @@ ActiveRecord::Schema.define(version: 2021_04_14_021116) do
   add_foreign_key "offers", "workers"
   add_foreign_key "students", "cities"
   add_foreign_key "students", "states_students"
+  add_foreign_key "students", "titles"
   add_foreign_key "students", "type_identifications"
+  add_foreign_key "students", "universities"
+  add_foreign_key "universities", "cities"
   add_foreign_key "workers", "profiles"
   add_foreign_key "workers", "type_identifications"
 end

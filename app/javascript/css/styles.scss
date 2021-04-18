@@ -4,7 +4,9 @@
 @import "bootstrap-select";
 
 
-
+tr>td {
+  font-size: 15px !important;
+}
 
 .width-95{
   width: 95% !important;
@@ -45,4 +47,27 @@ h5 > a {
 nav a:hover{
   background-color: transparent !important;
   text-decoration: none;
+}
+
+td > a:hover {
+  background-color: transparent !important;
+  text-decoration: none;
+}
+
+.form-check {
+  display: inline;
+}
+
+.form-check-input{
+margin: 5px !important;
+}
+
+input[type="radio"] {
+  margin-right: 5px !important;
+  position: relative;
+  top: 0;
+}
+
+.form-check-label{
+  margin: 5px !important;
 }

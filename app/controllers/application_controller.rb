@@ -7,5 +7,6 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource) || admin_controls_path
   end
 
+  add_flash_types(:success, :info, :warning, :danger)
 
 end

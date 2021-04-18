@@ -5,7 +5,7 @@
       <%= bootstrap_form_with(model: student, local: true,html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
 
         <% if student.errors.any? %>
-          <div id="error_explanation">
+          <div id="error_explanation" style="display: none">
             <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
             <ul>
               <% student.errors.full_messages.each do |message| %>
@@ -34,22 +34,19 @@
 
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <%= form.select(:types_identification_id, options_for_select(@identification_types, student.type_identification_id), :prompt => 'Selecciona un tipo',class: "form-control width-95", required: true ) %>
                       <%= form.select(:states_student_id, options_for_select(@c_states_students, student.states_student_id), { label: t('students.states_student') ,:prompt => 'Selecciona un estado',class: "form-control " ,required: true}) %>
                     </div>
                   </div>
 
                   <div class=" col-lg-6 pr-2">
                     <div class="form-group">
-                      <%= form.label :name , "Nombres" %>
-                      <%= form.text_field :name, class: "form-control", required: "true"  %>
+                           <%= form.text_field :name,label: t('students.name'), class: "form-control", required: "true"  %>
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <%= form.label :last_name , "Apellidos" %>
-                      <%= form.text_field :last_name, class: "form-control", required: "true"  %>
+                      <%= form.text_field :last_name, label: t('students.last_name'),class: "form-control", required: "true"  %>
                     </div>
                   </div>
 
@@ -62,30 +59,25 @@
 
                   <div class="col-lg-6 pr-2">
                     <div class="form-group">
-                      <%= form.label :identification, "No de identificacion"  %>
-                      <%= form.text_field :identification, class: "form-control", required: "true"   %>
+                      <%= form.text_field :identification, label: t('students.identification'),class: "form-control", required: "true"   %>
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <%= form.label :issued_in, "Expedida en " %>
-                      <%= form.text_field :issued_in , class: "form-control"  %>
+                      <%= form.text_field :issued_in ,label: t('students.issued_in'), class: "form-control"  %>
                     </div>
                   </div>
 
                   <div class="col-lg-6 pr-2">
                     <div class="form-group">
-                      <label for="birthday">Fecha de Nacimiento</label>
-                       <%= form.text_field :birthday , {label: t('offer.date_published'),class: 'datepicker form-control' , placeholder: "yyyy-mm-dd" , readonly: false , required: true}  %>
+                       <%= form.text_field :birthday , {label: t('students.birthday'),class: 'datepicker form-control' , placeholder: "yyyy-mm-dd" , readonly: false , required: true}  %>
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <%= form.label :age , "Edad" %>
-                      <%= form.text_field :age, class: "form-control" %>
-
+                      <%= form.text_field :age,label: t('students.age'), class: "form-control" %>
                     </div>
                   </div>
 
@@ -97,36 +89,34 @@
                   </div>
 
                   <div class="col-lg 6">
-                    <%= form.label :address , "Dirección" %>
-                    <%= form.text_field :address , { class: "form-control" , required: "true"} %>
+                    <%= form.text_field :address , label: t('students.address'), class: "form-control" , required: "true" %>
                   </div>
 
                   <div class="col-lg-6 pr-2">
                     <div class="form-group">
-                      <%= form.label :phone , "Telefono 1" %>
-                      <%= form.text_field :phone, {class: "form-control" ,required: "true"} %>
+
+                      <%= form.text_field :phone,label: t('students.phone') ,class: "form-control" ,required: "true" %>
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <%= form.label :phone_2 , "Telefono 2" %>
-                      <%= form.text_field :phone_2, class: "form-control"  %>
+
+                      <%= form.text_field :phone_2,label: t('students.phone_2') ,class: "form-control"  %>
                     </div>
                   </div>
 
                   <div class="col-lg-6 pr-2">
                     <div class="form-group">
-                      <%= form.label :mail , "Correo Electronico 1" %>
-                      <%= form.text_field :mail , class: "form-control", required: "true"  %>
+
+                      <%= form.text_field :mail , label: t('students.mail') ,class: "form-control", required: "true"  %>
                     </div>
 
                   </div>
 
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <%= form.label :mail_2 , "Correo Electronico 2" %>
-                      <%= form.text_field :mail_2 , class: "form-control"  %>
+                      <%= form.text_field :mail_2 , label: t('students.mail_2'),class: "form-control"  %>
                     </div>
                   </div>
 
@@ -157,37 +147,32 @@
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <%= form.label :university_id, "Nombre"  %>
+                      <%= form.select(:university_id, options_for_select(@universities, student.university_id), {label:t('students.university'),:prompt => 'Selecciona una universidad'},{class: "form-control selectpicker" , required: true , data: { live_search: 'true' }}) %>
                     </div>
                   </div>
 
                   <div class="col-lg-6 pr-2">
                     <div class="form-group">
-                      <%= form.label :title_id, "TItulacion"  %>
-
+                      <%= form.select(:title_id, options_for_select(@titles, student.title_id), {label:t('students.title'),:prompt => 'Selecciona un grado'},{class: "form-control selectpicker" , required: true , data: { live_search: 'true' }}) %>
                     </div>
                   </div>
 
                   <div class="col-lg-6 ">
                     <div class="form-group">
-                      <%= form.label :semester , "Semestre" %>
-                      <%= form.text_field :semester , class: "form-control"  %>
+                      <%= form.text_field :semester , label: t('students.semester'), class: "form-control" , required: true  %>
                     </div>
                   </div>
 
                   <div class="col-lg-12">
-                    <%= form.label :career , "Carrera" %>
-                    <%= form.text_field :career , class: "form-control"  %>
+                     <%= form.text_field :career ,label: t('students.career') ,  class: "form-control" , required: true %>
                   </div>
 
                   <div class="col-lg-12">
-                    <%= form.label :link_university , "Link de carpeta de la universidad" , class: 'mt-3'%>
-                    <%= form.text_field :link_university , class: "form-control"  %>
+                    <%= form.text_field :link_university , label:t('students.Link_university'),class: "form-control"  %>
                   </div>
 
                   <div class="col-lg-12">
-                    <%= form.label :body_1 , "Proceso" , class: 'mt-3' %>
-
+                    <%= form.rich_text_area :body_1 , label: t('students.process') %>
                   </div>
 
 
@@ -221,12 +206,19 @@
                   </div>
 
                   <div class="col-lg-12">
-                    <%= form.label :link_data , "Link de carpeta datos" , class: 'mt-3'%>
-                    <%= form.text_field :link_data , class: "form-control"  %>
+                    <%= form.text_field :link_data , label: t('students.link_data'), class: "form-control mt-3"  %>
                   </div>
 
                   <div class="col-lg-12">
-                    <%= form.label :body_2 , "Funciones:" , class: 'mt-3' %>
+                    <%= form.rich_text_area :body_2 , {label:t('students.function'),class: 'mt-3'}%>
+                  </div>
+
+
+
+                  <div class="col-lg-12 text-center">
+                       <%= form.label "Trabajador actual" ,class:"pl-3" %> <br>
+                      <%= form.radio_button :current_worker, true , {label: 'Si' , required:true } %>
+                      <%= form.radio_button :current_worker, false , {label: 'No' } %>
 
                   </div>
 
@@ -248,12 +240,10 @@
               <div class="card-body">
                 <div class="row no-gutters">
                   <div class="col-lg-12">
-                    <%= form.label :score , "Puntaje" , class: 'mt-3' %>
-                    <%= form.text_field :score , class: "form-control"  %>
+                    <%= form.text_field :score ,label: "Puntaje", class: "form-control"  %>
                   </div>
                   <div class="col-lg-12">
-                    <%= form.label :comment , "Comentario:" , class: 'mt-3' %>
-                    <%= form.text_area :comment, size: '20x3', maxlength: "140" ,class: "form-control" %>
+                    <%= form.text_area :comment, size: '20x3', maxlength: "140" , label: "Comentario:" ,class: "form-control mt-3" %>
                   </div>
                 </div>
               </div>
