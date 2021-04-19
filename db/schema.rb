@@ -287,7 +287,7 @@ ActiveRecord::Schema.define(version: 2021_04_18_032549) do
     t.bigint "type_identification_id", null: false
     t.bigint "title_id", null: false
     t.bigint "university_id", null: false
-    t.boolean "current_worker"
+    t.boolean "current_worker", default: false
     t.index ["city_id"], name: "index_students_on_city_id"
     t.index ["states_student_id"], name: "index_students_on_states_student_id"
     t.index ["title_id"], name: "index_students_on_title_id"

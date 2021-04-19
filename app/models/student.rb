@@ -12,7 +12,7 @@ class Student < ApplicationRecord
   validates :leader_first,:leader_second, :states_student_id ,:body_1,:body_2, presence: true
   validates :identification,presence: true,numericality: true
   validates :mail, presence: true , format: { with: /\A\S+@.+\.\S+\z/ ,message: "Direccion valida con @" }
-  validates :current_worker, presence: true
+
 
   has_rich_text :body_1
   has_rich_text :body_2

@@ -36,14 +36,15 @@ class StudentsController < ApplicationController
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)
-      if @student.save
-        if @student.current_worker
+    if @student.save
+        if @student.current_worker &&  @student.current_worker != nil
           profile_practice = Profile.where('(enable=? AND profile_type=?)',true,Profile.INTERN).pluck(:id)[0]
           w = Worker.create(first_name: @student.name, last_name: @student.last_name, phone: @student.phone,
                         phone_2: @student.phone_2 , email: @student.mail, profile_id: profile_practice,
                         identification:@student.identification,type_identification_id:@student.type_identification_id,enable:true)
-                   redirect_to @student, notice: "Student was successfully created."
-          end
+          redirect_to @student, notice: "Student was successfully created."
+        end
+        redirect_to @student, notice: "Student was successfully created."
       else
         combo_box_company
         worker_all
