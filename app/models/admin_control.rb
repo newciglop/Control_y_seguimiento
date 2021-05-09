@@ -10,8 +10,8 @@ class AdminControl < ApplicationRecord
 
   has_many :checklists
 
-  validates :company_id,:type_id,:theme_id,presence: true
-  validates :concept_id, :city_id,:item_id,:responsible_function_id , presence: true
+  #validates :company_id,:type_id,:theme_id,presence: true
+  #validates :concept_id, :city_id,:item_id,:responsible_function_id , presence: true
 
 
   has_rich_text :description_advance

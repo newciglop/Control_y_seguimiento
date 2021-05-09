@@ -1,6 +1,6 @@
 class AdminControlsController < ApplicationController
 
-  before_action :set_admin_control , only: [:edit,:destroy,:create,:update]
+  before_action :set_admin_control , only: [:show,:edit,:destroy,:update]
   include AdminControlsHelper
   include ComboBoxHelper
 
@@ -10,7 +10,6 @@ class AdminControlsController < ApplicationController
 
 
   def show
-    @admin_control = AdminControl.find(params[:id])
     @checklist =  @admin_control.checklists.build
     combo_box_data
     show_tracking_type(@admin_control)
