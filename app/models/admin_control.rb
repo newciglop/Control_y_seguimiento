@@ -8,6 +8,8 @@ class AdminControl < ApplicationRecord
   belongs_to :responsible_function
   belongs_to :user, optional: true
 
+  has_many :checklists
+
   validates :company_id,:type_id,:theme_id,presence: true
   validates :concept_id, :city_id,:item_id,:responsible_function_id , presence: true
 

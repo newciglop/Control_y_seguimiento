@@ -114,7 +114,7 @@
                 <div class="row no-gutters">
                   <div class="col-sm-12 col-md-12 text-center">
                     <h3>Tiempo restante</h3>
-                    <p id="demo" class="mb-0 count-down"></p>
+                    <p id="demo" class="mb-4 count-down"></p>
                   </div>
                 </div>
 
@@ -164,7 +164,7 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
-                      <p id="obs_report" class="mb-0 count-down"></p>
+                      <p id="obs_report" class="mb-4 count-down"></p>
                     </div>
                   </div>
 
@@ -211,7 +211,7 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
-                      <p id="deadline_offer" class="mb-0 count-down"></p>
+                      <p id="deadline_offer" class="mb-4 count-down"></p>
                     </div>
                   </div>
 
@@ -259,7 +259,7 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
-                      <p id="offer_e_report" class="mb-0 count-down"></p>
+                      <p id="offer_e_report" class="mb-4 count-down"></p>
                     </div>
                   </div>
 
@@ -306,7 +306,7 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
-                      <p id="obs_offer_e_report" class="mb-0 count-down"></p>
+                      <p id="obs_offer_e_report" class="mb-4 count-down"></p>
                     </div>
                   </div>
 
@@ -333,8 +333,8 @@
 
                 <!-- date_acceptance_offers -->
 
-                <fieldset>
-                  <legend>observaciones al informe de evaluacion de ofertas</legend>
+                <fieldset class="">
+                  <legend style="text-transform: lowercase">FEcHA DE ACEPTACION DE LAS OFERTAS</legend>
                   <div class="row no-gutters">
 
                     <div class="col-lg-6 pr-2">
@@ -353,7 +353,7 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
-                      <p id="acceptance_offers" class="mb-0 count-down"></p>
+                      <p id="acceptance_offers" class="mb-4 count-down"></p>
                     </div>
                   </div>
 
@@ -490,6 +490,7 @@
         var x = setInterval(function () {
             var now = new Date().getTime();
             var distance = countDownDate - now;
+            console.log(distance)
 
 // Time calculations for days, hours, minutes and seconds
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));

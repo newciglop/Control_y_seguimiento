@@ -4,11 +4,7 @@
   </div>
   <div class="offset-md-1"></div>
 </div>
-<div class="row">
-  <div class="col-lg-8 offset-lg-2 text-center">
-    <img src="https://media4.giphy.com/media/fZDXPWad3Rhx0H0gDp/giphy.gif" alt="" width="200">
-  </div>
-</div>
+
 <div class="row">
   <div class="offset-sm-1 col-sm-10">
     <div class="table-responsive">
@@ -16,19 +12,35 @@
         <thead>
         <tr>
           <th scope="col" class="text-center">#</th>
-          <th scope="col" class="text-center">Concepto</th>
-          <th scope="col" class="text-center">Asunto</th>
+          <th scope="col" class="text-center"><%= t('offer.leader') %></th>
+          <th scope="col" class="text-center"><%= t('offer.modality') %></th>
           <th scope="col" class="text-center">Estado</th>
+          <th scope="col" class="text-center">Fecha de publicación</th>
           <th colspan="2"></th>
         </tr>
         </thead>
 
         <tbody>
         <% @offers.each do |offer| %>
+
+
           <tr>
-            <td class="text-center"><%= offer.code %> </td>
-            <td class="text-center"><%= offer.worker.first_name %></td>
-            <td></td>
+            <% if offer.status_acceptance_offers == "Si"  %>
+              <td class="text-center bg-light-success"><%= offer.code %> </td>
+            <% else %>
+              <% if  (offer.date_acceptance_offers.to_date - Date.today) <= 0  %>
+              <td class="text-center bg-light-danger"><%= offer.code %> </td>
+                <% elsif (offer.date_acceptance_offers.to_date - Date.today) <= 7 %>
+              <td class="text-center bg-light-warning"><%= offer.code %> </td>
+                <% else %>
+                <td class="text-center bg-light-warning"><%= offer.code %> </td>
+                <% end %>
+            <% end %>
+            <td class="text-center"><%= offer.worker.full_name %> </td>
+            <td class="text-center"><%= offer.modality.name %>
+            <td class="text-center"><%= offer.status %></td>
+            <td class="text-center"><%= show_date(offer.publication_date) %></td>
+
             <td>
               <%= link_to 'Mostrar', offer_path(offer) %>
             </td>

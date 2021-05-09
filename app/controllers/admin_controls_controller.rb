@@ -1,6 +1,6 @@
 class AdminControlsController < ApplicationController
 
-  before_action :set_admin_control, only: %i[ show edit update destroy ]
+  before_action :set_admin_control , only: [:edit,:destroy,:create,:update]
   include AdminControlsHelper
   include ComboBoxHelper
 
@@ -10,12 +10,18 @@ class AdminControlsController < ApplicationController
 
 
   def show
+    @admin_control = AdminControl.find(params[:id])
+    @checklist =  @admin_control.checklists.build
     combo_box_data
     show_tracking_type(@admin_control)
     show_state_admin_control(@admin_control)
     if @admin_control.support != nil  && @admin_control.support != ""
     show_responsible_and_support(@admin_control)
     end
+
+
+
+
   end
 
 
@@ -46,7 +52,6 @@ class AdminControlsController < ApplicationController
 
   def update
        combo_box_data()
-
       if @admin_control.update(admin_control_params)
         redirect_to @admin_control, notice: "Admin control was successfully updated."
       else

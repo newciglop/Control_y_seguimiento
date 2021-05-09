@@ -17,7 +17,7 @@ class ChecklistsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create checklist" do
     assert_difference('Checklist.count') do
-      post checklists_url, params: { checklist: { offer_id: @checklist.offer_id, title: @checklist.title } }
+      post checklists_url, params: { checklist: { admin_control_id: @checklist.admin_control_id, title: @checklist.title } }
     end
 
     assert_redirected_to checklist_url(Checklist.last)
@@ -34,7 +34,7 @@ class ChecklistsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update checklist" do
-    patch checklist_url(@checklist), params: { checklist: { offer_id: @checklist.offer_id, title: @checklist.title } }
+    patch checklist_url(@checklist), params: { checklist: { admin_control_id: @checklist.admin_control_id, title: @checklist.title } }
     assert_redirected_to checklist_url(@checklist)
   end
 

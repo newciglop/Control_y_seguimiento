@@ -2,10 +2,10 @@
   <div class="offset-sm-2 col-sm-8">
     <div class="card card-margin">
 
-      <%= form_with(model: worker, local: true,class: "form-sample") do |form|  %>
+      <%= bootstrap_form_with(model: worker, local: true,html:{ class: "forms-sample needs-validation", novalidate: true }) do |form|  %>
         <div class="card-body p-0">
           <% if worker.errors.any? %>
-            <div id="error_explanation">
+            <div id="error_explanation" style="display: none">
               <h2><%= pluralize(worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
 
               <ul>
@@ -35,15 +35,13 @@
 
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <%= form.label :type_identification_id, "Tipo de identificación" %>
-                        <%= form.select(:type_identification_id, options_for_select(@identification_types, worker.type_identification_id), {:prompt => 'Selecciona un tipo'},{class: "form-control width-95" }) %>
+                        <%= form.select(:type_identification_id, options_for_select(@identification_types, worker.type_identification_id), {label: t('workers.type_identification'),:prompt => 'Selecciona un tipo'},{class: "form-control width-95", required: true }) %>
                       </div>
                     </div>
 
                     <div class="col-lg-8">
                       <div class="form-group">
-                        <%= form.label :identification, "identificación" %>
-                        <%= form.text_field :identification, class:"form-control", required:true %>
+                        <%= form.text_field :identification, label: t('workers.identification'),class:"form-control", required:true %>
                       </div>
                     </div>
 
@@ -52,14 +50,12 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6 pr-2">
                       <div class="form-group">
-                        <%= form.label :first_name, "Nombres" %>
-                        <%= form.text_field :first_name , class:"form-control",required:true %>
+                        <%= form.text_field :first_name , label:t('workers.first_name'), class:"form-control",required:true %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :last_name, "Apellidos" %>
-                        <%= form.text_field :last_name , class:"form-control",required:true %>
+                        <%= form.text_field :last_name ,  label:t('workers.last_name'),class:"form-control",required:true %>
                       </div>
                     </div>
                   </div>
@@ -67,14 +63,12 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6 pr-2">
                       <div class="form-group">
-                        <%= form.label :phone, "Telefono 1" %>
-                        <%= form.text_field :phone , class:"form-control" %>
+                        <%= form.text_field :phone , label:t('workers.phone'), class:"form-control" %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :phone_2, "Telefono 2" %>
-                        <%= form.text_field :phone_2, class:"form-control" %>
+                        <%= form.text_field :phone_2, label:t('workers.phone_2'), class:"form-control" %>
                       </div>
                     </div>
                   </div>
@@ -82,8 +76,7 @@
                   <div class="row no-gutters">
                     <div class="col-lg-12">
                       <div class="form-group">
-                        <%= form.label :email, "email" %>
-                        <%= form.text_field :email,class: "form-control" %>
+                        <%= form.text_field :email, label:t('workers.mail'),class: "form-control" %>
                       </div>
                     </div>
                   </div>
@@ -109,31 +102,26 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :profile_id, "Caracteristica 1" %>
-                        <%= form.select(:profile_id, options_for_select(@profiles, worker.profile_id), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                        <%= form.select(:profile_id, options_for_select(@profiles, worker.profile_id), {label:t('workers.profile'),:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :profile_2, "Caracteristica 2" %>
-                        <%= form.select(:profile_2, options_for_select(@profiles, worker.profile_2), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                        <%= form.select(:profile_2, options_for_select(@profiles, worker.profile_2), { label:t('workers.profile_2'),:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :profile_3, "Caracteristica 3" %>
-                        <%= form.select(:profile_3, options_for_select(@profiles, worker.profile_3), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                        <%= form.select(:profile_3, options_for_select(@profiles, worker.profile_3), { label:t('workers.profile_3'),:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.label :profile_4, "Caracteristica 4" %>
-                        <%= form.select(:profile_4, options_for_select(@profiles, worker.profile_4), {:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
+                        <%= form.select(:profile_4, options_for_select(@profiles, worker.profile_4), { label:t('workers.profile_4'),:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
                       </div>
                     </div>
                     <div class="col-lg-12">
-                      <%= form.label :function, "funciones" %>
-                      <%= form.rich_text_area :function, class: "control-form" %>
+                      <%= form.rich_text_area :function, label: t('workers.function'), class: "control-form" %>
                     </div>
                   </div>
                 </div>

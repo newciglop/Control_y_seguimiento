@@ -14,7 +14,7 @@ class ChecklistsTest < ApplicationSystemTestCase
     visit checklists_url
     click_on "New Checklist"
 
-    fill_in "Offer", with: @checklist.offer_id
+    fill_in "Admin control", with: @checklist.admin_control_id
     fill_in "Title", with: @checklist.title
     click_on "Create Checklist"
 
@@ -26,7 +26,7 @@ class ChecklistsTest < ApplicationSystemTestCase
     visit checklists_url
     click_on "Edit", match: :first
 
-    fill_in "Offer", with: @checklist.offer_id
+    fill_in "Admin control", with: @checklist.admin_control_id
     fill_in "Title", with: @checklist.title
     click_on "Update Checklist"
 

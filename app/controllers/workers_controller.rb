@@ -1,10 +1,14 @@
 class WorkersController < ApplicationController
-  before_action :set_worker, only: %i[ show edit update destroy ]
   include ComboBoxHelper
   include WorkersHelper
+  include Deleteable
+  before_action :set_worker, only: %i[ show edit update destroy ]
 
   def index
-    @workers = Worker.all
+
+    @search = params[:fullname] || ""
+    @workers = Worker.where("(LOWER(first_name) like LOWER(?) OR LOWER(last_name) like LOWER(?) OR LOWER(identification) like LOWER(?)) " ,"%#{@search}%","%#{@search}%","%#{@search}%")
+                   .order('last_name')
   end
 
 
@@ -27,11 +31,13 @@ class WorkersController < ApplicationController
 
 
   def create
+    combo_box_all()
+    combo_box_type_identification()
     @worker = Worker.new(worker_params)
       if @worker.save
-        redirect_to @worker, notice: "Worker was successfully created."
+        redirect_to @worker, notice: t('workers.worker') + " " + t('commons.create_success')
       else
-       render :new, status: :unprocessable_entity
+       render :new, notice: t('workers.worker') + " " + t('commons.what_wrong')
        combo_box_all()
        combo_box_type_identification()
       end
@@ -39,11 +45,13 @@ class WorkersController < ApplicationController
 
 
   def update
+    combo_box_all()
+    combo_box_type_identification()
     enable_resources(@worker,params)
       if @worker.update(worker_params)
-        redirect_to @worker, notice: "Worker was successfully updated."
+        redirect_to @worker, notice: t('workers.worker') + " " + t('commons.update_success')
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, notice: t('workers.worker') + " " + t('commons.what_wrong')
         combo_box_all()
         combo_box_type_identification()
      end
@@ -51,9 +59,7 @@ class WorkersController < ApplicationController
 
 
   def destroy
-    if @worker.destroy
-      redirect_to workers_url, notice: "Worker was successfully destroyed."
-    end
+    delete_with_references(@worker,workers_path)
   end
 
   private

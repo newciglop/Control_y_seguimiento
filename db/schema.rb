@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_18_032549) do
+ActiveRecord::Schema.define(version: 2021_05_06_035136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,12 +86,21 @@ ActiveRecord::Schema.define(version: 2021_04_18_032549) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "checklist_items", force: :cascade do |t|
+    t.bigint "checklist_id", null: false
+    t.string "title"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["checklist_id"], name: "index_checklist_items_on_checklist_id"
+  end
+
   create_table "checklists", force: :cascade do |t|
-    t.bigint "offer_id", null: false
+    t.bigint "admin_control_id", null: false
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["offer_id"], name: "index_checklists_on_offer_id"
+    t.index ["admin_control_id"], name: "index_checklists_on_admin_control_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -388,7 +397,8 @@ ActiveRecord::Schema.define(version: 2021_04_18_032549) do
   add_foreign_key "admin_controls", "themes"
   add_foreign_key "admin_controls", "types"
   add_foreign_key "admin_controls", "users"
-  add_foreign_key "checklists", "offers"
+  add_foreign_key "checklist_items", "checklists"
+  add_foreign_key "checklists", "admin_controls"
   add_foreign_key "cities", "states"
   add_foreign_key "designations", "areas"
   add_foreign_key "engineers", "profiles"

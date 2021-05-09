@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
 
 
+
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #
@@ -16,10 +17,7 @@ Rails.application.routes.draw do
   authenticated :user do
 
 
-  resources :offers do
-    resources :checklists
-  end
-
+  resources :offers
   resources :states_students
   resources :students
   resources :users
@@ -35,7 +33,11 @@ Rails.application.routes.draw do
   resources :concepts
   resources :responsible_functions
   resources :workers
-  resources :admin_controls
+  resources :admin_controls do
+    resources :checklists do
+      resources :checklist_items
+    end
+  end
   resources :titles
   resources :universities
 

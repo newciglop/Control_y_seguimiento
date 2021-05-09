@@ -4,13 +4,15 @@ class OffersController < ApplicationController
   include OffersHelper
 
   def index
-    @offers = Offer.all
+    @offers = Offer.all.order('created_at desc')
+
+
 
   end
 
 
   def show
-    @checklist =  @offer.checklists.build
+
   end
 
 

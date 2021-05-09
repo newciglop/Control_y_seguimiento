@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 #ruby '2.7.0'
 
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
@@ -30,6 +31,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'coffee-rails', '~> 5.0.0'
 gem 'devise'
 gem 'bootstrap_form' ,  '~> 4.0'
+#gem "stimulus_reflex", "~> 3.4"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -57,6 +59,12 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
-
+gem 'redis'
+gem 'redis-namespace'
+gem 'redis-rails'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+
+gem "stimulus_reflex", "~> 3.4"

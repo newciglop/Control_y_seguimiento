@@ -108,5 +108,14 @@ module OffersHelper
 
   end
 
+  def show_date(date)
+    string = date.to_s
+    num_expr = /(\d{4})-(\d{2})-(\d{2})/
+    m = num_expr.match(string)
+    return m[0]
+  end
+
+
+
 
 end

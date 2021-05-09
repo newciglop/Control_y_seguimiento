@@ -1,178 +1,321 @@
 <%= render "layouts/shared/notice" %>
 
+
+
 <div class="row">
-  <div class="col-lg-8 offset-lg-2" style="padding-top: 30px">
-    <nav>
-      <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-general-data-tab" data-toggle="tab" href="#nav-general-data" role="tab" aria-controls="nav-general-data" aria-selected="true">Datos Generales</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Personal a cargado e información de avance</a>
-      </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-      
-
-      <div class="tab-pane fade show active" id="nav-general-data" role="tabpanel" aria-labelledby="nav-general-data-tab">
-        <div class="card card-margin">
-          <div class="card-header">
-            <h5 class="card-title mb-0">
-              Datos Generales
-            </h5>
-          </div>
-
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table center-aligned-table table-striped">
-
-                <tr>
-                  <th class="bg-success text-light"><strong>Codigo</strong></th>
-                  <td class="bg-success text-light"><%= @admin_control.code %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Concepto</strong></th>
-                  <td class="td-white"><%= @admin_control.concept.name %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Asunto:</strong></th>
-                  <td class="td-white"><%= @admin_control.theme.name %> </td>
-                </tr>
-
-                <tr>
-                  <th><strong>Tipo:</strong></th>
-                  <td class="td-white"><%= @admin_control.type.name %> </td>
-                </tr>
+  <div class="offset-sm-2 col-sm-8">
+    <div class="card card-margin">
 
 
-                <tr>
-                  <th><strong>Item Especifico:</strong></th>
-                  <td class="td-white"><%= @admin_control.item.name %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Fecha de inicio</strong></th>
-                  <td class="td-white"><%= @admin_control.start_date %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Fecha Final</strong></th>
-                  <td class="td-white"><%= @admin_control.final_date %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Tipo de seguimiento</strong></th>
-                  <td class="td-white"><%= @show_tracking_type %></td>
-                </tr>
+          <div id="accordion">
 
 
-                <tr>
-                  <th><strong>Estado</strong></th>
-                  <td class="td-white"><%= @show_state %></td>
-                </tr>
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Datos Generales
+                  </a>
+                </h5>
+              </div>
 
-                <tr>
-                  <th><strong>Compañia</strong></th>
-                  <td class="td-white"><%= @admin_control.company.name %> </td>
-                </tr>
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table center-aligned-table table-striped">
 
-                <tr>
-                  <th><strong>localizacion</strong></th>
-                  <td class="td-white"><%= @admin_control.city.state.name %> - <%= @admin_control.city.name %> </td>
-                </tr>
+                      <tr>
+                        <th class="bg-success text-light"><strong>Codigo</strong></th>
+                        <td class="bg-success text-light"><%= @admin_control.code %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Concepto</strong></th>
+                        <td class="td-white"><%= @admin_control.concept.name %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Asunto:</strong></th>
+                        <td class="td-white"><%= @admin_control.theme.name %> </td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Tipo:</strong></th>
+                        <td class="td-white"><%= @admin_control.type.name %> </td>
+                      </tr>
 
 
-              </table>
+                      <tr>
+                        <th><strong>Item Especifico:</strong></th>
+                        <td class="td-white"><%= @admin_control.item.name %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Fecha de inicio</strong></th>
+                        <td class="td-white"><%= @admin_control.start_date %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Fecha Final</strong></th>
+                        <td class="td-white"><%= @admin_control.final_date %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Tipo de seguimiento</strong></th>
+                        <td class="td-white"><%= @show_tracking_type %></td>
+                      </tr>
+
+
+                      <tr>
+                        <th><strong>Estado</strong></th>
+                        <td class="td-white"><%= @show_state %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Compañia</strong></th>
+                        <td class="td-white"><%= @admin_control.company.name %> </td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>localizacion</strong></th>
+                        <td class="td-white"><%= @admin_control.city.state.name %> - <%= @admin_control.city.name %> </td>
+                      </tr>
+
+
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="card-footer bg-white text-center">
 
-            <%= link_to 'Editar', edit_admin_control_path(@admin_control) ,class: "btn btn-primary mr-2" %>
-            <%= link_to 'Regresar', admin_controls_path, class: "btn btn-light "  %>
 
-          </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Roles,estado e información adicional
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table center-aligned-table table-striped">
+                      <tr>
+                        <th><strong>Rol Responsable</strong></th>
+                        <td class="td-white"><%= @admin_control.responsible_function.name %></td>
+                      </tr>
+                      <tr>
+                        <th><strong>Responsable</strong></th>
+                        <% if @show_support != nil && @show_support != "" %>
+                          <td class="td-white"><%=  @show_responsible %></td>
+                        <% end %>
+                      </tr>
+                      <tr>
+                        <th><strong>Apoyo</strong></th>
+                        <% if @show_support != nil && @show_support != "" %>
+                          <td class="td-white"><%= @show_support %></td>
+                        <% end %>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Avance</strong></th>
+                        <td class="td-white"><%=  @admin_control.advance %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Proceso</strong></th>
+                        <td><%= @admin_control.process %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Descripcion del avance</strong></th>
+                        <td><%= @admin_control.description_advance %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Link del proceso</strong></th>
+                        <td><%= @admin_control.link_process %></td>
+                      </tr>
+
+                      <tr>
+                        <th><strong>Link del drive</strong></th>
+                        <td><%= @admin_control.link_drive %></td>
+                      </tr>
+
+
+
+
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Avances
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+          </div><!-- accordion -->
+
+
 
         </div>
-      </div>
-
-      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <div class="card card-margin">
-          <div class="card-header">
-            <h5 class="card-title mb-0">
-              Roles,estado e información adicional
-            </h5>
-          </div>
-
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table center-aligned-table table-striped">
-                <tr>
-                  <th><strong>Rol Responsable</strong></th>
-                  <td class="td-white"><%= @admin_control.responsible_function.name %></td>
-                </tr>
-                <tr>
-                  <th><strong>Responsable</strong></th>
-                  <% if @show_support != nil && @show_support != "" %>
-                  <td class="td-white"><%=  @show_responsible %></td>
-                    <% end %>
-                </tr>
-                <tr>
-                  <th><strong>Apoyo</strong></th>
-                  <% if @show_support != nil && @show_support != "" %>
-                  <td class="td-white"><%= @show_support %></td>
-                    <% end %>
-                </tr>
-
-                <tr>
-                  <th><strong>Avance</strong></th>
-                  <td class="td-white"><%=  @admin_control.advance %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Proceso</strong></th>
-                  <td><%= @admin_control.process %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Descripcion del avance</strong></th>
-                  <td><%= @admin_control.description_advance %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Link del proceso</strong></th>
-                  <td><%= @admin_control.link_process %></td>
-                </tr>
-
-                <tr>
-                  <th><strong>Link del drive</strong></th>
-                  <td><%= @admin_control.link_drive %></td>
-                </tr>
-
-
-
-
-              </table>
-            </div>
-          </div>
-
-          <div class="card-footer bg-white text-center">
-
-            <%= link_to 'Editar', edit_admin_control_path(@admin_control) ,class: "btn btn-primary mr-2" %>
-            <%= link_to 'Regresar', admin_controls_path, class: "btn btn-light "  %>
-
-          </div>
-
-        </div>
-      </div>
-
-
-
-
-
 
 
 
     </div>
   </div>
-  <div class="offset-lg-2"></div>
+  <div class="offset-sm-2"></div>
+
+<div class="table-responsive">
+  <table class="table center-aligned-table table-striped">
+    <tr>
+      <td>
+        <%= form_with(model: [@admin_control,@checklist]) do |form| %>
+          <div class="text-center">
+            <%= form.submit "Agregar titulo de la lista", class: "btn btn-primary"  %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <% @admin_control.checklists.each do |checklist| %>
+          <% if checklist.persisted? %>
+            <div class="text-content pd-4">
+              <% if checklist.title.present? %>
+                <h5>
+                  <%= checklist.title %>
+                </h5>
+              <% else %>
+                <h5 class="text-muted">Click para agregar titulo</h5>
+              <% end %>
+            </div>
+
+            <div class="form-content d-none" >
+              <%= form_with(model: [@admin_control,checklist]) do |form| %>
+                <div class="form-row py-4">
+                  <div class="col-md-8">
+                    <%= form.text_field :title , class: "form-control", placeholder: 'Ingrese titulo' %>
+                  </div>
+                  <div class="col-md-2">
+                    <%= form.submit 'Guardar', class: "btn btn-primary" ,style: "width:100%" %>
+                  </div>
+                  <div class="col-md-2">
+                    <a href="#" class="btn btn-light cancel" style="width: 100%"> Cancelar </a>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="checklist-item-form mt-3">
+              <%= form_with(model: [@admin_control,checklist,checklist.new_item]) do |form| %>
+                <div class="form-row">
+                  <div class="col-md-10">
+                    <%= form.text_field :title , class: "form-control" %>
+                  </div>
+                  <div class="col-md-2">
+                    <%= form.submit 'Guardar', class: "btn btn-primary" , style: "width:100%" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="checklist-item">
+              <ul  class="list-group">
+
+                <% checklist.checklist_items.each do |checklist_item| %>
+                  <% if checklist_item.persisted? %>
+                    <li class="list-group-item d-flex justify-content-between">
+                      <span><%= checklist_item.title %></span>
+                      <div>
+
+                        <div class="dropdown float-left">
+
+                          <button class=" dropdown-toggle  btn-outline-<%= checklist_item.color_class %>" type="button" id="dropdownMenubutton"
+                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= checklist_item.readable_status %>
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenubutton">
+                            <% ChecklistItem::STATUS_OPTIONS.each do | status | %>
+                              <a class="dropdown-item" href="#"
+                                 data-reflex="click->ChecklistItemReflex#change_status"
+                                 data-id="<%= checklist_item.id %>"
+                                 data-status="<%= status[1] %>">
+                                <%= status[0] %>
+                              </a>
+                            <% end %>
+                          </div>
+                        </div>
+
+
+
+
+                      </div>
+                      <%= link_to  "/admin_controls/#{@admin_control.id}/checklists/#{checklist.id}/checklist_items/#{checklist_item.id}", class: "btn btn-danger",
+                                   method: :delete, data: { confirm: "Esta seguro que desea eliminar el item"} do %>
+                       Borrar
+                      <% end %>
+                    </li>
+
+
+                  <% end %>
+                <% end %>
+              </ul>
+
+            </div>
+
+          <% end %> <!-- checklist persist -->
+          <% end %><!-- admin_checklist-->
+      </td>
+    </tr>
+
+
+
+
+
+  </table>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

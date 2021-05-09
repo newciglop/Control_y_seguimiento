@@ -21,41 +21,36 @@ class ChecklistsController < ApplicationController
 
   # POST /checklists or /checklists.json
   def create
-    offer = Offer.find(params[:offer_id])
-    checklist = offer.checklists.create
 
-    redirect_to offer_checklist_path(offer)
+    admin_control = AdminControl.find(params[:admin_control_id])
+    checklist = admin_control.checklists.create
+    redirect_to  admin_control_path(admin_control.id)
 
   end
 
   # PATCH/PUT /checklists/1 or /checklists/1.json
   def update
-    offer = Offer.find(params[:offer_id])
-    checklist = offer.checklists.find(params[:id])
+    admin_control = AdminControl.find(params[:admin_control_id])
+    checklist = admin_control.checklists.find(params[:id])
     checklist.update(checklist_params)
-    respond_to do |format|
-    format.json { head :no_content }
-    end
+    redirect_to  admin_control_path(admin_control.id)
   end
 
   # DELETE /checklists/1 or /checklists/1.json
   def destroy
     @checklist.destroy
-    respond_to do |format|
-      format.html { redirect_to checklists_url, notice: "Checklist was successfully destroyed." }
-      format.json { head :no_content }
-    end
   end
 
   private
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_checklist
       @checklist = Checklist.find(params[:id])
     end
 
-
     # Only allow a list of trusted parameters through.
     def checklist_params
-      params.require(:checklist).permit( :title)
+      params.require(:checklist).permit( :admin_control_id,:title)
     end
 end

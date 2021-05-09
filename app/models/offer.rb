@@ -4,7 +4,7 @@ class Offer < ApplicationRecord
   belongs_to :modality
   belongs_to :city, optional: true
   belongs_to :company, optional: true
-  has_many :checklists
+
 
   validates :code,:worker_id,:modality_id, :status, :publication_date, presence: true
   validates :date_submission_obs, :date_offer_evaluation_report,:date_deadline_submission_offers,
@@ -26,5 +26,10 @@ class Offer < ApplicationRecord
   def self.STATUS_YES_OR_NOT
     [["Si","Si"],["No","No"]]
   end
+
+
+
+
+
 
 end

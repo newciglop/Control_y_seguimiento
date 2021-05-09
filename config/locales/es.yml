@@ -193,10 +193,11 @@ es:
   commons:
    what_wrong: alog malo ocurrrio
    disabled&enabled: Estado
+   create_success: creado exitosamente
+   update_success: actualizado exitosamente
+   delete_success: eliminado exitosamente
   action:
-    create_success: Creado con exito
-    update_success: Actualizado con exito
-    destroy_success: Eliminado con exito
+    search: Buscar
     destroy_error: Este item se encuentra relacionado con otro item, no puede ser eliminado.
   type:
     name: Nombre
@@ -223,6 +224,7 @@ es:
     address: Dirección
     email: Correo Electronico
   offer:
+    delivered: Entregado
     code: Codigo
     leader: Lider
     modality: Modalidad
@@ -295,6 +297,20 @@ es:
     contact: Contacto de universidad
     contact_phone: Telefono del contacto
     agreement: Convenio
+  workers:
+    worker: Empleado
+    type_identification: Tipo de documentos
+    identification: Identificación
+    phone: Telefono 1
+    phone_2: Telefono 2
+    first_name: Nombre
+    last_name: Apellido
+    profile: Caracteristica 1
+    profile_2: Caracteristica 2
+    profile_3: Caracteristica 3
+    profile_4: Caracteristica 4
+    function: Funciones
+    mail: Correo electronico
 
 
 

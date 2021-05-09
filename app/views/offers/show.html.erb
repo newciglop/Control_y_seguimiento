@@ -1,54 +1,312 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/shared/notice" %>
 
 
 
-<%= form_with(model: [@offer,@checklist]) do |form|%>
-  <%= form.submit "Add submmit", class: "btn-primary" %>
-  <% end %>
+<div class="row">
+  <div class="offset-sm-2 col-sm-8">
+    <div class="card card-margin">
 
-<% @offer.checklists.each do |checklist| %>
-  <% if checklist.persisted? %>
-    <div class="text-content">
-      <label for="">title</label>
-      <h4><%= checklist.title %></h4>
+
+      <div id="accordion">
+
+
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Datos Generales
+              </a>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table center-aligned-table table-striped">
+
+                  <tr>
+                    <th class=""><strong><%= t('offer.code') %></strong></th>
+                    <td class=""><%= @offer.code %></td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.leader') %></strong></th>
+                    <td class="td-white"><%= @offer.worker.full_name %></td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.modality') %>:</strong></th>
+                    <td class="td-white"><%= @offer.modality.name %> </td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.status') %></strong></th>
+                    <td class="td-white"><%= @offer.status %> </td>
+                  </tr>
+
+
+
+
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <a class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                Fechas
+              </a>
+            </h5>
+          </div>
+
+          <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table center-aligned-table table-striped">
+                  <tr>
+                    <td class=text-center><strong><%= t('offer.date_published') %></strong></td>
+                    <td class="td-white" style="text-align: center"><%= show_date(@offer.publication_date) %></td>
+                  </tr>
+
+                  <tbody class="thead-light">
+                  <tr>
+                    <td class="text-center" colspan="3">
+                      <strong>Fecha De Presentacion De Observaciones</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center w-50">
+                      <strong><%= show_date(@offer.date_submission_obs)%></strong>
+                    </td>
+                    <td class="text-center w-50">
+                      <%= t('offer.delivered') + " " %> : <%= @offer.status_obs %>
+                    </td>
+                  </tr>
+                  <tr class="text-center mb-3">
+                    <td><strong> Dias de plazo: </strong> <%= ( @offer.date_submission_obs.to_datetime - @offer.publication_date.to_datetime ).to_i %> <%= " " %>Dias </td>
+                    <td><strong> Horas de plazo: </strong> <%= ( @offer.date_submission_obs.to_datetime - @offer.publication_date.to_datetime).to_i*24  %> <%= " " %> horas  </td>
+                  </tr>
+                  </tbody>
+
+                  <tbody class="thead-light">
+                  <tr>
+                    <td class="text-center" colspan="3">
+                      <strong>Fecha de publicacion de informe de observaciones</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center w-50">
+                      <strong><%= show_date(@offer.date_publication_observations_report)%></strong>
+                    </td>
+                    <td class="text-center w-50">
+                      <%= t('offer.delivered') + " " %> : <%= @offer.status_obs_report %>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td><strong> Dias de plazo: </strong> <%= ( @offer.date_publication_observations_report.to_datetime - @offer.publication_date.to_datetime ).to_i %> <%= " " %>Dias </td>
+                    <td><strong> Horas de plazo: </strong> <%= ( @offer.date_publication_observations_report.to_datetime - @offer.publication_date.to_datetime).to_i*24  %> <%= " " %> horas  </td>
+                  </tr>
+                  </tbody>
+
+                  <tbody class="thead-light">
+                  <tr>
+                    <td class="text-center" colspan="3">
+                      <strong>Fecha limite para presentacion de ofertas</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center w-50">
+                      <strong><%= show_date(@offer.date_deadline_submission_offers)%></strong>
+                    </td>
+                    <td class="text-center w-50">
+                      <%= t('offer.delivered') + " " %> : <%= @offer.status_submission_offers %>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td><strong> Dias de plazo: </strong> <%= ( @offer.date_deadline_submission_offers.to_datetime - @offer.publication_date.to_datetime ).to_i %> <%= " " %>Dias </td>
+                    <td><strong> Horas de plazo: </strong> <%= ( @offer.date_deadline_submission_offers.to_datetime - @offer.publication_date.to_datetime).to_i*24  %> <%= " " %> horas  </td>
+                  </tr>
+                  </tbody>
+
+                  <tbody class="thead-light">
+                  <tr>
+                    <td class="text-center" colspan="3">
+                      <strong>Fecha de publicación de informe de evaluación de ofertas</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center w-50">
+                      <strong><%= show_date(@offer.date_offer_evaluation_report)%></strong>
+                    </td>
+                    <td class="text-center w-50">
+                      <%= t('offer.delivered') + " " %> : <%= @offer.status_offer_evaluation_report %>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td><strong> Dias de plazo: </strong> <%= ( @offer.date_offer_evaluation_report.to_datetime - @offer.publication_date.to_datetime ).to_i %> <%= " " %>Dias </td>
+                    <td><strong> Horas de plazo: </strong> <%= ( @offer.date_offer_evaluation_report.to_datetime - @offer.publication_date.to_datetime).to_i*24  %> <%= " " %> horas  </td>
+                  </tr>
+                  </tbody>
+
+                  <tbody class="thead-light">
+                  <tr>
+                    <td class="text-center" colspan="3">
+                      <strong> observaciones al informe de evaluacion de ofertas </strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center w-50">
+                      <strong><%= show_date(@offer.date_obs_offer_evaluation_report)%></strong>
+                    </td>
+                    <td class="text-center w-50">
+                      <%= t('offer.delivered') + " " %> : <%= @offer.status_obs_offer_evaluation_report %>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td><strong> Dias de plazo: </strong> <%= ( @offer.date_obs_offer_evaluation_report.to_datetime - @offer.publication_date.to_datetime ).to_i %> <%= " " %>Dias </td>
+                    <td><strong> Horas de plazo: </strong> <%= ( @offer.date_obs_offer_evaluation_report.to_datetime - @offer.publication_date.to_datetime).to_i*24  %> <%= " " %> horas  </td>
+                  </tr>
+                  </tbody>
+
+
+                  <tbody class="thead-light">
+                  <tr>
+                    <td class="text-center" colspan="3">
+                      <strong> Fecha de aceptacion de la oferta </strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center w-50">
+                      <strong><%= show_date(@offer.date_acceptance_offers)%></strong>
+                    </td>
+                    <td class="text-center w-50">
+                      <%= t('offer.delivered') + " " %> : <%= @offer.status_acceptance_offers %>
+                    </td>
+                  </tr>
+                  <tr class="text-center">
+                    <td><strong> Dias de plazo: </strong> <%= ( @offer.date_acceptance_offers.to_datetime - @offer.publication_date.to_datetime ).to_i %> <%= " " %>Dias </td>
+                    <td><strong> Horas de plazo: </strong> <%= ( @offer.date_acceptance_offers.to_datetime - @offer.publication_date.to_datetime).to_i*24  %> <%= " " %> horas  </td>
+                  </tr>
+                  </tbody>
+
+
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+              <a class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                Informacion de la entidad y valores presupuestales
+              </a>
+            </h5>
+          </div>
+
+          <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table center-aligned-table table-striped">
+
+                  <tr>
+                    <th class=""><strong><%= t('offer.company') %></strong></th>
+                    <td class=""><%= @offer.company.name %></td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.location') %></strong></th>
+                    <td class="td-white"><%= @offer.city.state.name %>-<%= @offer.city.name %></td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.budget_value') %>:</strong></th>
+                    <td class="td-white"><%= @offer.budget_value %> </td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.presented_value') %></strong></th>
+                    <td class="td-white"><%= @offer.presented_value %> </td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.email_company') %></strong></th>
+                    <td class="td-white"><%= @offer.email_company %> </td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.email_alternative') %></strong></th>
+                    <td class="td-white"><%= @offer.email_alternative %> </td>
+                  </tr>
+
+                  <tr>
+                    <th><strong><%= t('offer.link_document') %></strong></th>
+                    <td class="td-white"><%= @offer.link_document %> </td>
+                  </tr>
+
+
+
+
+
+                </table>
+              </div>
+            </div>
+
+            <div class="card-footer bg-white text-center">
+
+              <%= link_to 'Editar', edit_offer_path(@offer) ,class: "btn btn-primary mr-2" %>
+              <%= link_to 'Regresar', offers_path, class: "btn btn-light "  %>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div><!-- accordion -->
+
+
+
     </div>
-    <div  id="target" class="form-content d-none">
-      <%= form_with(model: [@offer,checklist]) do |form|%>
-        <%= form.text_field :title %>
-        <%= form.submit "Save", class: "btn-primary" %>
-        <a href="" class="cancel btn btn-light">Cancel</a>
-      <% end %>
-    </div>
-
-    <% end %>
-  <% end %>
-<%= link_to 'Edit', edit_offer_path(@offer) %> |
-<%= link_to 'Back', offers_path %>
-
-
-<script>
-/*
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log('Hola mundo')
-        document.addEventListener('click',() => {
-            var element = document.querySelector('.text-content');
-            element.classList.add('d-none')
-            element.nextElementSibling.classList.remove('d-none')
-        })
-        console.log('hola mundo')
-        document.addEventListener('click',() => {
-            if (!document.querySelector('.cancel')) return;
-       $('.cancel').preventDefault()
-            let element = document.querySelector('.form-content')
-
-            element.classList.add('d-none')
-            element.nextElementSibling.classList.remove('d-none')
-            /*element.previousElementSibling.classList.remove('d-none')
-
-        })
-    })
-*/
 
 
 
-</script>
+  </div>
+</div>
+<div class="offset-sm-2"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

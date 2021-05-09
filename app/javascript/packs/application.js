@@ -2,38 +2,47 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-
-
-
 require("@rails/ujs").start()
-require("turbolinks")
+require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-import 'bootstrap';
-import 'css/styles'
-require("../customize/bootstrap-select.min")
+require("jquery")
 import flatpickr from "flatpickr";
 import { Spanish } from "flatpickr/dist/l10n/es.js"
 
-
-
+import 'bootstrap';
+import 'css/styles'
+require("../customize/bootstrap-select.min")
 
 require("trix")
 require("@rails/actiontext")
 
+    document.addEventListener('turbolinks:load', function() {
+        flatpickr(".datepicker", {
+            "locale": Spanish, // locale for this instance only
+            dateFormat: "Y-m-d",
+        });
+
+    })
 
 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
 
 
+document.addEventListener('turbolinks:load',function(){
+    document.addEventListener('click',() => {
+        let element = event.target.closest('.text-content')
+        if (!element) return
+        element.classList.add('d-none')
+        element.nextElementSibling.classList.remove('d-none')
+    })
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    flatpickr(".datepicker", {
-        "locale": Spanish, // locale for this instance only
-        dateFormat: "Y-m-d",
-    });
-
+    document.addEventListener('click',() => {
+        if (!event.target.matches('.cancel')) return;
+        event.preventDefault()
+        let element = event.target.closest('.form-content')
+        element.classList.add('d-none')
+        element.previousElementSibling.classList.remove('d-none')
+    })
 })
 
 
@@ -44,5 +53,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
+import "controllers"
