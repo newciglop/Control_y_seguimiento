@@ -1,10 +1,13 @@
 class User < ApplicationRecord
+
   def self.ADMINISTRATOR
     1
   end
-
-  def self.SIMPLE_USER
+  def self.AUTHOR
     2
+  end
+  def self.EDITOR
+    3
   end
 
 

@@ -8,7 +8,7 @@
         </h5>
       </div>
 
-      <%= bootstrap_form_with(model: user, local: true, html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
+      <%= bootstrap_form_with(model: user, local: true , html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
         <div class="card-body">
           <% if user.errors.any? %>
             <div id="error_explanation" style="display: none">
@@ -52,13 +52,13 @@
 
             <div class="col-sm-12 pr-2">
               <div class="form-group">
-                <%= form.password_field :password, label: 'Contraseña' ,class: "form-control" , required: true  , autocomplete: "off"%>
+                <%= form.password_field :password, label: 'Contraseña' ,class: "form-control" , autocomplete: "off"%>
               </div>
             </div>
 
             <div class="col-sm-12">
               <div class="form-group">
-                <%= form.password_field :password_confirmation, label: 'confirmar contraseña' ,class: "form-control" , required: true %>
+                <%= form.password_field :password_confirmation, label: 'confirmar contraseña' ,class: "form-control"%>
               </div>
             </div>
           </div>

@@ -1,0 +1,17 @@
+<%= form_with(model: navigator, local: true) do |form| %>
+  <% if navigator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(navigator.errors.count, "error") %> prohibited this navigator from being saved:</h2>
+
+      <ul>
+        <% navigator.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

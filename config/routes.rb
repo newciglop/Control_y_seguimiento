@@ -14,8 +14,9 @@ Rails.application.routes.draw do
     root to: "devise/sessions#new"
   end
 
-
   authenticated :user do
+    get 'new_navigator' , to: "navigators#create_user" , as: 'create_navigator'
+    post 'new_navigator' , to: "navigators#create_user"
   resources :offers
   resources :states_students
   resources :students
