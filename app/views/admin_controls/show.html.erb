@@ -250,6 +250,15 @@
                     <li class="list-group-item d-flex justify-content-between">
                       <span><%= checklist_item.title %></span>
                       <div>
+
+                        <div class="form-group">
+                          <%= label_tag :deposit_id , "De" %>
+                          <%= select_tag "deposit_from", options_for_select(@status_checklist, ""),:prompt => "" , id:"product", class: "form-control", required: true %>
+                        </div>
+
+
+
+
                       </div>
                       <%= link_to  "/admin_controls/#{@admin_control.id}/checklists/#{checklist.id}/checklist_items/#{checklist_item.id}", class: "btn btn-danger",
                                    method: :delete, data: { confirm: "Esta seguro que desea eliminar el item"} do %>
@@ -269,7 +278,51 @@
       </td>
     </tr>
 
+    <script type="text/javascript" charset="utf-8">
 
+
+
+
+        $("#product").change(function(){
+            var id_product = $(this).val();
+            console.log(id_product)
+            if(id_product == 'sin-iniciar'){
+                $("#product").addClass("bg-light-danger");
+                $("#product").removeClass("bg-light-info");
+                $("#product").removeClass("bg-light-success");
+            }else if (id_product == 'en-progreso'){
+                $("#product").addClass("bg-light-info");
+                $("#product").removeClass("bg-light-danger");
+                $("#product").removeClass("bg-light-success");
+            }else if (id_product == 'completado'){
+                $("#product").addClass("bg-light-success");
+                $("#product").removeClass("bg-light-danger");
+                $("#product").removeClass("bg-light-info");
+            }/*
+            $.ajax({
+                url: "/reference_inventories/new",
+                method: "GET",
+                dataType: "json",
+                data: {id_product: id_product},
+                error: function (xhr, status, error) {
+                    console.error('AJAX Error: ' + status + error);
+                },
+                success: function (response) {
+                    console.log(response);
+                    var skus = response["skus"];
+                    $("#hidden").empty();
+                    console.log(skus)
+                    console.log(`${skus} hola mundo ******` )
+                    $("#hidden").append("<option><%#= t('action.please_select') %></option>");
+
+                    for(var i = 0; i < skus.length; i++){
+                        console.log(skus[i]["sku"])
+                        $("#hidden").append('<option value=" ' + skus[i][0] + '">' + '<<'+ skus[i][1] + skus[i][2]  +  '>>'+'</option>');
+                    }
+                }
+            });*/
+        });
+    </script>
 
 
 

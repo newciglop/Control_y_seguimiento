@@ -16,8 +16,6 @@ Rails.application.routes.draw do
 
 
   authenticated :user do
-
-
   resources :offers
   resources :states_students
   resources :students

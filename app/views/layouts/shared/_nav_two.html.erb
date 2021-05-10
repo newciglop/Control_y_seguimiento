@@ -70,8 +70,12 @@
         <a class="nav-link dropdown-toggle" href="#" id="settings" role="button" data-toggle="dropdown" aria-expanded="false">
           Configuración
         </a>
+
         <ul class="dropdown-menu" aria-labelledby="settings">
-          <li><a class="dropdown-item" href="<%= themes_path %>">Asuntos</a> </li>
+          <li><a class="dropdown-item" href="<%= themes_path %>">Asuntos</a>
+            <% if current_user.role_id == User.ADMINISTRATOR %>
+          <li><a class="dropdown-item" href="<%= users_path %>">Usuarios</a>
+            <% end %>
           <li><a class="dropdown-item" href="<%= concepts_path %>">Conceptos</a></li>
           <li><a class="dropdown-item" href="<%= items_path %>">Items Especificos</a></li>
           <li><a class="dropdown-item" href="<%= modalities_path %>">Modalidad</a></li>

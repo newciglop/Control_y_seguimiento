@@ -10,7 +10,9 @@ class AdminControlsController < ApplicationController
 
 
   def show
+    show_states
     @checklist =  @admin_control.checklists.build
+
     combo_box_data
     show_tracking_type(@admin_control)
     show_state_admin_control(@admin_control)
@@ -69,6 +71,10 @@ class AdminControlsController < ApplicationController
   end
 
   private
+
+  def show_states
+    @status_checklist = ChecklistItem.STATUS_OPTIONS.map{|x| [x[0],x[1]]}
+  end
 
   def combo_box_data
     generate_code()

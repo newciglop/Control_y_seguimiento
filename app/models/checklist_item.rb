@@ -4,11 +4,13 @@ class ChecklistItem < ApplicationRecord
   validates :status , inclusion: { in: ['sin-iniciar','en-progreso','completado']}
   validates_presence_of :status
 
-  STATUS_OPTIONS = [
+  def self.STATUS_OPTIONS
+    [
       ['Sin iniciar','sin-iniciar'],
       ['En Progreso','en-progreso'],
       ['Completado','completado']
   ]
+  end
 
   def readable_status
     case status
