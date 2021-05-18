@@ -1,6 +1,10 @@
-<h1>Editing Admin Control</h1>
-
+<%  if current_user.role_id == User.ADMINISTRATOR || @admin_control.user_id == current_user.id  %>
 <%= render 'form', admin_control: @admin_control %>
+  <% else %>
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <h2 class="text-danger">NOT FOUND 404</h2>
+  </div>
+</div>
+<% end %>
 
-<%= link_to 'Show', @admin_control %> |
-<%= link_to 'Back', admin_controls_path %>

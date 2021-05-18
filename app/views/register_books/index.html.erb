@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1  text-center">
+    <h2 class="my-4">Registro de acciones</h2>
+  </div>
+  <div class="offset-md-1"></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center tr-register">code</th>
+          <th scope="col" class="text-center tr-register">id</th>
+          <th scope="col" class="text-center tr-register">Responsable</th>
+          <th scope="col" class="text-center tr-register">Compañia</th>
+          <th scope="col" class="text-center tr-register">Concepto</th>
+          <th scope="col" class="text-center tr-register">Asunto</th>
+          <th scope="col" class="text-center tr-register">Tipo</th>
+          <th scope="col" class="text-center tr-register">Item</th>
+          <th scope="col" class="text-center tr-register">Propietario</th>
+          <th scope="col" class="text-center tr-register">creado</th>
+          <th scope="col" class="text-center tr-register">Actualizado por</th>
+          <th scope="col" class="text-center tr-register">Actualizado</th>
+          <th scope="col" class="text-center tr-register">Eliminado por</th>
+          <th scope="col" class="text-center tr-register">Eliminado</th>
+          <th scope="col" class="text-center tr-register">Hora de eliminacíon</th>
+
+
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @register_books.each do |register_books| %>
+          <tr>
+            <td class="text-center td-register"><%= register_books.code %> </td>
+            <td class="text-center td-register"><%= register_books.code_sa %></td>
+            <td class="text-center td-register"><%= register_books.rol_responsible %></td>
+            <td class="text-center td-register"><%= register_books.company %></td>
+            <td class="text-center td-register"><%= register_books.concept_admin %></td>
+            <td class="text-center td-register"><%= register_books.theme_admin %></td>
+            <td class="text-center td-register"><%= register_books.type_admin %></td>
+            <td class="text-center td-register"><%= register_books.item_admin %></td>
+            <td class="text-center td-register"><%= register_books.create_user %></td>
+            <td class="text-center td-register"><%= register_books.create_time %></td>
+            <td class="text-center td-register"><%= register_books.update_user %></td>
+            <td class="text-center td-register"><%= register_books.update_time %></td>
+            <td class="text-center td-register"><%= register_books.destroy_user %></td>
+            <td class="text-center td-register"><%= register_books.destroy_time %></td>
+            <td class="text-center td-register"><%= register_books.time_destroy %></td>
+
+
+
+
+
+
+
+
+
+              </tr>
+
+        <% end %>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>

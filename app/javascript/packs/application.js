@@ -7,16 +7,17 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
+
 import flatpickr from "flatpickr";
 import { Spanish } from "flatpickr/dist/l10n/es.js"
 
 import 'bootstrap';
 import 'css/styles'
-require("../customize/bootstrap-select.min")
+
 
 require("trix")
 require("@rails/actiontext")
-
+require("../customize/bootstrap-select.min")
     document.addEventListener('turbolinks:load', function() {
         flatpickr(".datepicker", {
             "locale": Spanish, // locale for this instance only

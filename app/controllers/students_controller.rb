@@ -3,11 +3,13 @@ class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
   include ComboBoxHelper
   include StudentsHelper
+  include Deleteable
 
   # GET /students or /students.json
   def index
-
-    @students = Student.all
+    @search = params[:fullname] || ""
+    @students = Student.where("(LOWER(name) like LOWER(?) OR LOWER(last_name) like LOWER(?) OR LOWER(identification) like LOWER(?)) " ,"%#{@search}%","%#{@search}%","%#{@search}%")
+                    .order('last_name')
   end
 
   # GET /students/1 or /students/1.json
@@ -71,8 +73,7 @@ class StudentsController < ApplicationController
 
   # DELETE /students/1 or /students/1.json
   def destroy
-    @student.destroy
-    redirect_to students_url, notice: "Student was successfully destroyed."
+    delete_with_references(@student,students_path)
   end
 
   private

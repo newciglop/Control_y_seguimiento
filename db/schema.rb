@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_033340) do
+ActiveRecord::Schema.define(version: 2021_05_16_181154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_05_10_033340) do
     t.boolean "enable"
     t.bigint "responsible_function_id", null: false
     t.bigint "user_id"
+    t.string "sa"
     t.index ["city_id"], name: "index_admin_controls_on_city_id"
     t.index ["company_id"], name: "index_admin_controls_on_company_id"
     t.index ["concept_id"], name: "index_admin_controls_on_concept_id"
@@ -231,6 +232,7 @@ ActiveRecord::Schema.define(version: 2021_05_10_033340) do
     t.integer "remaining_hour_acceptance_offers"
     t.string "status_acceptance_offers"
     t.bigint "user_id"
+    t.string "sl"
     t.index ["city_id"], name: "index_offers_on_city_id"
     t.index ["company_id"], name: "index_offers_on_company_id"
     t.index ["modality_id"], name: "index_offers_on_modality_id"
@@ -245,6 +247,36 @@ ActiveRecord::Schema.define(version: 2021_05_10_033340) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "editable", default: true
     t.integer "profile_type"
+  end
+
+  create_table "register_books", force: :cascade do |t|
+    t.bigint "offer_id"
+    t.bigint "admin_control_id"
+    t.string "create_user"
+    t.string "update_user"
+    t.string "destroy_user"
+    t.date "create_time"
+    t.date "update_time"
+    t.date "destroy_time"
+    t.string "code_sa"
+    t.string "code_sl"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.time "time_destroy"
+    t.string "concept_admin"
+    t.string "theme_admin"
+    t.string "type_admin"
+    t.string "item_admin"
+    t.string "rol_responsible"
+    t.string "leader_sl"
+    t.string "modality_sl"
+    t.string "status_sl"
+    t.string "company"
+    t.string "code"
+    t.boolean "is_offer"
+    t.boolean "is_admin_control"
+    t.index ["admin_control_id"], name: "index_register_books_on_admin_control_id"
+    t.index ["offer_id"], name: "index_register_books_on_offer_id"
   end
 
   create_table "responsible_functions", force: :cascade do |t|
@@ -412,6 +444,8 @@ ActiveRecord::Schema.define(version: 2021_05_10_033340) do
   add_foreign_key "offers", "modalities"
   add_foreign_key "offers", "users"
   add_foreign_key "offers", "workers"
+  add_foreign_key "register_books", "admin_controls"
+  add_foreign_key "register_books", "offers"
   add_foreign_key "students", "cities"
   add_foreign_key "students", "states_students"
   add_foreign_key "students", "titles"

@@ -10,8 +10,24 @@ tr>td {
   font-size: 14px !important;
 }
 
+.will_paginate a {
+  margin-right: 5px;
+  margin-left: 5px;
+}
 
+.will_paginate a:hover {
+  background-color: transparent !important;
+  text-decoration: none;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.navbar-light .navbar-nav .nav-link{
+  font-size: 14px !important;
+}
 
+.tr-register, .td-register {
+  font-size: 12px !important;
+}
 
 .table thead th {
   font-size: 14px;

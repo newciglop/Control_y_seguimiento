@@ -32,8 +32,8 @@
               <td class="text-center bg-light-danger"><%= offer.code %> </td>
                 <% elsif (offer.date_acceptance_offers.to_date - Date.today) <= 7 %>
               <td class="text-center bg-light-warning"><%= offer.code %> </td>
-                <% else %>
-                <td class="text-center bg-light-warning"><%= offer.code %> </td>
+                <% elsif (offer.date_acceptance_offers.to_date - Date.today) >= 8 %>
+                <td class="text-center"><%= offer.code %> </td>
                 <% end %>
             <% end %>
             <td class="text-center"><%= offer.worker.full_name %> </td>
@@ -54,6 +54,7 @@
         <% end %>
         </tbody>
       </table>
+      <%= will_paginate(@offers, :renderer => WillPaginate::ActionView::LinkRenderer) %>
 
       <br>
     </div>

@@ -3,7 +3,9 @@ class CompaniesController < ApplicationController
 
 
   def index
-    @companies = Company.all
+    @search = params[:fullname] || ""
+    @companies = Company.where("(LOWER(name) like LOWER(?) OR LOWER(identification) like LOWER(?)) " ,"%#{@search}%","%#{@search}%")
+                     .order('name')
   end
 
 
@@ -42,9 +44,7 @@ class CompaniesController < ApplicationController
 
 
   def destroy
-    if @company.destroy
-     redirect_to companies_url, notice: "Company was successfully destroyed."
-    end
+    delete_with_references(@companies,companies_path)
   end
 
   private

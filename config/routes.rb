@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
 
 
+
   mount ActionCable.server => '/cable'
 
 
@@ -40,6 +41,8 @@ Rails.application.routes.draw do
   end
   resources :titles
   resources :universities
+  resources :register_books
+  get "/register_offer" , to: 'register_books#index_offer'  ,as: 'register_books_offer'
 
 
   resources :states do

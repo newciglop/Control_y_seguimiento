@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'dotenv-rails', groups: [:development, :test]
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
@@ -31,6 +31,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'coffee-rails', '~> 5.0.0'
 gem 'devise'
 gem 'bootstrap_form' ,  '~> 4.0'
+gem 'bootstrap-will_paginate'
 #gem "stimulus_reflex", "~> 3.4"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

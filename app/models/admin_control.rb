@@ -1,4 +1,5 @@
 class AdminControl < ApplicationRecord
+  scope :by_month, lambda {|date| where('start_date >= ? AND start_date <=  ?', date.beginning_of_month, date.end_of_month)}
   belongs_to :concept
   belongs_to :theme
   belongs_to :type
@@ -10,11 +11,18 @@ class AdminControl < ApplicationRecord
 
   has_many :checklists
 
+  after_create do
+    RegisterBook.where(admin_control_id: self.id).update(code_sa: self.sa)
+  end
+
   #validates :company_id,:type_id,:theme_id,presence: true
   #validates :concept_id, :city_id,:item_id,:responsible_function_id , presence: true
 
 
   has_rich_text :description_advance
+
+
+
 
   def self.TYPE_IPM
     1

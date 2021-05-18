@@ -13,7 +13,7 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="licitation" role="button" data-toggle="dropdown" aria-expanded="false">
-            Seguimiento licitaciones
+            Segto licitaciones
           </a>
           <ul class="dropdown-menu" aria-labelledby="licitation">
             <li><a class="dropdown-item" href="<%= offers_path %>">Lista de licitaciones</a></li>
@@ -24,7 +24,7 @@
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="Companies" role="button" data-toggle="dropdown" aria-expanded="false">
-          Seguimiento Admin
+          Segto Admin
         </a>
         <ul class="dropdown-menu" aria-labelledby="Companies">
           <li><a class="dropdown-item" href="<%= admin_controls_path %>">Lista de Seguimientos</a></li>
@@ -76,6 +76,9 @@
             <% if current_user.role_id == User.ADMINISTRATOR %>
           <li><a class="dropdown-item" href="<%= users_path %>">Usuarios</a>
             <% end %>
+          <% if current_user.role_id == User.ADMINISTRATOR %>
+            <li><a class="dropdown-item" href="<%= users_path %>">Usuarios</a>
+          <% end %>
           <li><a class="dropdown-item" href="<%= concepts_path %>">Conceptos</a></li>
           <li><a class="dropdown-item" href="<%= items_path %>">Items Especificos</a></li>
           <li><a class="dropdown-item" href="<%= modalities_path %>">Modalidad</a></li>
@@ -87,16 +90,35 @@
       </li>
 
 
+        <% if current_user.role_id == User.ADMINISTRATOR %>
+             <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="settings" role="button" data-toggle="dropdown" aria-expanded="false">
+          G.U.R
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="settings">
+          <li><a class="dropdown-item" href="<%= users_path %>">Usuarios</a>
+          <li><a class="dropdown-item" href="<%= new_navigator_path %>">Nuevo usuario</a> </li>
+          <li><a class="dropdown-item" href="<%= register_books_path %>">Registro Sgto. Admin</a> </li>
+          <li><a class="dropdown-item" href="<%= register_books_offer_path %>">Registro Sgto. Control</a> </li>
+
+        </ul>
+      </li>
+          <% end %>
+
+
 <% end %>
     </ul>
 
 
 
 
-    <form class="d-flex" style="width:200px">
+    <form class="d-flex" style="">
       <div class="dropdown">
+        <div class="btn-group">
+          <div class="btn-group dropleft" role="group">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Usuario
+          <i class="fas fa-user"></i>
         </button>
         <div class="dropdown-menu">
           <% unless user_signed_in? %>
@@ -108,6 +130,11 @@
             <%= link_to "Cerrar sesion", destroy_user_session_path , method: :delete , class:"dropdown-item"%>
           <% end %>
       </div>
+          </div>
+        </div>
+
+
+
       </div>
     </form>
   </div>

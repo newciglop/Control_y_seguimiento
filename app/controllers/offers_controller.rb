@@ -2,9 +2,10 @@ class OffersController < ApplicationController
   before_action :set_offer, only: %i[ show edit update destroy ]
   include ComboBoxHelper
   include OffersHelper
+  include RegisterBooksHelper
 
   def index
-    @offers = Offer.all.order('created_at desc')
+    @offers = Offer.all.paginate(page: params[:page], per_page: 30).order('created_at desc')
 
 
 
@@ -49,6 +50,9 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     @offer.user_id = current_user.id
       if @offer.save
+        @offer.sl =  "sl-#{@offer.id}"
+        @offer.save
+        create_register_offer(@offer,current_user)
          redirect_to offers_path, notice: "Offer was successfully created."
       else
         combo_box_company
@@ -65,6 +69,7 @@ class OffersController < ApplicationController
 
   def update
     if @offer.update(offer_params)
+       update_register_offer(@offer,current_user)
        redirect_to @offer, notice: "Offer was successfully updated."
     else
       combo_box_company
@@ -81,14 +86,63 @@ class OffersController < ApplicationController
 
 
   def destroy
-    if @offer.destroy
-     redirect_to offers_url, notice: "Offer was successfully destroyed."
+    if destroy_register_offer(@offer,current_user)
+      if delete_ref_offer(@offer)
+         if @offer.destroy
+          redirect_to offers_url, notice: "Offer was successfully destroyed."
+         end
+      end
     end
   end
 
   def generate_code
     offer = Offer.all.map{|x| x.code}
   @suggest_code = offer.max == nil ? 1 : offer.max + 1
+  end
+
+  def create_register_offer(obj,current_user)
+    register =  RegisterBook.new(offer_id:obj.id,create_user:"#{current_user.first_name}" + " " + "#{current_user.last_name}",
+                                 create_time:Date.today,admin_control_id:nil,leader_sl:obj.worker.full_name,
+                                 modality_sl: obj.modality.name, status_sl: obj.status,
+                                 company: obj.company.name , code_sl:obj.sl ,code: obj.code,is_offer:true)
+    register.save!
+  end
+
+
+  def update_register_offer(obj,current_user)
+    ru = RegisterBook.where(offer_id:obj.id).update(update_user:"#{current_user.first_name}" + " " + "#{current_user.last_name}",
+                                                    leader_sl: obj.worker.full_name,
+                                                    update_time:Date.today,
+                                                    modality_sl:obj.modality.name,
+                                                    status_sl:obj.status,code:obj.code,
+                                                    company:obj.company.name)
+  end
+
+
+  def destroy_register_offer(obj,current_user)
+    @result = ""
+    dia_actual = Date.today
+
+    register = RegisterBook.where(offer_id:obj.id)
+                   .update(destroy_user:"#{current_user.first_name}" + " " + "#{current_user.last_name}",
+                           destroy_time:dia_actual,time_destroy:Time.now.strftime("%I:%M:%S %P"))
+    if register
+      @result = true
+    else
+      @result = false
+    end
+    return @result
+  end
+
+
+  def delete_ref_offer(obj)
+    r = RegisterBook.where(offer_id: obj.id).update(offer_id: nil)
+    if r
+      result_offer = true
+    else
+      result_offer = false
+    end
+    return result_offer
   end
 
   private

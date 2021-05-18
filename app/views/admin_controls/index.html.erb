@@ -6,6 +6,25 @@
 </div>
 
 <div class="row">
+  <div class="col-sm-5 offset-sm-1">
+    <form class="forms-sample">
+      <div class="form-group">
+        <label>Mes</label>
+        <%= select_tag "search", options_for_select(@months, @search), class: "form-control bg-input"%>
+      </div>
+      <div class="form-group">
+        <label>Responsable</label>
+        <%= select_tag "responsible", options_for_select(@responsible_functions, @responsible), prompt: 'Selecciona un responsable', class: "form-control bg-input"%>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="<%= t("action.search")%>" class="btn btn-primary my-2"/>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<div class="row">
   <div class="offset-sm-1 col-sm-10">
     <div class="table-responsive">
       <table class="table table-striped">
@@ -40,6 +59,10 @@
         <% end %>
         </tbody>
       </table>
+
+<div class="will_paginate">
+  <%= will_paginate(@offers, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+</div>
 
       <br>
     </div>

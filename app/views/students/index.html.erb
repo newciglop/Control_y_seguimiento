@@ -4,7 +4,19 @@
   </div>
   <div class="offset-md-1"></div>
 </div>
-
+<div class="row">
+  <div class="col-md-4 offset-md-1 text-left">
+    <form>
+      <div class="form-group">
+        <label><%= t('action.search') %></label>
+        <input name="fullname" placeholder="<%= t('workers.first_name') %>" value="<%=@search%>" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="<%= t('action.search') %>" class="btn btn-primary my-2"/>
+      </div>
+    </form>
+  </div>
+</div>
 <div class="row">
   <div class="offset-sm-1 col-sm-10">
     <div class="table-responsive">
@@ -13,6 +25,7 @@
         <tr>
           <th scope="col" class="text-center">#</th>
           <th scope="col" class="text-center">Nombre</th>
+          <th scope="col" class="text-center">No Identificación</th>
           <th scope="col" class="text-center">Telefono</th>
           <th scope="col" class="text-center">correo electronico </th>
           <th colspan="2"></th>
@@ -24,6 +37,7 @@
           <tr>
             <td> <%= index + 1  %></td>
             <td class="text-center"><%= student.name + " " + student.last_name %></td>
+            <td class="text-center"><%= student.identification %></td>
             <td class="text-center"><%= student.phone %></td>
             <td class="text-center"><%= student.mail %></td>
             <td></td>

@@ -9,4 +9,13 @@ class ApplicationController < ActionController::Base
 
   add_flash_types(:success, :info, :warning, :danger)
 
+
+  def show_hour(obj)
+    objet = obj
+    hour = objet[2]
+    min = objet[1]
+    second= objet[0]
+    hour_full = "#{hour}:#{min}:#{second}"
+  end
+
 end

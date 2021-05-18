@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1  text-center">
+    <h2 class="my-4">Registro de acciones</h2>
+  </div>
+  <div class="offset-md-1"></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center tr-register">codigo </th>
+          <th scope="col" class="text-center tr-register">Id</th>
+          <th scope="col" class="text-center tr-register">Modalidad</th>
+          <th scope="col" class="text-center tr-register">Encargado</th>
+          <th scope="col" class="text-center tr-register">Estado</th>
+          <th scope="col" class="text-center tr-register">compañia</th>
+          <th scope="col" class="text-center tr-register">Propietario</th>
+          <th scope="col" class="text-center tr-register">Creado</th>
+          <th scope="col" class="text-center tr-register">Actualizado por</th>
+          <th scope="col" class="text-center tr-register">Actualizado</th>
+          <th scope="col" class="text-center tr-register">Eliminado por</th>
+          <th scope="col" class="text-center tr-register">Eliminado</th>
+          <th scope="col" class="text-center tr-register">Hora de eliminacíon</th>
+
+
+
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @register_books_offer.each do |register_books| %>
+          <tr>
+            <td class="text-center td-register"><%= register_books.code %> </td>
+            <td class="text-center td-register"><%= register_books.code_sl %></td>
+            <td class="text-center td-register"><%= register_books.modality_sl %></td>
+            <td class="text-center td-register"><%= register_books.leader_sl %></td>
+            <td class="text-center td-register"><%= register_books.status_sl %></td>
+            <td class="text-center td-register"><%= register_books.company  %></td>
+            <td class="text-center td-register"><%= register_books.create_user %></td>
+            <td class="text-center td-register"><%= register_books.create_time %></td>
+            <td class="text-center td-register"><%= register_books.update_user %></td>
+            <td class="text-center td-register"><%= register_books.update_time %></td>
+            <td class="text-center td-register"><%= register_books.destroy_user %></td>
+            <td class="text-center td-register"><%= register_books.destroy_time %></td>
+            <td class="text-center td-register"><%= register_books.time_destroy %></td>
+          </tr>
+
+        <% end %>
+        </tbody>
+      </table>
+
+      <br>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  offer: one
+  admin_control: one
+  create_user: 1
+  update_user: 1
+  destroy_user: 1
+  create_time: 2021-05-12
+  update_time: 2021-05-12
+  destroy_time: 2021-05-12
+  code_sa: MyString
+  code_sl: MyString
+
+two:
+  offer: two
+  admin_control: two
+  create_user: 1
+  update_user: 1
+  destroy_user: 1
+  create_time: 2021-05-12
+  update_time: 2021-05-12
+  destroy_time: 2021-05-12
+  code_sa: MyString
+  code_sl: MyString
