@@ -11,13 +11,27 @@ class ChecklistItemsController < ApplicationController
     checklist = admin_control.checklists.find(params[:checklist_id])
     checklist_item = checklist.checklist_items.find(params[:id])
 
+       if params[:status_id].present?
+         @status = ChecklistItem.where(id:checklist_item.id).update(status:params[:status_id])
+       else
+         @status = ChecklistItem.where(id:checklist_item.id).update(status:'without-start')
+       end
+
+       if request.xhr?
+         respond_to do |format|
+           format.json {
+             render json: {skus: @status}
+           }
+         end
+       end
+
   end
 
   def create
     admin_control = AdminControl.find(params[:admin_control_id])
     checklist = admin_control.checklists.find(params[:checklist_id])
     checklist_item = checklist.checklist_items.new(checklist_item_params)
-    checklist_item.status = 'sin-iniciar'
+    checklist_item.status = 'without_start'
     checklist_item.save
     redirect_to  "/admin_controls/#{admin_control.id}"
   end

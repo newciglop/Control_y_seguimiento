@@ -46,9 +46,14 @@
             <%= select_tag "engineer_elements[]", options_for_select(@engineers, designation.engineer_elements),:prompt => 'Escoger un elemento' , class: "form-control selectpicker", multiple: true , data: { live_search: 'true' } %>
           </div>
 
-
-           <%= @engineers_has_name %>
-
+          <% if @designation.id? %>
+          <div id="engineer">
+              <% @engineers_has_name.each  do |designation| %>
+            <%=designation[0] %>
+            <%= link_to 'Eliminar',   {:controller => "designations", :action => "destroy_engineer", :des_id => @designation.id, engineer_id: designation[1]}, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
+            <%end %>
+          </div>
+<% end %>
 <!--
           <div class="form-group">
             <label for="engineer_elements">Ingenieros Encargados</label> <br>
@@ -76,9 +81,9 @@
   </div>
 </div>
 
-<script>
-
-
+<
+<script type="text/javascript" charset="utf-8">
+    double_charge()
 </script>
 
 

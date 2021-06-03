@@ -8,6 +8,8 @@ class NavigatorsController < ApplicationController
 
 
     show_role
+    first_name = params[:first_name]
+    last_name = params[:last_name]
     email = params[:email]
     password  = params[:password]
     password_confirmation = params[:password_confirmation]
@@ -18,7 +20,7 @@ class NavigatorsController < ApplicationController
     if password.to_s == password_confirmation.to_s
     user = User.new(email: email,password: password,
                     password_confirmation: password_confirmation,role_id: role_id,
-                    deactivated: deactivated)
+                    deactivated: deactivated,first_name: first_name,last_name: last_name)
     if user.save
       redirect_to users_path, notice: "Usuario creado exitosamente"
     end
@@ -35,7 +37,7 @@ class NavigatorsController < ApplicationController
   private
 
   def show_role
-    @roles = [[1,"Administrador"],[2,"editor"],[3,"observador"]].map{|x| [x[1], x[0]]}
+    @roles = [[1,"Administrador"],[2,"Editor"],[3,"Usuario"]].map{|x| [x[1], x[0]]}
   end
 
 end

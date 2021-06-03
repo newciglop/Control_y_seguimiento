@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_181154) do
+ActiveRecord::Schema.define(version: 2021_05_25_024000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,11 +166,38 @@ ActiveRecord::Schema.define(version: 2021_05_16_181154) do
     t.index ["engineer_id"], name: "index_has_engineers_on_engineer_id"
   end
 
+  create_table "has_managers", force: :cascade do |t|
+    t.bigint "worker_id", null: false
+    t.bigint "admin_control_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_control_id"], name: "index_has_managers_on_admin_control_id"
+    t.index ["worker_id"], name: "index_has_managers_on_worker_id"
+  end
+
+  create_table "has_supports", force: :cascade do |t|
+    t.bigint "worker_id"
+    t.bigint "admin_control_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_control_id"], name: "index_has_supports_on_admin_control_id"
+    t.index ["worker_id"], name: "index_has_supports_on_worker_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.boolean "enable"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "description"
+    t.boolean "completed", default: false
+    t.bigint "admin_control_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_control_id"], name: "index_lists_on_admin_control_id"
   end
 
   create_table "modalities", force: :cascade do |t|
@@ -439,6 +466,11 @@ ActiveRecord::Schema.define(version: 2021_05_16_181154) do
   add_foreign_key "engineers", "profiles"
   add_foreign_key "has_engineers", "designations"
   add_foreign_key "has_engineers", "engineers"
+  add_foreign_key "has_managers", "admin_controls"
+  add_foreign_key "has_managers", "workers"
+  add_foreign_key "has_supports", "admin_controls"
+  add_foreign_key "has_supports", "workers"
+  add_foreign_key "lists", "admin_controls"
   add_foreign_key "offers", "cities"
   add_foreign_key "offers", "companies"
   add_foreign_key "offers", "modalities"

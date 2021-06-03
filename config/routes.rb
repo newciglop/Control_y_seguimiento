@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :lists
   mount ActionCable.server => '/cable'
 
 
@@ -35,10 +36,24 @@ Rails.application.routes.draw do
   resources :responsible_functions
   resources :workers
   resources :admin_controls do
+    resources :lists
     resources :checklists do
       resources :checklist_items
     end
   end
+
+    get '/create_items', to: 'lists#create_items'
+    post '/create_items' ,to: 'lists#create_items' , as: "create_lists"
+
+    get '/destroy_engineer'  , to: 'designations#destroy_engineer' ,as: 'destroy_engineer'
+    post '/destroy_engineer'  , to: 'designations#destroy_engineer'
+
+    get '/destroy_support'  , to: 'admin_controls#destroy_support' ,as: 'destroy_support'
+    post '/destroy_support'  , to: 'admin_controls#destroy_support'
+
+    get '/destroy_manager'  , to: 'admin_controls#destroy_manager' ,as: 'destroy_manager'
+    post '/destroy_manager'  , to: 'admin_controls#destroy_manager'
+
   resources :titles
   resources :universities
   resources :register_books
@@ -56,6 +71,8 @@ Rails.application.routes.draw do
 
 
   end
+
+  get ":url" => "application#redirect_user", :constraints => { :url => /.*/ }
 
 end
 

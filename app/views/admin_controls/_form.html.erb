@@ -148,24 +148,77 @@
               <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-parent="#accordion">
                 <div class="card-body">
                   <div class="row no-gutters">
-                    <div class="col-lg-4">
+                    <div class="col-lg-12">
                       <div class="form-group">
                         <%= form.label :responsible_function_id, "Rol de Responsable" %>
                         <%= form.select(:responsible_function_id, options_for_select(@responsible_functions, admin_control.responsible_function_id), {:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
                       </div>
                     </div>
-                    <div class="col-lg-4">
+
+                    <div class="col-lg-12">
                       <div class="form-group">
-                        <%= form.label :responsible, "responsable" %>
-                        <%= form.select(:responsible, options_for_select(@worker_responsible, admin_control.responsible), {:prompt => 'Selecciona un Responsable'},{class: "form-control " }) %>
+                        <%= label_tag :manager_elements , "Responsable" %>
+                        <%= select_tag "manager_elements[]", options_for_select(@workers, admin_control.manager_elements),:prompt => 'Escoger un elemento' , class: "form-control selectpicker", multiple: true , data: { live_search: 'true' } %>
                       </div>
                     </div>
-                    <div class="col-lg-4">
+
+                    <div class="col-lg-12">
+                      <% if @admin_control.id? %>
+                        <table class="table">
+                          <tr>
+                            <th colspan="2" class="text-center">Integrantes</th>
+                          </tr>
+                          <% @manager_has_name.each  do |manager| %>
+                            <tr>
+                              <td class="text-center">
+                                <%= manager[0] %>
+                              </td>
+                              <td class="text-center">
+                                <%= link_to  :controller => "admin_controls", :action => "destroy_manager", :admin_control_id => @admin_control.id, worker_id: manager[1],data: { confirm: '¿Esta seguro que desea eliminarlo?' } do  %>
+                                  <span class="btn btn-outline-danger"> <i class="fas fa-trash-alt"></i> </span>
+                                <% end %>
+                              </td>
+                          <%end %>
+                          </tr>
+                        </table>
+                      <% end %>
+                    </div>
+
+                    <!-- Ayudantes -->
+
+                    <div class="col-lg-12 pr-2">
                       <div class="form-group">
-                        <%= form.label :support, "Apoyo" %>
-                        <%= form.select(:support, options_for_select(@worker_support, admin_control.support), {:prompt => 'Selecciona un apoyo'},{class: "form-control " }) %>
+                        <%= label_tag :supports_elements , "Ayudantes" %>
+                        <%= select_tag "support_elements[]", options_for_select(@workers, admin_control.support_elements),:prompt => 'Escoger un elemento' , class: "form-control selectpicker", multiple: true , data: { live_search: 'true' } %>
                       </div>
                     </div>
+                    <div class="col-lg-12">
+                      <% if @admin_control.id? %>
+                        <table class="table">
+                          <tr>
+                            <th colspan="2" class="text-center">Integrantes</th>
+                          </tr>
+                          <% @support_has_name.each  do |support| %>
+                            <tr>
+                              <td class="text-center">
+                                <%= support[0] %>
+                              </td>
+                              <td class="text-center">
+                                <%= link_to  :controller => "admin_controls", :action => "destroy_support", :admin_control_id => @admin_control.id, worker_id: support[1],data: { confirm: '¿Esta seguro que desea eliminarlo?' } do  %>
+                                  <span class="btn btn-outline-danger"> <i class="fas fa-trash-alt"></i> </span>
+                                <% end %>
+                              </td>
+                          <%end %>
+                          </tr>
+                        </table>
+                      <% end %>
+                    </div>
+
+                    <!-- final de ayudantes -->
+
+
+
+
                   </div>
                 </div>
               </div>
@@ -186,15 +239,55 @@
 
 
                     <div class="row no-gutters">
-                      <div class="col-lg-6">
-                        <%= form.label :advance %>
-                        <%= form.range_field :advance, {class: "form-control" , max:100 }%>
+
+
+                      <div class="col-lg-12">
+                        <table class="table table-bordered" id="list">
+                          <thead>
+                          <tr>
+                            <th colspan="2">
+                              <span class="text-center">Lista de actividades</span>
+                      <% if @admin_control.id? %>
+                              <%= link_to admin_control_path(@admin_control.id) do %>
+                                <span class="float-right btn  btn-outline-primary btn-sm">
+                                <i class="far fa-plus-square"></i>
+                                     </span>
+                              <% end %>
+                      <% end %>
+                            </th>
+
+                          </tr>
+                          </thead>
+
+                          <tbody>
+                          <div class="text-center">
+                            <span class="percent"><%= "#{@percent_completed}%" %></span>
+                          </div>
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= @percent_completed %>%" aria-valuenow="<%= @percent_completed %>" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                          <% @admin_control.lists.each do |list| %>
+                            <tr>
+                              <td style="width:50%; text-align: center"><%= list.description %></td>
+                              <td style="width:50%; text-align: center">
+                                <% if list.completed %>
+                                     <span style="font-size: 15px" class="text-success">
+                                    <i class="fas fa-check"></i>
+                                     </span>
+                                <% else %>
+                                    <span style="font-size: 15px" class="text-danger">
+                                       <i class="fas fa-times"></i>
+                                    </span>
+                                <% end %>
+                              </td>
+                            </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
                       </div>
 
-                      <div class="col-lg-6">
-                        <%= form.label :process %>
-                        <%= form.text_field :process, {class: "form-control" }%>
-                      </div>
+
+
 
                       <div class="col-lg-12">
                         <%= form.label :description_advance , "Descripcion de los avances del proceso o servicio" %>
@@ -206,6 +299,9 @@
 
                         <%= form.text_field :link_drive, label:t('admin_control.link_drive'),class: "form-control" %>
                       </div>
+
+
+
 
                     </div>
 
@@ -246,10 +342,13 @@
         </div>
       <% end %>
 
+      <span id="down"></span>
     </div>
   </div>
   <div class="offset-sm-2"></div>
 </div>
+
+<a href="#down" style="position: fixed; bottom: 0">down</a>
 
 
 

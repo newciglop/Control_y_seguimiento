@@ -18,4 +18,9 @@ class ApplicationController < ActionController::Base
     hour_full = "#{hour}:#{min}:#{second}"
   end
 
+
+  def redirect_user
+    redirect_to '/404'
+  end
+
 end

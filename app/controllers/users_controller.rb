@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   private
 
   def show_role
-    @roles = [[1,"Administrador"],[2,"editor"],[3,"observador"]].map{|x| [x[1], x[0]]}
+    @roles = [[1,"Administrador"],[2,"Editor"],[3,"Usuario"]].map{|x| [x[1], x[0]]}
   end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -63,6 +63,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :password,:password_confirmation,:current_password,:first_name,:last_name,:deactivated)
+      params.require(:user).permit(:email, :password,:password_confirmation,:current_password,:first_name,:last_name,:deactivated,:role_id)
     end
 end

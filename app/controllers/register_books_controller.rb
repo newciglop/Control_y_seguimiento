@@ -3,7 +3,15 @@ class RegisterBooksController < ApplicationController
 
   # GET /register_books or /register_books.json
   def index
-    @register_books = RegisterBook.where(is_admin_control: true).order('create_time desc')
+    @months = (Date.today - 1.year..Date.today).map(&:beginning_of_month).uniq.reverse.map{|dt| [dt.strftime("%Y-%m"), dt] }
+    @search = if params[:search]
+                Date.parse(params[:search])
+              else
+                Date.today
+              end
+    @inputs = params[:inputs] || ""
+
+        @register_books = RegisterBook.by_month(@search).where(is_admin_control: true).where("(LOWER(create_user) like LOWER(?) OR LOWER(rol_responsible) like LOWER(?) OR LOWER(company) like LOWER(?) ) " ,"%#{@inputs}%","%#{@inputs}%","%#{@inputs}%").order('created_at desc')
   end
 
   def index_offer

@@ -14,6 +14,7 @@
           <th scope="col" class="text-center">#</th>
           <th scope="col" class="text-center">Nombre</th>
           <th scope="col" class="text-center">correo electronico </th>
+          <th scope="col" class="text-center">Roles</th>
           <th colspan="2"></th>
         </tr>
         </thead>
@@ -24,6 +25,18 @@
             <td> <%= index + 1  %></td>_
             <td class="text-center"><%= user.first_name.to_s + " " + user.last_name.to_s %></td>
             <td class="text-center"><%= user.email %></td>
+            <td class="text-center">
+             <% case user.role_id %>
+             <% when User.ADMINISTRATOR %>
+                Administrador
+             <% when User.EDITOR %>
+              Editor
+             <% when User.AUTHOR %>
+              Usuario
+             <% else %>
+                   No tiene rol asignado, este usuario no deberia existir
+             <% end %>
+           </td>
             <td></td>
             <td>
               <%= link_to 'Mostrar', user_path(user) %>

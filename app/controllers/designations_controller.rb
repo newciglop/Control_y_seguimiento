@@ -22,7 +22,7 @@ class DesignationsController < ApplicationController
     find_area()
     find_engineers()
     ids =  HasEngineer.where(designation_id: @designation.id).map{|x| x.engineer_id}
-    @engineers_has_name =  Engineer.where(id:ids).map{|x| x.name}
+    @engineers_has_name =  Engineer.where(id:ids).map{|x| [x.name,x.id]}
   end
 
 
@@ -48,6 +48,14 @@ class DesignationsController < ApplicationController
       else
         render :edit, status: :unprocessable_entity
       end
+
+  end
+
+  def destroy_engineer
+    engineer_id = params[:engineer_id]
+    des_id = params[:des_id]
+    HasEngineer.where(designation_id: des_id).where(engineer_id:engineer_id).destroy_all
+    redirect_to edit_designation_path(des_id,anchor: "engineer")
 
   end
 

@@ -1,13 +1,140 @@
-<%= render "layouts/shared/notice" %>
-
-
-
 <div class="row">
   <div class="offset-sm-2 col-sm-8">
     <div class="card card-margin">
 
 
           <div id="accordion">
+
+
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Avances
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+
+
+                <div class="card-body">
+               <%  if current_user.role_id == User.ADMINISTRATOR || @admin_control.user_id == current_user.id  || current_user.role_id == User.EDITOR %>
+                  <table class="table table-bordered">
+                    <thead>
+
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                      <td colspan="3">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= @percent_completed %>%" aria-valuenow="<%= @percent_completed %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+
+                      <td colspan="3">
+
+
+                              <%= form_tag(:controller => "lists", :action => "create_items", :method => "get", local: true, class:"forms-sample form-inline") do %>
+                          <a style="position: relative;top: 1px;" href="/admin_controls/<%= @admin_control.id %>/edit#list" class="btn btn-sm btn-outline-dark"><i class="fas fa-long-arrow-alt-left pd-y-5"></i></a>
+                                <%= text_field_tag :description,"", class: "form-control" , style: 'width: 75%; display: inline-block; position:relative; top: 4px' %>
+                                <%= hidden_field_tag :admin_control_id ,"#{@admin_control.id}" , class: "form-control" %>
+                                <button type="submit" class="btn btn-outline-success mr-2 btn-action" style="width: 150px">Agregar tarea</button>
+
+                              <% end %>
+                      </td>
+                    </tr>
+                    <% @admin_control.lists.each do |list| %>
+                      <% if list.completed %>
+                        <tr class="table-secondary">
+                          <td class="striker"><%= link_to  list.description,  edit_admin_control_list_path(@admin_control.id,list) %></td>
+                          <td>
+                            <%= form_with(model: [@admin_control,list]) do |f| %>
+                              <%= f.text_field :admin_control_id,value: @admin_control.id , type: 'hidden' %>
+                              <%= f.text_field :description , type: 'hidden' %>
+                              <%= f.check_box :completed,:checked => false,:style => 'visibility: hidden' %>
+                              <%= f.submit "Incompleto",class: 'btn btn-outline-secondary btn-sm' %>
+                            <% end %>
+                          </td>
+                          <td><%= link_to :controller => "lists", :action => "destroy", :id => list.id ,:admin_control_id => @admin_control.id ,
+                                          :confirm => "Are you sure?", :method => :delete  do %>
+                              <span class="btn btn-outline-danger"> <i class="fas fa-trash-alt"></i> </span>
+                              <% end %>
+                              </td>
+                        </tr>
+                      <% else %>
+                        <tr>
+                          <td><%= list.description %></td>
+                          <td>
+                            <%= form_with(model: [@admin_control,list], id:'form') do |f| %>
+                              <%= f.text_field :admin_control_id,value: @admin_control.id , type: 'hidden' %>
+                              <%= f.text_field :description , type: 'hidden' %>
+                              <%= f.check_box :completed,:checked => true,:style => 'visibility: hidden' %>
+                              <%= f.submit "Completar",class: 'btn btn-outline-secondary btn-sm' %>
+                            <% end %>
+                          </td>
+                          <td><%= link_to :controller => "lists", :action => "destroy", :id => list.id ,:admin_control_id => @admin_control.id ,
+                                          :confirm => "Are you sure?", :method => :delete do   %>
+                              <span class="btn btn-outline-danger"> <i class="fas fa-trash-alt"></i> </span>
+                              <% end %>
+                              </td>
+
+
+                        </tr>
+
+                      <% end %>
+
+                    <% end %>
+                    </tbody>
+                  </table>
+
+                <% else %>
+
+                  <table class="table table-bordered" id="list">
+                    <thead>
+                    <tr>
+                      <th colspan="2">
+                        <span class="text-center">Lista de actividades</span>
+                        <% if @admin_control.id? %>
+                          <%= link_to admin_control_path(@admin_control.id) do %>
+                                <span class="float-right btn  btn-outline-primary btn-sm">
+                                <i class="far fa-plus-square"></i>
+                                     </span>
+                          <% end %>
+                        <% end %>
+                      </th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <% @admin_control.lists.each do |list| %>
+                      <tr>
+                        <td style="width:50%; text-align: center"><%= list.description %></td>
+                        <td style="width:50%; text-align: center">
+                          <% if list.completed %>
+                                     <span style="font-size: 15px" class="text-success">
+                                    <i class="fas fa-check"></i>
+                                     </span>
+                          <% else %>
+                                    <span style="font-size: 15px" class="text-danger">
+                                       <i class="fas fa-times"></i>
+                                    </span>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                <% end %>
+                </div>
+                 </div>
+
+            </div>
+
 
 
             <div class="card">
@@ -109,15 +236,32 @@
                       </tr>
                       <tr>
                         <th><strong>Responsable</strong></th>
-                        <% if @show_support != nil && @show_support != "" %>
-                          <td class="td-white"><%=  @show_responsible %></td>
-                        <% end %>
+                        <td>
+                          <ul style="list-style: none" class="text-center">
+                            <% if @manager_has_name.present? %>
+                            <% @manager_has_name.each  do |manager| %>
+                              <li class="my-2" style="font-size: 14px; text-transform: capitalize; font-weight: 600">
+                                <%= manager[0] %>
+                              </li>
+                            <% end %>
+                              <% end %>
+                          </ul>
+                        </td>
                       </tr>
                       <tr>
                         <th><strong>Apoyo</strong></th>
-                        <% if @show_support != nil && @show_support != "" %>
-                          <td class="td-white"><%= @show_support %></td>
-                        <% end %>
+                        <td>
+                         <ul style="list-style: none" class="text-center">
+                           <% @support_has_name.each  do |support| %>
+                           <li class="my-2" style="font-size: 14px; text-transform: capitalize; font-weight: 600">
+                             <%= support[0] %>
+                           </li>
+                           <% end %>
+                         </ul>
+
+
+                        </td>
+
                       </tr>
 
                       <tr>
@@ -161,21 +305,7 @@
             </div>
 
 
-            <div class="card">
-              <div class="card-header" id="headingThree">
-                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    Avances
-                  </a>
-                </h5>
-              </div>
 
-              <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
-
-                </div>
-              </div>
-            </div>
 
 
 
@@ -194,146 +324,7 @@
   </div>
   <div class="offset-sm-2"></div>
 
-<div class="table-responsive">
-  <table class="table center-aligned-table table-striped">
-    <tr>
-      <td>
-        <%= form_with(model: [@admin_control,@checklist]) do |form| %>
-          <div class="text-center">
-            <%= form.submit "Agregar titulo de la lista", class: "btn btn-primary"  %>
-          </div>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <% @admin_control.checklists.each do |checklist| %>
-          <% if checklist.persisted? %>
-            <div class="text-content pd-4">
-              <% if checklist.title.present? %>
-                <h5>
-                  <%= checklist.title %>
-                </h5>
-              <% else %>
-                <h5 class="text-muted">Click para agregar titulo</h5>
-              <% end %>
-            </div>
 
-            <div class="form-content d-none" >
-              <%= form_with(model: [@admin_control,checklist]) do |form| %>
-                <div class="form-row py-4">
-                  <div class="col-md-8">
-                    <%= form.text_field :title , class: "form-control", placeholder: 'Ingrese titulo' %>
-                  </div>
-                  <div class="col-md-2">
-                    <%= form.submit 'Guardar', class: "btn btn-primary" ,style: "width:100%" %>
-                  </div>
-                  <div class="col-md-2">
-                    <a href="#" class="btn btn-light cancel" style="width: 100%"> Cancelar </a>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-
-            <div class="checklist-item-form mt-3">
-              <%= form_with(model: [@admin_control,checklist,checklist.new_item]) do |form| %>
-                <div class="form-row">
-                  <div class="col-md-10">
-                    <%= form.text_field :title , class: "form-control" %>
-                  </div>
-                  <div class="col-md-2">
-                    <%= form.submit 'Guardar', class: "btn btn-primary" , style: "width:100%" %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-
-            <div class="checklist-item">
-              <ul  class="list-group">
-
-                <% checklist.checklist_items.each do |checklist_item| %>
-                  <% if checklist_item.persisted? %>
-                    <li class="list-group-item d-flex justify-content-between">
-                      <span><%= checklist_item.title %></span>
-                      <div>
-
-                        <div class="form-group">
-                          <%= label_tag :deposit_id , "De" %>
-                          <%= select_tag "deposit_from", options_for_select(@status_checklist, ""),:prompt => "" , id:"product", class: "form-control", required: true %>
-                        </div>
-
-
-
-
-                      </div>
-                      <%= link_to  "/admin_controls/#{@admin_control.id}/checklists/#{checklist.id}/checklist_items/#{checklist_item.id}", class: "btn btn-danger",
-                                   method: :delete, data: { confirm: "Esta seguro que desea eliminar el item"} do %>
-                       Borrar
-                      <% end %>
-                    </li>
-
-
-                  <% end %>
-                <% end %>
-              </ul>
-
-            </div>
-
-          <% end %> <!-- checklist persist -->
-          <% end %><!-- admin_checklist-->
-      </td>
-    </tr>
-
-    <script type="text/javascript" charset="utf-8">
-
-
-
-
-        $("#product").change(function(){
-            var id_product = $(this).val();
-            console.log(id_product)
-            if(id_product == 'sin-iniciar'){
-                $("#product").addClass("bg-light-danger");
-                $("#product").removeClass("bg-light-info");
-                $("#product").removeClass("bg-light-success");
-            }else if (id_product == 'en-progreso'){
-                $("#product").addClass("bg-light-info");
-                $("#product").removeClass("bg-light-danger");
-                $("#product").removeClass("bg-light-success");
-            }else if (id_product == 'completado'){
-                $("#product").addClass("bg-light-success");
-                $("#product").removeClass("bg-light-danger");
-                $("#product").removeClass("bg-light-info");
-            }/*
-            $.ajax({
-                url: "/reference_inventories/new",
-                method: "GET",
-                dataType: "json",
-                data: {id_product: id_product},
-                error: function (xhr, status, error) {
-                    console.error('AJAX Error: ' + status + error);
-                },
-                success: function (response) {
-                    console.log(response);
-                    var skus = response["skus"];
-                    $("#hidden").empty();
-                    console.log(skus)
-                    console.log(`${skus} hola mundo ******` )
-                    $("#hidden").append("<option><%#= t('action.please_select') %></option>");
-
-                    for(var i = 0; i < skus.length; i++){
-                        console.log(skus[i]["sku"])
-                        $("#hidden").append('<option value=" ' + skus[i][0] + '">' + '<<'+ skus[i][1] + skus[i][2]  +  '>>'+'</option>');
-                    }
-                }
-            });*/
-        });
-    </script>
-
-
-
-  </table>
-</div>
 
 
 

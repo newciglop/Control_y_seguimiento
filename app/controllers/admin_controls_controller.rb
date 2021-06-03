@@ -27,38 +27,50 @@ class AdminControlsController < ApplicationController
 
   def show
     show_states
-    @checklist =  @admin_control.checklists.build
-
-    combo_box_data
+    #combo_box_data
+    percent_completed(@admin_control)
     show_tracking_type(@admin_control)
     show_state_admin_control(@admin_control)
-    if @admin_control.support != nil  && @admin_control.support != ""
-    show_responsible_and_support(@admin_control)
-    end
+    AdminControl.where(id:@admin_control.id).update(advance: percent_completed(@admin_control))
+    ids =  HasSupport.where(admin_control_id: @admin_control.id).map{|x| x.worker_id}
+    @support_has_name =  Worker.where(id:ids).map{|x| [x.full_name,x.id]}
 
-
-
-
+    ids_manager =  HasManager.where(admin_control_id: @admin_control.id).map{|x| x.worker_id}
+    @manager_has_name =  Worker.where(id:ids_manager).map{|x| [x.full_name,x.id]}
   end
 
 
   def new
     @admin_control = AdminControl.new
     combo_box_data
+    worker_all
   end
 
 
   def edit
+    worker_all
     combo_box_data
+    percent_completed(@admin_control)
+    ids =  HasSupport.where(admin_control_id: @admin_control.id).map{|x| x.worker_id}
+    @support_has_name =  Worker.where(id:ids).map{|x| [x.full_name,x.id]}
+
+    ids_manager =  HasManager.where(admin_control_id: @admin_control.id).map{|x| x.worker_id}
+    @manager_has_name =  Worker.where(id:ids_manager).map{|x| [x.full_name,x.id]}
   end
 
 
   def create
+    worker_all
     combo_box_data()
+
     @admin_control = AdminControl.new(admin_control_params)
     @admin_control.user_id = current_user.id
-
+    @admin_control.support_elements = params[:support_elements]
+    @admin_control.manager_elements = params[:manager_elements]
+    @admin_control.advance = percent_completed(@admin_control)
       if @admin_control.save
+        @admin_control.save_supports
+        @admin_control.save_managers
         @admin_control.sa =  "sa-#{@admin_control.id}"
         @admin_control.save
         create_register_admin(@admin_control,current_user)
@@ -73,9 +85,14 @@ class AdminControlsController < ApplicationController
 
 
   def update
+        worker_all
        combo_box_data()
+
       if @admin_control.update(admin_control_params)
-        puts "#{current_user.id} #{current_user.email}"
+        @admin_control.support_elements = params[:support_elements]
+        @admin_control.manager_elements = params[:manager_elements]
+        @admin_control.save_supports
+        @admin_control.save_managers
         update_register_admin_control(@admin_control,current_user)
         redirect_to @admin_control, notice: "Admin control was successfully updated."
       else
@@ -88,9 +105,9 @@ class AdminControlsController < ApplicationController
 
 
   def destroy
-    checklist = Checklist.where(admin_control_id: @admin_control.id)
-    checklist_items = ChecklistItem.where(checklist_id: checklist.pluck(:id) ).delete_all
-    checklist_destroy = Checklist.where(admin_control_id: @admin_control.id).delete_all
+    list = List.where(admin_control_id: @admin_control.id).delete_all
+    HasManager.where(admin_control_id: @admin_control.id).delete_all
+    HasSupport.where(admin_control_id: @admin_control.id).delete_all
     if destroy_register_admin_control(@admin_control,current_user)
         if delete_ref_admin_control(@admin_control)
            if @admin_control.destroy
@@ -101,7 +118,29 @@ class AdminControlsController < ApplicationController
 
   end
 
+  def percent_completed(admin_control)
+    @total_items ||= admin_control.lists.count
+    return 0 if @total_items == 0
+    @percent_completed = ((admin_control.lists.select(&:completed?).count.to_f / @total_items) * 100).round
+  end
 
+
+
+
+
+  def destroy_support
+    worker_id = params[:worker_id]
+    admin_control_id = params[:admin_control_id]
+    HasSupport.where(admin_control_id: admin_control_id).where(worker_id: worker_id).destroy_all
+    redirect_to edit_admin_control_path(admin_control_id)
+  end
+
+  def destroy_manager
+    worker_id = params[:worker_id]
+    admin_control_id = params[:admin_control_id]
+    HasManager.where(admin_control_id: admin_control_id).where(worker_id: worker_id).destroy_all
+    redirect_to edit_admin_control_path(admin_control_id)
+  end
 
   def create_register_admin(obj,current_user)
     register = RegisterBook.new(admin_control_id:obj.id,
@@ -186,6 +225,7 @@ class AdminControlsController < ApplicationController
                                             :type_id,:item_id,:start_date,:final_date,
                                             :tracking_type,:state,:company_id,:city_id,
                                             :responsible_function_id,:responsible,:support,
-                                            :description_advance,:advance,:process,:link_process,:link_drive,:user_id)
+                                            :description_advance,:advance,:process,:link_process,:link_drive,:user_id,
+                                            support_elements:[],manager_elements:[])
     end
 end

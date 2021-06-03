@@ -1,35 +1,35 @@
 class ChecklistItem < ApplicationRecord
   belongs_to :checklist
 
-  validates :status , inclusion: { in: ['sin-iniciar','en-progreso','completado']}
+  validates :status , inclusion: { in: ['without_start','in_progress','complete']}
   validates_presence_of :status
 
   def self.STATUS_OPTIONS
     [
-      ['Sin iniciar','sin-iniciar'],
-      ['En Progreso','en-progreso'],
-      ['Completado','completado']
+      ['Sin iniciar','without_start'],
+      ['En Progreso','in_progress'],
+      ['Completado','complete']
   ]
   end
 
   def readable_status
     case status
-    when 'sin-iniciar'
+    when 'without_start'
       'Sin iniciar'
-    when 'en-progreso'
+    when 'in_progress'
       'En Progreso'
-    when 'completado'
+    when 'complete'
       'Completado'
     end
   end
 
   def color_class
     case status
-    when 'sin-iniciar'
+    when 'without_start'
       'secondary'
-    when 'en-progreso'
+    when 'in_progress'
       'info'
-    when 'completado'
+    when 'complete'
       'success'
     end
   end

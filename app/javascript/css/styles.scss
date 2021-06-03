@@ -3,13 +3,31 @@
 @import "toggle-switch";
 @import "bootstrap-select";
 
+.striker {
+  text-decoration: line-through;
+}
+
 .w-50{
   width: 50% !important;
+}
+
+.percent {
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.pd-y-5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 tr>td {
   font-size: 14px !important;
 }
-
+.bg-ciglop{
+  background-color: #e3f2fd !important
+}
 .will_paginate a {
   margin-right: 5px;
   margin-left: 5px;

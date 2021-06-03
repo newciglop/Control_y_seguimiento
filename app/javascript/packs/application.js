@@ -11,6 +11,7 @@ require("jquery")
 import flatpickr from "flatpickr";
 import { Spanish } from "flatpickr/dist/l10n/es.js"
 
+
 import 'bootstrap';
 import 'css/styles'
 
@@ -18,6 +19,9 @@ import 'css/styles'
 require("trix")
 require("@rails/actiontext")
 require("../customize/bootstrap-select.min")
+
+
+
     document.addEventListener('turbolinks:load', function() {
         flatpickr(".datepicker", {
             "locale": Spanish, // locale for this instance only
@@ -45,6 +49,8 @@ document.addEventListener('turbolinks:load',function(){
         element.previousElementSibling.classList.remove('d-none')
     })
 })
+
+
 
 
 

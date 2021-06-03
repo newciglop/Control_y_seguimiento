@@ -8,25 +8,48 @@
         </h5>
       </div>
 
-      <%= form_tag(:controller => "navigators", :action => "create_user", :method => "post", local: true , html: { class: "forms-sample needs-validation", novalidate: true , autocomplete: "off" }) do  %>
+      <%= bootstrap_form_tag(:controller => "navigators", :action => "create_user", :method => "post", local: true , html: { class: "forms-sample needs-validation", novalidate: true , autocomplete: "off" }) do  %>
         <div class="card-body">
 
 
-          <div class="form-group">
-            <%= label_tag "Roles" %>
-            <%= select_tag "role_id", options_for_select(@roles, ""),:prompt => "Selecciona un rol" , class: "form-control", required: true %>
+          <div class="form-row">
+            <div class="col-sm-12 my-3">
+              <%= label_tag "Roles" %>
+              <%= select_tag "role_id", options_for_select(@roles, ""),:prompt => "Selecciona un rol" , class: "form-control", required: true %>
+            </div>
           </div>
 
-          <div class="form-group">
-            <%= email_field_tag "email","",{class: "form-control", required: true}  %>
+
+          <div class="form-row">
+            <div class="col-sm-6">
+              <%= label_tag "Nombres" %>
+              <%= text_field_tag "first_name","",class: "form-control", required: true ,autocomplete: "off" %>
+            </div>
+            <div class="col-sm-6">
+              <%= label_tag "Apellidos" %>
+              <%= text_field_tag "last_name","",class: "form-control", required: true , autocomplete: "off" %>
+            </div>
           </div>
 
-          <div class="form-group">
+
+          <div class="form-row">
+            <div class="col-sm-12">
+              <%= label_tag "correo electronico" %>
+              <%= email_field_tag "email","",{class: "form-control", required: true}  %>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-sm-6">
+              <%= label_tag "Contraseña" %>
             <%= password_field_tag "password","",class: "form-control", required: true ,autocomplete: "off" %>
           </div>
-          <div class="form-group">
-            <%= password_field_tag "password_confirmation","",class: "form-control", required: true , autocomplete: "off" %>
+            <div class="col-sm-6">
+                <%= label_tag "Confirmar Contraseña" %>
+                <%= password_field_tag "password_confirmation","",class: "form-control", required: true , autocomplete: "off" %>
+            </div>
           </div>
+
 
 
 
