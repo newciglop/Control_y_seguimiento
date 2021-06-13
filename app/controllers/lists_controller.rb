@@ -52,7 +52,7 @@ class ListsController < ApplicationController
 
   def destroy
     @list.destroy
-      redirect_to admin_control_path(params[:admin_control_id]), notice: "List was successfully destroyed."
+      redirect_to admin_control_path(params[:admin_control_id])
   end
 
   private

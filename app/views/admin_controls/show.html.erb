@@ -61,11 +61,11 @@
                               <%= f.submit "Incompleto",class: 'btn btn-outline-secondary btn-sm' %>
                             <% end %>
                           </td>
-                          <td><%= link_to :controller => "lists", :action => "destroy", :id => list.id ,:admin_control_id => @admin_control.id ,
-                                          :confirm => "Are you sure?", :method => :delete  do %>
+                          <td>
+                            <%= link_to "/admin_controls/#{@admin_control.id}/lists/#{list.id}",method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } do   %>
                               <span class="btn btn-outline-danger"> <i class="fas fa-trash-alt"></i> </span>
-                              <% end %>
-                              </td>
+                            <% end %>
+                           </td>
                         </tr>
                       <% else %>
                         <tr>
@@ -78,8 +78,8 @@
                               <%= f.submit "Completar",class: 'btn btn-outline-secondary btn-sm' %>
                             <% end %>
                           </td>
-                          <td><%= link_to :controller => "lists", :action => "destroy", :id => list.id ,:admin_control_id => @admin_control.id ,
-                                          :confirm => "Are you sure?", :method => :delete do   %>
+                          <td>
+                            <%= link_to "/admin_controls/#{@admin_control.id}/lists/#{list.id}",method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } do   %>
                               <span class="btn btn-outline-danger"> <i class="fas fa-trash-alt"></i> </span>
                               <% end %>
                               </td>
