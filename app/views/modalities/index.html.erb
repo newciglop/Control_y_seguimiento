@@ -1,5 +1,4 @@
-<%= render 'layouts/shared/notice' %>
-
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="row">
   <div class="offset-sm-1 col-sm-10  text-center">
     <h2 class="my-4">Modalidades</h2>
@@ -11,22 +10,42 @@
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
-        <tr>
+        <tr class="text-center">
           <th scope="col">Nombre</th>
-          <th colspan="2"></th>
+          <th scope="col">Estado</th>
         </tr>
         </thead>
 
         <tbody>
         <% @modalities.each_with_index  do |modality| %>
 
-          <tr>
+          <tr class="text-center">
             <td><%= modality.name %></td>
             <td>
-            </td>
-            <td><%= link_to 'Editar', edit_modality_path(modality) %></td>
+              <% if modality.enable %>
+                Habilitado
+              <% else %>
+                Deshabilitado
+              <% end %>
 
-            <td><%#= link_to 'Eliminar', modality, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %></td>
+            </td>
+            <td>
+              <%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
+                <%= link_to  modality_path(modality) do %>
+                  <%= @show_eye %>
+                <% end %>
+
+                <%= link_to  edit_modality_path(modality) do %>
+                  <%= @show_edit %>
+                <% end %>
+              <% end %>
+
+              <% if current_user.role_id == User.ADMINISTRATOR  %>
+                <%= link_to  modality, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } do %>
+                  <%= @show_trash %>
+                <% end %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
         </tbody>
@@ -34,6 +53,11 @@
 
       <br>
     </div>
+
+    <div class="will_paginate">
+      <%= will_paginate(@modalities, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+    </div>
+
   </div>
 </div>
 <div class="row justify-content-center no-gutters">
@@ -41,7 +65,9 @@
     <%= link_to 'Nuevo modalidad', new_modality_path , class: "btn btn-primary" %>
 
   </div>
-
-
-
 </div>
+  <%= render "layouts/views_partials/button" %>
+<%else %>
+  <% route = "modalities" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>

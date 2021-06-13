@@ -19,11 +19,14 @@
 
           <div class="card">
             <div class="card-header" id="headingOne">
-              <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <h5 class="mb-0" style="display: inline-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   Datos Generales
                 </a>
               </h5>
+
+              <% route = "offers" %>
+              <%= render "layouts/views_partials/link_to_back_form_especial" , route: route %>
             </div>
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -44,7 +47,7 @@
 
                   <div class="col-lg-8">
                     <div class="form-group">
-                      <%= form.select(:worker_id , options_for_select(@worker_leader, offer.worker_id), { label: t('offer.leader') ,:prompt => 'Selecciona un lider',class: "form-control " ,required: true}) %>
+                      <%= form.select(:worker_id , options_for_select(@workers, offer.worker_id), { label: t('offer.leader') ,:prompt => 'Selecciona un lider',class: "form-control " ,required: true}) %>
                     </div>
                   </div>
 
@@ -114,7 +117,9 @@
                 <div class="row no-gutters">
                   <div class="col-sm-12 col-md-12 text-center">
                     <h3>Tiempo restante</h3>
+                    <% if @offer.id? %>
                     <p id="demo" class="mb-4 count-down"></p>
+                      <% end %>
                   </div>
                 </div>
 
@@ -164,7 +169,9 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
+                      <% if @offer.id? %>
                       <p id="obs_report" class="mb-4 count-down"></p>
+                        <% end %>
                     </div>
                   </div>
 
@@ -211,7 +218,9 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
+                      <% if @offer.id? %>
                       <p id="deadline_offer" class="mb-4 count-down"></p>
+                        <% end  %>
                     </div>
                   </div>
 
@@ -259,7 +268,9 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
+                      <% if @offer.id? %>
                       <p id="offer_e_report" class="mb-4 count-down"></p>
+                        <% end %>
                     </div>
                   </div>
 
@@ -306,7 +317,9 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
+                      <% if @offer.id %>
                       <p id="obs_offer_e_report" class="mb-4 count-down"></p>
+                        <% end %>
                     </div>
                   </div>
 
@@ -334,7 +347,7 @@
                 <!-- date_acceptance_offers -->
 
                 <fieldset class="">
-                  <legend style="text-transform: lowercase">FEcHA DE ACEPTACION DE LAS OFERTAS</legend>
+                  <legend style="text-transform: lowercase">FECHA DE ACEPTACIÓN DE LAS OFERTAS</legend>
                   <div class="row no-gutters">
 
                     <div class="col-lg-6 pr-2">
@@ -353,7 +366,9 @@
                   <div class="row no-gutters">
                     <div class="col-sm-12 col-md-12 text-center">
                       <h3>Tiempo restante</h3>
+                      <% if @offer.id? %>
                       <p id="acceptance_offers" class="mb-4 count-down"></p>
+                      <% end %>
                     </div>
                   </div>
 
@@ -477,11 +492,13 @@
 </div>
 
 
-
+<%= render "layouts/views_partials/button" %>
 
 
 <script>
-  
+var validate_null = function(id){
+    return !!document.getElementById(`${this.id}`)
+}
   year_obs = <%= @year %>
   month_obs =  <%= @month %>
   day_obs = <%= @day %>
@@ -490,7 +507,7 @@
         var x = setInterval(function () {
             var now = new Date().getTime();
             var distance = countDownDate - now;
-            console.log(distance)
+
 
 // Time calculations for days, hours, minutes and seconds
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -499,15 +516,16 @@
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 // Output the result in an element with id="demo"
+if (!!document.getElementById("demo")) {
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
 
-            document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-                + minutes + "m " + seconds + "s ";
-
-            // If the count down is over, write some text
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("demo").innerHTML = "EXPIRED";
-            }
+    // If the count down is over, write some text
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+}
         }, 1000);
     };
   obs(year_obs,month_obs,day_obs);
@@ -518,6 +536,7 @@
   month_obs_report = <%= @month_obs_report %>
   day_obs_report = <%= @day_obs_report %>
   obs_report =  function (y,m,d)  {
+
                   var countDownDate_obs_report = new Date(`${m} ${d}, ${y} 00:00:00`).getTime();
                   var x = setInterval(function () {
                       var now = new Date().getTime();
@@ -530,14 +549,17 @@
                       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 // Output the result in an element with id="demo"
+                      if (!!document.getElementById("obs_report")) {
+                          document.getElementById("obs_report").innerHTML = days + "d "
+                              + hours + "h "
+                              + minutes + "m "
+                              + seconds + "s ";
 
-                      document.getElementById("obs_report").innerHTML = days + "d " + hours + "h "
-                          + minutes + "m " + seconds + "s ";
-
-                      // If the count down is over, write some text
-                      if (distance < 0) {
-                          clearInterval(x);
-                          document.getElementById("obs_report").innerHTML = "EXPIRED";
+                          // If the count down is over, write some text
+                          if (distance < 0) {
+                              clearInterval(x);
+                              document.getElementById("obs_report").innerHTML = "EXPIRED";
+                          }
                       }
                   }, 1000);
               };
@@ -562,7 +584,7 @@
                       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 // Output the result in an element with id="demo"
-
+                  if (!!document.getElementById("deadline_offer")){
                       document.getElementById("deadline_offer").innerHTML = days + "d " + hours + "h "
                           + minutes + "m " + seconds + "s ";
 
@@ -571,6 +593,7 @@
                           clearInterval(x);
                           document.getElementById("deadline_offer").innerHTML = "EXPIRED";
                       }
+                  }
                   }, 1000);
               };
   deadline_sub_offer(year_deadline_offer,month_deadline_offer,day_deadline_offer);
@@ -596,15 +619,16 @@
                       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 // Output the result in an element with id="demo"
+                   if (!!document.getElementById("offer_e_report")) {
+                       document.getElementById("offer_e_report").innerHTML = days + "d " + hours + "h "
+                           + minutes + "m " + seconds + "s ";
 
-                      document.getElementById("offer_e_report").innerHTML = days + "d " + hours + "h "
-                          + minutes + "m " + seconds + "s ";
-
-                      // If the count down is over, write some text
-                      if (distance < 0) {
-                          clearInterval(x);
-                          document.getElementById("offer_e_report").innerHTML = "EXPIRED";
-                      }
+                       // If the count down is over, write some text
+                       if (distance < 0) {
+                           clearInterval(x);
+                           document.getElementById("offer_e_report").innerHTML = "EXPIRED";
+                       }
+                   }
                   }, 1000);
               };
   offer_e_report(year_offer_e_report, month_offer_e_report,day_offer_e_report);
@@ -631,15 +655,16 @@
               var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 // Output the result in an element with id="demo"
+         if (document.getElementById("obs_offer_e_report")) {
+             document.getElementById("obs_offer_e_report").innerHTML = days + "d " + hours + "h "
+                 + minutes + "m " + seconds + "s ";
 
-              document.getElementById("obs_offer_e_report").innerHTML = days + "d " + hours + "h "
-                  + minutes + "m " + seconds + "s ";
-
-              // If the count down is over, write some text
-              if (distance < 0) {
-                  clearInterval(x);
-                  document.getElementById("obs_offer_e_report").innerHTML = "EXPIRED";
-              }
+             // If the count down is over, write some text
+             if (distance < 0) {
+                 clearInterval(x);
+                 document.getElementById("obs_offer_e_report").innerHTML = "EXPIRED";
+             }
+         }
           }, 1000);
       };
  obs_offer_e_report(year_obs_offer_evaluation_report, month_obs_offer_evaluation_report,day_obs_offer_evaluation_report);
@@ -665,15 +690,16 @@
                       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 // Output the result in an element with id="demo"
+                     if (!!document.getElementById("acceptance_offers")) {
+                         document.getElementById("acceptance_offers").innerHTML = days + "d " + hours + "h "
+                             + minutes + "m " + seconds + "s ";
 
-                      document.getElementById("acceptance_offers").innerHTML = days + "d " + hours + "h "
-                          + minutes + "m " + seconds + "s ";
-
-                      // If the count down is over, write some text
-                      if (distance < 0) {
-                          clearInterval(x);
-                          document.getElementById("acceptance_offers").innerHTML = "EXPIRED";
-                      }
+                         // If the count down is over, write some text
+                         if (distance < 0) {
+                             clearInterval(x);
+                             document.getElementById("acceptance_offers").innerHTML = "EXPIRED";
+                         }
+                     }
                   }, 1000);
               };
   acceptance_offers(year_acceptance_offers , month_acceptance_offers ,day_acceptance_offers );

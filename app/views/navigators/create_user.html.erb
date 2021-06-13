@@ -1,11 +1,22 @@
+<% if current_user.role_id == User.ADMINISTRATOR %>
+<div class="row">
+  <div class="col-sm-10 offset-sm-1  text-center">
+    <h3 class="my-4">Nuevo Usuario</h3>
+  </div>
+</div>
 <div class="row">
   <div class="offset-sm-2 col-sm-8">
     <div class="card card-margin">
 
       <div class="card-header">
-        <h5 class="card-title">
+        <h5 class="card-title" style="display:inline-block;">
           Datos
         </h5>
+        <span class="float-right" style="display: inline-block">
+          <%= link_to users_path,class: "btn btn-sm btn-outline-dark" do %>
+          <i class="fas fa-long-arrow-alt-left pd-y-5"></i>
+          <% end %>
+        </span>
       </div>
 
       <%= bootstrap_form_tag(:controller => "navigators", :action => "create_user", :method => "post", local: true , html: { class: "forms-sample needs-validation", novalidate: true , autocomplete: "off" }) do  %>
@@ -76,7 +87,10 @@
     </div>
   </div>
 </div>
-
+<% else %>
+  <% route = "users" %>
+  <%= render "layouts/views_partials/not_found" , route: route %>
+<% end %>
 
 
 

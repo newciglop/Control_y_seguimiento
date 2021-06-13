@@ -20,10 +20,12 @@
 
           <div class="card">
             <div class="card-header" id="headingOne">
-              <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <h5 class="mb-0" style="display: inline" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   Datos Personales
                 </a>
+                <% route = "students" %>
+                <%= render "layouts/views_partials/link_to_back_form_especial",route: route %>
               </h5>
             </div>
 
@@ -82,9 +84,9 @@
                   </div>
 
 
-                  <div class="col-lg-6 pr-2">
+                  <div class="col-lg-6 pr-2" id="select_picker">
                     <div class="form-group">
-                       <%= form.select(:city_id, options_for_select(@cities, student.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{class: "form-control selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                       <%= form.select(:city_id, options_for_select(@cities, student.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
                     </div>
                   </div>
 

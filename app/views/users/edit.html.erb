@@ -1,7 +1,14 @@
-<h1>Editing User</h1>
+<% if current_user.role_id == User.ADMINISTRATOR %>
+<%= render 'form', user: @user do %>
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1  text-center">
+      <h3 class="my-4">Editar Usuario</h3>
+    </div>
+  </div>
+<% end %>
+<% else %>
+  <% route = "users" %>
+  <%= render "layouts/views_partials/not_found" , route: route %>
+<% end %>
 
-<%= render 'form', user: @user %>
 
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>

@@ -1,9 +1,22 @@
 class ResponsibleFunctionsController < ApplicationController
   before_action :set_responsible_function, only: %i[ show edit update destroy ]
   include ResponsibleFunctionsHelper
+  include Deleteable
+  include Icons
 
   def index
-    @responsible_functions = ResponsibleFunction.all
+    show_icons
+    @search = params[:search]
+
+    if @search.present?
+      @responsible_functions = ResponsibleFunction.all.where("lower(name) like lower(?)","%#{@search}%")
+                                   .paginate(page: params[:page], per_page: 30).order('id asc')
+    else
+      @responsible_functions = ResponsibleFunction.all
+                                   .paginate(page: params[:page], per_page: 30).order('id asc')
+    end
+
+
   end
 
 
@@ -22,7 +35,7 @@ class ResponsibleFunctionsController < ApplicationController
   def create
     @responsible_function = ResponsibleFunction.new(responsible_function_params)
       if @responsible_function.save
-         redirect_to @responsible_function, notice: "Responsible function was successfully created."
+         redirect_to @responsible_function, notice: "Rol responsable" + " " + t('commons.create_success')
       else
          render :new, status: :unprocessable_entity , notice: "algo salio mal"
     end
@@ -32,17 +45,15 @@ class ResponsibleFunctionsController < ApplicationController
   def update
     enable_resources(@responsible_function,params)
       if @responsible_function.update(responsible_function_params)
-        redirect_to @responsible_function, notice: "Responsible function was successfully updated."
+        redirect_to @responsible_function, notice: "Rol responsable" + " " + t('commons.update_success')
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, notice: "algo salio mal"
        end
   end
 
 
   def destroy
-    if  @responsible_function.destroy
-       redirect_to responsible_functions_url notice: "Responsible function was successfully destroyed."
-    end
+    delete_with_references(@responsible_function,responsible_functions_path)
   end
 
   private

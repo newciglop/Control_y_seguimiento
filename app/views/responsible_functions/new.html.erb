@@ -1,9 +1,14 @@
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="row">
-  <div class="col-sm-9 offset-sm-3 text-center">
+  <div class="col-sm-10 offset-sm-1 text-center">
     <h3 class="my-4">Nuevo Rol Responable</h3>
   </div>
 </div>
 
 <%= render 'form', responsible_function: @responsible_function %>
+<% else %>
+  <% route = "responsible_functions" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>
 
 

@@ -1,9 +1,17 @@
-<<div class="row">
-  <div class="col-sm-10 offset-sm-1 text-center">
-    <h3 class="my-4">Nuevo Entidad</h3>
-  </div>
-</div>
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 
-<%= render 'form', company: @company %>
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1  text-center">
+      <h3 class="my-4">Nueva compañia</h3>
+    </div>
+  </div>
+  <%= render 'form', company: @company %>
+
+
+<% else %>
+
+  <% route = "companies" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>
 
 

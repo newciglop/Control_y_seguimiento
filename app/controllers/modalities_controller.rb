@@ -1,10 +1,21 @@
 class ModalitiesController < ApplicationController
   include ModalitiesHelper
   before_action :set_modality, only: %i[ show edit update destroy ]
-
+  include Deleteable
+  include Icons
 
   def index
-    @modalities = Modality.all
+    show_icons
+
+    @search = params[:search]
+
+    if @search.present?
+       @modalities = Modality.all.where("lower(name) like lower(?)","%#{@search}%")
+                         .paginate(page: params[:page], per_page: 30).order('id asc')
+    else
+      @modalities = Modality.all.paginate(page: params[:page], per_page: 30).order('id asc')
+    end
+
   end
 
 
@@ -24,27 +35,26 @@ class ModalitiesController < ApplicationController
   def create
     @modality = Modality.new(modality_params)
       if @modality.save
-         redirect_to @modality, notice: "Modality was successfully created."
+         redirect_to @modality, notice: "Modalidad" +  " " + t('commons.create_success')
       else
-         render :new, status: :unprocessable_entity
+         render :new, notice: t('commons.what_wrong')
       end
   end
 
 
   def update
+
     enable_resources(@modality,params)
       if @modality.update(modality_params)
-        redirect_to @modality, notice: "Modality was successfully updated."
+        redirect_to @modality, notice: "Modalidad" +  " " + t('commons.update_success')
       else
-         render :edit, status: :unprocessable_entity
+         render :edit,notice: t('commons.what_wrong')
       end
   end
 
 
   def destroy
-    if @modality.destroy
-      redirect_to modalities_url, notice: "Modality was successfully destroyed."
-    end
+    delete_with_references(@modality,modalities_path)
   end
 
   private

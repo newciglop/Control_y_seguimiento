@@ -38,12 +38,14 @@ module ComboBoxHelper
     end
 
   end
-
+=begin
   def combo_box_responsible
     profiles_responsible = Profile.where('(enable=? AND profile_type=?) OR (enable=? AND profile_type=?)',true,Profile.RESPONSIBLE,true,Profile.WILDCARD).pluck(:id)
     ids_profile = profiles_responsible
     @worker_responsible = Worker.where('(profile_id IN (?)) or (profile_2 IN (?)) or (profile_3 IN (?)) or (profile_4 IN (?))',ids_profile,ids_profile,ids_profile,ids_profile).map{|employee| [employee.full_name,employee.id]}
   end
+=end
+=begin
   def combo_box_support
     profiles_responsible = Profile.where('(enable=? AND profile_type=?) OR (enable=? AND profile_type=?)',true,Profile.SUPPORT,true,Profile.WILDCARD).pluck(:id)
     ids_profile = profiles_responsible
@@ -55,7 +57,7 @@ module ComboBoxHelper
     ids_profile = profiles_responsible
     @worker_leader = Worker.where('(profile_id IN (?)) or (profile_2 IN (?)) or (profile_3 IN (?)) or (profile_4 IN (?))',ids_profile,ids_profile,ids_profile,ids_profile).map{|employee| [employee.full_name,employee.id]}
   end
-
+=end
   def worker_all
     @workers =  Worker.where(enable:true).map{|w| [w.full_name, w.id]}
   end

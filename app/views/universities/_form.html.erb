@@ -3,9 +3,8 @@
     <div class="card card-margin">
 
       <div class="card-header">
-        <h5 class="card-title">
-          Datos
-        </h5>
+        <% route = "universities" %>
+        <%= render "layouts/views_partials/link_to_back",route: route %>
       </div>
 
       <%= bootstrap_form_with(model: university, local: true, html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>

@@ -22,11 +22,13 @@
 
             <div class="card">
               <div class="card-header" id="headingOne">
-                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h5 style="display: inline-block" class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <a  class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     Datos Personales
                   </a>
                 </h5>
+                <% route = "admin_controls" %>
+                <%= render "layouts/views_partials/link_to_back_form_especial" , route: route %>
               </div>
 
               <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -96,7 +98,7 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.select(:state, options_for_select(@states, admin_control.state), {label:t('admin_control.state'),:prompt => 'Selecciona un Estado'},{class: "form-control " }) %>
+                        <%= form.select(:state, options_for_select(@states, admin_control.state), {label:t('admin_control.state'),:prompt => 'Selecciona un Estado'},{class: "form-control " , required: true }) %>
                       </div>
                     </div>
 
@@ -150,8 +152,7 @@
                   <div class="row no-gutters">
                     <div class="col-lg-12">
                       <div class="form-group">
-                        <%= form.label :responsible_function_id, "Rol de Responsable" %>
-                        <%= form.select(:responsible_function_id, options_for_select(@responsible_functions, admin_control.responsible_function_id), {:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
+                        <%= form.select(:responsible_function_id, options_for_select(@responsible_functions, admin_control.responsible_function_id), {label: "Rol de Responsable",:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
                       </div>
                     </div>
 
@@ -290,8 +291,7 @@
 
 
                       <div class="col-lg-12">
-                        <%= form.label :description_advance , "Descripcion de los avances del proceso o servicio" %>
-                        <%= form.rich_text_area :description_advance %>
+                        <%= form.rich_text_area :description_advance , label: t('admin_control.description_advance')%>
                       </div>
 
 
@@ -339,16 +339,20 @@
         <div class="card-footer bg-white">
           <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
           <%= link_to 'Regresar', admin_controls_path ,class: "btn btn-light btn-action"  %>
+
+
         </div>
       <% end %>
 
-      <span id="down"></span>
+
     </div>
   </div>
   <div class="offset-sm-2"></div>
 </div>
+<%= render "layouts/views_partials/button" %>
 
-<a href="#down" style="position: fixed; bottom: 0">down</a>
+
+
 
 
 

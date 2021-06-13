@@ -2,11 +2,20 @@ class StatesStudentsController < ApplicationController
   before_action :set_states_student, only: %i[ show edit update destroy ]
   include StatesStudentsHelper
   include Deleteable
+  include Icons
 
 
-  # GET /states_students or /states_students.json
+
   def index
-    @states_students = StatesStudent.all
+    show_icons
+    @search = params[:search] || ""
+
+    if @search.present?
+    @states_students = StatesStudent.all.where("lower(name) like lower(?)","%#{@search}%").paginate(page: params[:page], per_page: 30).order('id desc')
+    else
+    @states_students = StatesStudent.all.paginate(page: params[:page], per_page: 30).order('id desc')
+    end
+
   end
 
   # GET /states_students/1 or /states_students/1.json
@@ -27,7 +36,7 @@ class StatesStudentsController < ApplicationController
     @states_student = StatesStudent.new(states_student_params)
 
          if @states_student.save
-         redirect_to edit_states_student_path(@states_student), notice: "States student was successfully created."
+         redirect_to edit_states_student_path(@states_student), notice: t('states_students.states_students') + " " + t('commons.create_success')
          else
             render :new, status: :unprocessable_entity
          end
@@ -37,7 +46,7 @@ class StatesStudentsController < ApplicationController
   def update
     enable_resources(@states_student,params)
       if @states_student.update(states_student_params)
-       redirect_to states_students_path, notice: "States student was successfully updated."
+       redirect_to states_students_path, notice: t('states_students.states_students') + " " + t('commons.update_success')
       else
      render :edit, status: :unprocessable_entity
      end

@@ -1,0 +1,36 @@
+<button class="btn btn-sm btn-primary d-none btn-nav-page" id="top" onClick="scrollSmoothToTop()">
+  <i class="fas fa-long-arrow-alt-up"></i>
+</button>
+  <button class="btn btn-sm btn-primary btn-nav-page" id="bottom"  onClick="scrollSmoothToBottom()">
+    <i class="fas fa-long-arrow-alt-down"></i>
+  </button>
+
+
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+    function scrollSmoothToBottom () {
+        $('html,body').animate({
+            scrollTop: document.body.scrollHeight
+        }, 1000);
+
+        $('#bottom').addClass('d-none');
+        $('#top').removeClass('d-none');
+        /*$('html,body').animate({scrollTop: document.body.scrollHeight},1000);*/
+    }
+
+    //Require jQuery
+    function scrollSmoothToTop () {
+        $('html,body').animate({
+            scrollTop: 0,
+        }, 1000);
+
+
+            $('#top').addClass('d-none');
+            $('#bottom').removeClass('d-none');
+
+    }
+</script>

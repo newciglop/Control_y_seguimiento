@@ -2,11 +2,12 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
+require("jquery")
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("jquery")
+require("../customize/bootstrap-select.min")
 
 import flatpickr from "flatpickr";
 import { Spanish } from "flatpickr/dist/l10n/es.js"
@@ -18,7 +19,8 @@ import 'css/styles'
 
 require("trix")
 require("@rails/actiontext")
-require("../customize/bootstrap-select.min")
+
+
 
 
 
@@ -32,7 +34,7 @@ require("../customize/bootstrap-select.min")
 
 
 
-
+/*
 document.addEventListener('turbolinks:load',function(){
     document.addEventListener('click',() => {
         let element = event.target.closest('.text-content')
@@ -48,7 +50,7 @@ document.addEventListener('turbolinks:load',function(){
         element.classList.add('d-none')
         element.previousElementSibling.classList.remove('d-none')
     })
-})
+})*/
 
 
 

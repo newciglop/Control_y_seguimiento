@@ -1,12 +1,15 @@
 class AdminControlsController < ApplicationController
 
-  before_action :set_admin_control , only: [:show,:edit,:destroy,:update]
+  before_action :set_admin_control ,  only: [:show,:edit,:destroy,:update]
   include AdminControlsHelper
   include ComboBoxHelper
   include RegisterBooksHelper
 
   def index
     @responsible_functions = ResponsibleFunction.where(enable:true).map{|x| [x.name, x.id]}
+    @months = (Date.today - 1.year..Date.today).map(&:beginning_of_month).uniq.reverse.map{|dt| [dt.strftime("%Y-%m"), dt] }
+    @companies = Company.where(enable: true).order("name").map{|company| [company.name, company.id]}
+
     @search = if params[:search]
                 Date.parse(params[:search])
               else
@@ -15,13 +18,28 @@ class AdminControlsController < ApplicationController
 
 
 
-    filters = {}
-    @responsible = params[:responsible]
-    if @responsible  && @responsible != "" then
-      filters["responsible_function_id"] = @responsible
+    @company = params[:company] || " "
+    @responsible = params[:responsible] || ""
+
+    if @responsible != "" && @company != ""
+      @admin_controls = AdminControl.all.joins(:company).where("lower(companies.name) like lower(?)","%#{@company}%")
+                            .joins(:responsible_function).where("lower(responsible_functions.name) like lower(?)","%#{@responsible}%")
+                            .by_month(@search)
+                            .paginate(page: params[:page], per_page: 30).order('id desc')
+    elsif @responsible != ""
+      @admin_controls =  AdminControl.all.joins(:responsible_function).where("lower(responsible_functions.name) like lower(?)","%#{@responsible}%")
+          .by_month(@search)
+          .paginate(page: params[:page], per_page: 30).order('id desc')
+    elsif @company != ""
+      @admin_controls =  AdminControl.all.joins(:company).where("lower(companies.name) like lower(?)","%#{@company}%")
+                .by_month(@search)
+          .paginate(page: params[:page], per_page: 30).order('id desc')
+    else
+      @admin_controls = AdminControl.all.by_month(@search)
+          .paginate(page: params[:page], per_page: 30).order('id desc')
     end
-    @admin_controls = AdminControl.all.by_month(@search).where(filters).paginate(page: params[:page], per_page: 30).order('created_at desc')
-    @months = (Date.today - 1.year..Date.today).map(&:beginning_of_month).uniq.reverse.map{|dt| [dt.strftime("%Y-%m"), dt] }
+
+
   end
 
 
@@ -204,9 +222,7 @@ class AdminControlsController < ApplicationController
     generate_code()
     combo_box_general_data()
     combo_box_company()
-    combo_box_responsible()
     combo_box_personal()
-    combo_box_support()
   end
 
   def generate_code

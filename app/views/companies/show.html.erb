@@ -1,10 +1,12 @@
-<br>
+
 <div class="col-lg-8 offset-lg-2">
   <div class="card card-margin mt-4">
     <div class="card-header">
-      <h5 class="card-title">
+      <h5 class="card-title" style="display: inline-block">
         Datos compañia
       </h5>
+      <% route = "companies" %>
+      <%= render "layouts/views_partials/link_to_back_form_especial", route: route %>
     </div>
 
     <div class="card-body">

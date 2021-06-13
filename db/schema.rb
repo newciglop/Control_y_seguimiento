@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_024000) do
+ActiveRecord::Schema.define(version: 2021_06_13_021316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -437,7 +437,6 @@ ActiveRecord::Schema.define(version: 2021_05_25_024000) do
     t.string "phone"
     t.string "phone_2"
     t.string "email"
-    t.bigint "profile_id", null: false
     t.integer "profile_2"
     t.integer "profile_3"
     t.integer "profile_4"
@@ -446,7 +445,6 @@ ActiveRecord::Schema.define(version: 2021_05_25_024000) do
     t.string "identification"
     t.bigint "type_identification_id", null: false
     t.boolean "enable", default: true
-    t.index ["profile_id"], name: "index_workers_on_profile_id"
     t.index ["type_identification_id"], name: "index_workers_on_type_identification_id"
   end
 
@@ -484,6 +482,5 @@ ActiveRecord::Schema.define(version: 2021_05_25_024000) do
   add_foreign_key "students", "type_identifications"
   add_foreign_key "students", "universities"
   add_foreign_key "universities", "cities"
-  add_foreign_key "workers", "profiles"
   add_foreign_key "workers", "type_identifications"
 end

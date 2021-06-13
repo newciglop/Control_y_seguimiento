@@ -45,12 +45,14 @@ class AdminControl < ApplicationRecord
   end
 
 
-  #validates :company_id,:type_id,:theme_id,presence: true
-  #validates :concept_id, :city_id,:item_id,:responsible_function_id , presence: true
+  validates :company_id,:type_id,:theme_id,presence: true
+  validates :concept_id, :city_id,:item_id,:responsible_function_id , presence: true
+  validates :start_date,:final_date, presence: true
+  validates :tracking_type,presence: true
+  validates :state, presence: true
 
 
   has_rich_text :description_advance
-
 
 
 

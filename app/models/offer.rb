@@ -1,9 +1,10 @@
 class Offer < ApplicationRecord
-
+  scope :by_month, lambda {|date| where('publication_date >= ? AND publication_date <=  ?', date.beginning_of_month, date.end_of_month)}
   belongs_to :worker
   belongs_to :modality
   belongs_to :city, optional: true
   belongs_to :company, optional: true
+  belongs_to :user
 
 
   validates :code,:worker_id,:modality_id, :status, :publication_date, presence: true

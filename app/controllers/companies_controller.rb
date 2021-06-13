@@ -1,11 +1,16 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[ show edit update destroy ]
-
+  include Deleteable
 
   def index
-    @search = params[:fullname] || ""
+    @search = params[:search] || ""
+
+    if @search.present?
     @companies = Company.where("(LOWER(name) like LOWER(?) OR LOWER(identification) like LOWER(?)) " ,"%#{@search}%","%#{@search}%")
-                     .order('name')
+                     .order('name').paginate(page: params[:page], per_page: 30).order('id desc')
+    else
+      @companies = Company.all.paginate(page: params[:page], per_page: 30).order('id desc')
+    end
   end
 
 

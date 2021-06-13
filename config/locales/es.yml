@@ -194,7 +194,7 @@ es:
       short: ! '%d de %b %H:%M'
     pm: pm
   commons:
-   what_wrong: alog malo ocurrrio
+   what_wrong: algo inesperado ocurrio
    disabled&enabled: Estado
    create_success: creado exitosamente
    update_success: actualizado exitosamente
@@ -243,6 +243,7 @@ es:
     email_alternative: Correo alternativo de la entidad
     link_document: Link de documento
   admin_control:
+    description_advance: Descripcion de los avances del proceso o servicio
     code: Codigo
     leader: Lider
     concept: Concepto

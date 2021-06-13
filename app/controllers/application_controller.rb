@@ -19,6 +19,8 @@ class ApplicationController < ActionController::Base
   end
 
 
+
+
   def redirect_user
     redirect_to '/404'
   end

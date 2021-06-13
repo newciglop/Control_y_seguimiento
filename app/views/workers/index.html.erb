@@ -1,3 +1,4 @@
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="row">
   <div class="col-md-10 offset-md-1  text-center">
      <h2 class="my-4">Empleados</h2>
@@ -6,7 +7,7 @@
     <form>
       <div class="form-group">
         <label><%= t('action.search') %></label>
-        <input name="fullname" placeholder="<%= t('workers.first_name') %>" value="<%=@search%>" class="form-control"/>
+        <input name="search" placeholder="<%= t('workers.first_name') %>" value="<%=@search%>" class="form-control"/>
       </div>
       <div class="form-group">
         <input type="submit" value="<%= t('action.search') %>" class="btn btn-primary my-2"/>
@@ -14,15 +15,12 @@
     </form>
   </div>
 </div>
-
-
-
 <div class="row">
   <div class="col-sm-10 offset-sm-1  text-center">
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
-        <tr>
+        <tr class="text-center">
           <th scope="col">Nombres</th>
           <th scope="col">Telefono</th>
           <th scope="col">Identificación</th>
@@ -33,7 +31,7 @@
 
         <tbody>
         <% @workers.each do |worker| %>
-          <tr>
+          <tr class="text-center">
             <td><%= worker.full_name %> </td>
             <td><%= worker.phone %></td>
             <td><%= worker.identification %></td>
@@ -45,14 +43,27 @@
               <% end %>
 
             </td>
-            <td>
-              <%= link_to 'Mostrar', worker_path(worker) %>
+            <td class="text-center">
+              <% if current_user.role_id == User.ADMINISTRATOR || current_user.role_id == User.EDITOR %>
+              <%= link_to worker_path(worker) do %>
+                <%= @show_eye %>
+                  <% end %>
+
+              <%= link_to edit_worker_path(worker) do %>
+                <%= @show_edit %>
+                <% end %>
+
+
+              <% end %>
+
+
+              <% if current_user.role_id == User.ADMINISTRATOR %>
+                   <%= link_to worker, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' }  do %>
+                <%= @show_trash %>
+                <% end %>
+              <% end %>
             </td>
-            <td><%= link_to 'Editar', edit_worker_path(worker) %></td>
-            <td>
-              <%# if profile.editable   %>
-              <%= link_to 'Eliminar', worker, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %></td>
-            <%# end %>
+
           </tr>
         <% end %>
         </tbody>
@@ -60,13 +71,20 @@
 
       <br>
     </div>
+
+    <div class="will_paginate">
+      <%= will_paginate(@workers, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+    </div>
+
   </div>
 </div>
 <div class="row no-gutters justify-content-center mb-5">
   <div class="col-lg-10 offset-lg-1 d-flex justify-content-center">
     <%= link_to 'Nuevo Empleado', new_worker_path , class: "btn btn-primary mr-2" %>
   </div>
-
-
-
 </div>
+<%= render "layouts/views_partials/button" %>
+<% else %>
+  <% route = "workers" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>

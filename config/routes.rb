@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
 
 
-  resources :lists
+
   mount ActionCable.server => '/cable'
 
 
@@ -19,11 +19,12 @@ Rails.application.routes.draw do
   authenticated :user do
     get 'new_navigator' , to: "navigators#create_user" , as: 'create_navigator'
     post 'new_navigator' , to: "navigators#create_user"
+    #resources :lists
   resources :offers
   resources :states_students
   resources :students
-  resources :users
-  resources :profiles
+  resources :users, except: [:show]
+  resources :profiles , except: [:new,:edit,:show,:index]
   resources :engineers
   resources :areas
   resources :designations

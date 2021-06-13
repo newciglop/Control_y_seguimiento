@@ -1,3 +1,5 @@
+
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="row">
   <div class="col-md-10 offset-md-1  text-center">
     <h2 class="my-4">Practicantes</h2>
@@ -28,25 +30,34 @@
           <th scope="col" class="text-center">No Identificación</th>
           <th scope="col" class="text-center">Telefono</th>
           <th scope="col" class="text-center">correo electronico </th>
-          <th colspan="2"></th>
+          <th></th>
         </tr>
         </thead>
 
         <tbody>
         <% @students.each_with_index  do |student, index| %>
-          <tr>
+          <tr class="text-center">
             <td> <%= index + 1  %></td>
             <td class="text-center"><%= student.name + " " + student.last_name %></td>
             <td class="text-center"><%= student.identification %></td>
             <td class="text-center"><%= student.phone %></td>
             <td class="text-center"><%= student.mail %></td>
-            <td></td>
-            <td>
-              <%= link_to 'Mostrar', student_path(student) %>
-            </td>
-            <td><%= link_to 'Editar', edit_student_path(student) %></td>
-            <td>
-              <%= link_to 'Eliminar', student, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
+            <td class="text-center">
+
+              <%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
+              <%= link_to student_path(student) do  %>
+              <%= @show_eye %>
+                <% end %>
+
+             <%= link_to  edit_student_path(student) do %>
+                <%= @show_edit %>
+                <% end %>
+             <% end %>
+            <%  if current_user.role_id == User.ADMINISTRATOR  %>
+              <%= link_to student, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' }  do %>
+                <%= @show_trash %>
+              <% end %>
+             <% end %>
             </td>
           </tr>
 
@@ -56,7 +67,13 @@
 
       <br>
     </div>
+
+    <div class="will_paginate">
+      <%= will_paginate(@students, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+    </div>
   </div>
+
+
 </div>
 <div class="row justify-content-center">
   <div class="col-sm-12 d-flex justify-content-center">
@@ -66,3 +83,10 @@
 
 
 </div>
+
+<%= render "layouts/views_partials/button" %>
+
+<% else %>
+  <% route = "students" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>

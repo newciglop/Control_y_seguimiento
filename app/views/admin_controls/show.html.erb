@@ -8,11 +8,13 @@
 
             <div class="card">
               <div class="card-header" id="headingThree">
-                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                <h5 class="mb-0" style="display: inline-block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                   <a class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     Avances
                   </a>
                 </h5>
+                <% route = "admin_controls" %>
+                <%= render "layouts/views_partials/link_to_back_form_especial" , route: route %>
               </div>
 
               <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
@@ -323,7 +325,7 @@
     </div>
   </div>
   <div class="offset-sm-2"></div>
-
+<%= render "layouts/views_partials/button" %>
 
 
 

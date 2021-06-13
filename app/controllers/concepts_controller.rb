@@ -1,9 +1,20 @@
 class ConceptsController < ApplicationController
   before_action :set_concept, only: %i[ show edit update destroy ]
   include ConceptsHelper
+  include Deleteable
+  include Icons
 
   def index
-    @concepts = Concept.all
+    show_icons
+    @search = params[:search]
+
+    if @search.present?
+      @concepts = Concept.all.where("lower(name) like lower(?)","%#{@search}%")
+                      .paginate(page: params[:page], per_page: 30).order('id desc')
+    else
+      @concepts = Concept.all.paginate(page: params[:page], per_page: 30).order('id desc')
+    end
+
   end
 
 
@@ -23,9 +34,9 @@ class ConceptsController < ApplicationController
   def create
     @concept = Concept.new(concept_params)
       if @concept.save
-        redirect_to edit_concept_path(@concept), notice: "Concept was successfully created."
+        redirect_to edit_concept_path(@concept), notice: t('admin_control.concept') + " " + t('commons.create_success')
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_entity , notice: t('commons.what_wrong')
       end
 
   end
@@ -34,18 +45,16 @@ class ConceptsController < ApplicationController
   def update
       enable_resources(@concept,params)
       if @concept.update(concept_params)
-       redirect_to edit_concept_path(@concept), notice: "Concept was successfully updated."
+       redirect_to edit_concept_path(@concept), notice: t('admin_control.concept') + " " + t('commons.update_success')
       else
-         render :edit, status: :unprocessable_entity
+         render :edit, status: :unprocessable_entity ,notice: t('commons.what_wrong')
       end
 
   end
 
 
   def destroy
-    if @concept.destroy
-       redirect_to concepts_url, notice: "Concept was successfully destroyed."
-    end
+    delete_with_references(@concept,concepts_path)
   end
 
   private

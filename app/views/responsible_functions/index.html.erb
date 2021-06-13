@@ -1,5 +1,4 @@
-<%= render 'layouts/shared/notice' %>
-
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="row">
   <div class="col-md-10 offset-md-1  text-center">
     <h2 class="my-4">Rol responsable</h2>
@@ -7,13 +6,32 @@
 </div>
 
 <div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    <form class="forms-sample">
+      <div class="form-row">
+        <div class="col-sm-8 offset-sm-2 mb-4" id="index-admin_control">
+          <div style = "display: inline-block; width:93%; margin: auto;">
+            <input name="search" placeholder="Algunos roles responsable" value="<%=@search%>" class="form-control"/>
+          </div>
+          <button type="submit" value="<%= t("action.search")%>" class="btn btn-outline-primary btn-sm my-2">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<div class="row">
   <div class="offset-sm-1 col-sm-10">
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
-        <tr>
+        <tr class="text-center">
           <th scope="col">#</th>
-          <th scope="col">Nombres</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
           <th scope="col">Estado</th>
           <th colspan="2"></th>
         </tr>
@@ -22,7 +40,7 @@
         <tbody>
         <% @responsible_functions.each_with_index  do |responsible_function, index | %>
 
-          <tr>
+          <tr class="text-center">
             <td> <%= index + 1  %></td>
             <td><%= responsible_function.name %> </td>
             <td><%= responsible_function.description %> </td>
@@ -34,9 +52,25 @@
               <% end %>
 
             </td>
-            <td><%= link_to 'Editar',edit_responsible_function_path(responsible_function) %></td>
-
             <td>
+              <%  if current_user.role_id == User.ADMINISTRATOR || current_user.role_id == User.EDITOR %>
+                <%= link_to responsible_function_path(responsible_function) do  %>
+                  <%= @show_eye %>
+                  <% end %>
+
+                <%= link_to edit_responsible_function_path(responsible_function) do %>
+                  <%= @show_edit %>
+                <% end %>
+
+              <% end %>
+
+              <%  if current_user.role_id == User.ADMINISTRATOR %>
+                <%= link_to  responsible_function, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } do %>
+                  <%= @show_trash %>
+                <% end %>
+              <% end %>
+
+
             </td>
           </tr>
         <% end %>
@@ -45,17 +79,22 @@
 
       <br>
     </div>
+
+    <div class="will_paginate">
+      <%= will_paginate(@responsible_functions, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+    </div>
   </div>
 </div>
 <div class="row justify-content-center">
   <div class="col-lg-12 d-flex justify-content-center">
     <%= link_to 'Nuevo rol Responsable', new_responsible_function_path , class: "btn btn-primary mr-2" %>
   </div>
-
-
-
 </div>
 
-
+<%= render "layouts/views_partials/button" %>
+<% else %>
+  <% route = "responsible_functions" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>
 
 

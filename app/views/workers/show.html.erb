@@ -1,3 +1,4 @@
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="row">
   <div class="col-lg-8 offset-lg-2" style="padding-top: 30px">
     <nav>
@@ -10,9 +11,11 @@
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="card card-margin">
           <div class="card-header">
-            <h5 class="card-title mb-0">
+            <h5 class="card-title mb-0" style="display: inline-block">
               Datos Personales
             </h5>
+            <% route = "workers" %>
+            <%= render "layouts/views_partials/link_to_back_form_especial", route: route %>
           </div>
 
           <div class="card-body">
@@ -20,8 +23,8 @@
               <table class="table center-aligned-table table-striped">
 
                   <tr>
-                    <th class="bg-success text-light"><strong>Tipo de Documento</strong></th>
-                    <td class="bg-success text-light"><%= @worker.type_identification.name %></td>
+                    <th class=""><strong>Tipo de Documento</strong></th>
+                    <td class=""><%= @worker.type_identification.name %></td>
                   </tr>
 
                 <tr>
@@ -81,20 +84,7 @@
           <div class="card-body">
             <div class="table-responsive">
               <table class="table center-aligned-table table-striped">
-                <tr>
-                  <th><strong>rol 1</strong></th>
-                  <td class="td-white"><%= @worker.profile.name %></td>
-                  <th><strong>rol 2</strong></th>
-                  <td class="td-white"><%=  @characteristic_two %></td>
-                </tr>
-                <tr>
-                  <th><strong>rol 3</strong></th>
-                  <td class="td-white"><%=  @characteristic_three %></td>
-                  <th><strong>rol 4</strong></th>
-                  <td class="td-white"><%=  @characteristic_four %></td>
-                </tr>
-
-                <tr>
+                               <tr>
                   <th><strong>funciones</strong></th>
                   <td><%= @worker.function %></td>
                 </tr>
@@ -123,3 +113,9 @@
   </div>
 </div>
 </div>
+
+<%= render "layouts/views_partials/button" %>
+<% else %>
+  <% route = "workers" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>

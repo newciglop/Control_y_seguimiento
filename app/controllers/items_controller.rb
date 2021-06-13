@@ -1,9 +1,17 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy ]
-
+  include Deleteable
+  include Icons
 
   def index
-    @items = Item.all
+    show_icons
+    @search = params[:search]
+    if @search.present?
+    @items = Item.all.where("lower(name) like lower(?)","%#{@search}%")
+                           .paginate(page: params[:page], per_page: 30).order('id asc')
+    else
+      @items = Item.all.paginate(page: params[:page], per_page: 30).order('id asc')
+    end
   end
 
 
@@ -23,9 +31,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
       if @item.save
-         redirect_to edit_item_path(@item), notice: "Item was successfully created."
+         redirect_to edit_item_path(@item), notice: t('admin_control.item') +  " " + t('commons.create_success')
       else
-        render :new, status: :unprocessable_entity
+        render :new, notice: t('commons.what_wrong')
       end
   end
 
@@ -34,17 +42,15 @@ class ItemsController < ApplicationController
     @enable = params[:enable]
     @enable ? @item.enable = @enable: @item.enable = false
       if @item.update(item_params)
-         redirect_to edit_item_path(@item), notice: "Item was successfully updated."
+         redirect_to edit_item_path(@item), notice: t('admin_control.item') +  " " + t('commons.update_success')
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, notice: t('commons.what_wrong')
       end
 
   end
 
   def destroy
-    if @item.destroy
-      redirect_to items_url, notice: "Item was successfully destroyed."
-    end
+    delete_with_references(@item,items_path)
   end
 
   private

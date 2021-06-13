@@ -4,7 +4,13 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @full_name = params[:full_name] || ""
+
+    if @full_name != ""
+      @users = User.all.where("lower(first_name) like lower(?)","%#{@full_name}%").or(User.where("lower(last_name) like lower(?)","%#{@full_name}%")).or(User.where("lower(email) like lower(?)","%#{@full_name}%")).paginate(page: params[:page], per_page: 30).order('id desc')
+    else
+      @users = User.all.paginate(page: params[:page], per_page: 30).order('id desc')
+    end
   end
 
   # GET /users/1 or /users/1.json
@@ -27,10 +33,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.password_conf
       if @user.save
-        redirect_to @user, notice: "User was successfully created."
+        redirect_to users_path, notice: "Usuario fue creado existosamente"
       else
         show_role
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, notice: t('commons.what_wrong') }
       end
 
   end
@@ -39,10 +45,10 @@ class UsersController < ApplicationController
   def update
 
     if @user.update(user_params)
-         redirect_to @user, notice: "User was successfully updated."
+         redirect_to users_path, notice: "Usuario fue actualizado existosamente"
     else
       show_role
-        render :edit, status: :unprocessable_entity
+        render :edit, notice: t('commons.what_wrong')
     end
   end
 

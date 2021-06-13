@@ -3,9 +3,23 @@ class UniversitiesController < ApplicationController
   include Deleteable
   include Resources
   include ComboBoxHelper
-  # GET /universities or /universities.json
+  include Icons
+
   def index
-    @universities = University.all
+    show_icons
+    @search = params[:search] || ""
+
+
+
+    if !@search.present?
+      @universities = University.all.paginate(page: params[:page], per_page: 30)
+      else
+    @universities = University.all.where("lower(name) like lower(?)","%#{@search}%").paginate(page: params[:page], per_page: 30)
+    end
+
+
+
+
   end
 
 
@@ -29,7 +43,7 @@ class UniversitiesController < ApplicationController
   def create
     @university = University.new(university_params)
       if @university.save
-        redirect_to @university, :flash => { :success => t('universities.university') + " " +t('action.create_success') }
+        redirect_to @university, :flash => { :success => t('universities.university') + " " +t('commons.create_success') }
       else
         agreement
         combo_box_company
@@ -40,7 +54,7 @@ class UniversitiesController < ApplicationController
   def update
     enable_resources(@university,params)
       if @university.update(university_params)
-       redirect_to @university, :flash => { :success => t('universities.university') + " " +t('action.update_success') }
+       redirect_to @university, :flash => { :success => t('universities.university') + " " +t('commons.update_success') }
       else
         agreement
         combo_box_company

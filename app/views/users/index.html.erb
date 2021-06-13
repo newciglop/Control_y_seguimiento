@@ -1,3 +1,5 @@
+<%  if current_user.role_id == User.ADMINISTRATOR %>
+
 <div class="row">
   <div class="col-md-10 offset-md-1  text-center">
     <h2 class="my-4">Usuarios</h2>
@@ -6,23 +8,41 @@
 </div>
 
 <div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    <form class="forms-sample">
+      <div class="form-row">
+        <div class="col-sm-8 offset-sm-2 mb-4" id="index-admin_control">
+          <div style = "display: inline-block; width:93%; margin: auto;">
+            <input name="full_name" placeholder="<%= t('workers.first_name') %>" value="<%=@full_name%>" class="form-control"/>
+          </div>
+          <button type="submit" value="<%= t("action.search")%>" class="btn btn-outline-primary btn-sm my-2">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<div class="row">
   <div class="offset-sm-1 col-sm-10">
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
         <tr>
-          <th scope="col" class="text-center">#</th>
           <th scope="col" class="text-center">Nombre</th>
           <th scope="col" class="text-center">correo electronico </th>
           <th scope="col" class="text-center">Roles</th>
-          <th colspan="2"></th>
-        </tr>
+          <th scope="col" class="text-center">Estado</th>
+          <th scope="col" class="text-center"></th>
+
+         </tr>
         </thead>
 
         <tbody>
-        <% @users.each_with_index  do |user, index| %>
+        <% @users.each  do |user| %>
           <tr>
-            <td> <%= index + 1  %></td>_
             <td class="text-center"><%= user.first_name.to_s + " " + user.last_name.to_s %></td>
             <td class="text-center"><%= user.email %></td>
             <td class="text-center">
@@ -37,13 +57,16 @@
                    No tiene rol asignado, este usuario no deberia existir
              <% end %>
            </td>
-            <td></td>
-            <td>
-              <%= link_to 'Mostrar', user_path(user) %>
+            <td class="text-center">
+              <%= !user.deactivated ? "Activo" : "Inactivo" %>
             </td>
-            <td><%= link_to 'Editar', edit_user_path(user) %></td>
-            <td>
-              <%= link_to 'Eliminar', user, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %>
+            <td class="text-center">
+              <%= link_to  edit_user_path(user) do %>
+                <span class="btn btn-sm btn-outline-primary"> <i class="far fa-edit"></i> </span>
+              <% end %>
+              <%= link_to  user, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } do %>
+                <span class="btn btn-sm btn-outline-danger">  <i class="fas fa-trash-alt"></i> </span>
+              <% end %>
             </td>
           </tr>
 
@@ -53,9 +76,13 @@
 
       <br>
     </div>
+
+    <div class="will_paginate">
+      <%= will_paginate(@users, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+    </div>
+
   </div>
 </div>
-
 
 <div class="row justify-content-center">
   <div class="col-sm-12 d-flex justify-content-center">
@@ -65,3 +92,9 @@
 
 
 </div>
+
+<% else %>
+  <% route = "users" %>
+  <%= render "layouts/views_partials/not_found" , route: route %>
+
+<% end %>

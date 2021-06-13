@@ -1,27 +1,46 @@
-<%= render 'layouts/shared/notice' %>
-
-
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="row">
   <div class="col-md-10 offset-md-1  text-center">
     <h2 class="my-4">Items especificos</h2>
   </div>
 </div>
 
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <form class="forms-sample">
+        <div class="form-row">
+          <div class="col-sm-8 offset-sm-2 mb-4" id="index-admin_control">
+            <div style = "display: inline-block; width:93%; margin: auto;">
+              <input name="search" placeholder="Algun item" value="<%=@search%>" class="form-control"/>
+            </div>
+            <button type="submit" value="<%= t("action.search")%>" class="btn btn-outline-primary btn-sm my-2">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
 <div class="row">
   <div class="offset-sm-1 col-sm-10">
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
-        <tr>
+        <tr class="text-center">
+
+          <th scope="col">#</th>
           <th scope="col">Nombres</th>
           <th scope="col">Estado</th>
-          <th colspan="2"></th>
+
         </tr>
         </thead>
 
         <tbody>
-        <% @items.each do |item| %>
-          <tr>
+        <% @items.each_with_index  do |item, index| %>
+          <tr class="text-center">
+            <td><%= index + 1 %></td>
             <td><%= item.name %> </td>
             <td>
               <% if  item.enable %>
@@ -31,12 +50,20 @@
               <% end %>
 
             </td>
-            <td><%= link_to 'Editar', edit_item_path(item) %></td>
-
             <td>
-              <%#if item.editable   %>
-              <%= link_to 'Eliminar', item, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } %></td>
-            <%# end %>
+              <%  if current_user.role_id == User.ADMINISTRATOR || current_user.role_id == User.EDITOR %>
+               <%= link_to edit_item_path(item) do %>
+               <%= @show_edit %>
+               <% end %>
+               <% end %>
+
+               <%  if current_user.role_id == User.ADMINISTRATOR %>
+               <%= link_to  item, method: :delete, data: { confirm: '¿Esta seguro que desea eliminarlo?' } do %>
+               <%= @show_trash %>
+               <% end %>
+               <% end %>
+
+            </td>
           </tr>
         <% end %>
         </tbody>
@@ -44,13 +71,19 @@
 
       <br>
     </div>
+    <div class="will_paginate">
+      <%= will_paginate(@items, :renderer => WillPaginate::ActionView::LinkRenderer) %>
+    </div>
+
   </div>
 </div>
 <div class="row justify-content-center">
-  <div class="col-lg-10 offset-lg-1 d-flex justify-content-center">
+  <div class="col-lg-12 d-flex justify-content-center">
     <%= link_to 'Nuevo item', new_item_path , class: "btn btn-primary mr-2" %>
   </div>
-
-
-
 </div>
+  <%= render  "layouts/views_partials/button" %>
+<% else %>
+  <% route = "items" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>

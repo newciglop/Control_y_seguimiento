@@ -1,6 +1,4 @@
-
-<%= render 'layouts/shared/notice' %>
-<br>
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="col-lg-8 offset-lg-2">
   <div class="card card-margin mt-4">
     <div class="card-header">
@@ -48,4 +46,7 @@
     </div>
   </div>
 </div>
-
+  <% else %>
+  <% route = "themes" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>

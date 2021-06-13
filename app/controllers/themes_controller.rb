@@ -1,10 +1,20 @@
 class ThemesController < ApplicationController
   before_action :set_theme, only: %i[ show edit update destroy ]
   include ThemesHelper
-
+  include Deleteable
+  include Icons
 
   def index
-    @themes = Theme.all
+    show_icons
+    @search = params[:search]
+    if @search.present?
+    @themes = Theme.all.where("lower(name) like lower(?)","%#{@search}%")
+                  .paginate(page: params[:page], per_page: 30).order('id asc')
+    else
+    @themes = Theme.all.paginate(page: params[:page], per_page: 30).order('id asc')
+    end
+
+
   end
 
 
@@ -24,9 +34,9 @@ class ThemesController < ApplicationController
   def create
     @theme = Theme.new(theme_params)
     if @theme.save
-        redirect_to @theme, notice: "Theme was successfully created."
+        redirect_to @theme, notice: t('admin_control.theme') + " " + t('commons.create_success')
       else
-        render :new, status: :unprocessable_entity
+        render :new,notice: t('commons.what_wrong')
       end
   end
 
@@ -34,17 +44,15 @@ class ThemesController < ApplicationController
   def update
     enable_resources(@theme,params)
       if @theme.update(theme_params)
-         redirect_to @theme, notice: "Theme was successfully updated."
+         redirect_to @theme,  notice: t('admin_control.theme') + " " + t('commons.update_success')
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, notice: t('commons.what_wrong')
      end
   end
 
 
   def destroy
-    if @theme.destroy
-       redirect_to themes_url, notice: "Theme was successfully destroyed."
-    end
+    delete_with_references(@theme,themes_path)
   end
 
   private

@@ -5,32 +5,47 @@ class OffersController < ApplicationController
   include RegisterBooksHelper
 
   def index
-    @offers = Offer.all.paginate(page: params[:page], per_page: 30).order('created_at desc')
 
+    @search = if params[:search]
+                Date.parse(params[:search])
+              else
+                Date.today
+              end
+    @company = params[:company] || ""
+    @worker = params[:worker] || ""
+    @months = (Date.today - 1.year..Date.today).map(&:beginning_of_month).uniq.reverse.map{|dt| [dt.strftime("%Y-%m"), dt] }
 
+    if @company != "" && @worker != ""
+    @offers = Offer.all.joins(:company).where("lower(companies.name) like lower(?)","%#{@company}%").joins(:worker).where("(lower(workers.first_name) like lower(?)) or (lower(workers.last_name) like lower(?))","%#{@worker}%","%#{@worker}%").by_month(@search).paginate(page: params[:page], per_page: 30).order('created_at desc')
+    elsif @company != ""
+    @offers = Offer.all.joins(:company).where("lower(companies.name) like lower(?)","%#{@company}%").by_month(@search).paginate(page: params[:page], per_page: 30).order('created_at desc')
+    elsif @worker != ""
+    @offers = Offer.all.joins(:worker).where("(lower(workers.first_name) like lower(?)) or (lower(workers.last_name) like lower(?))","%#{@worker}%","%#{@worker}%").by_month(@search).paginate(page: params[:page], per_page: 30).order('created_at desc')
+    else
+      @offers = Offer.all.by_month(@search).paginate(page: params[:page], per_page: 30).order('created_at desc')
+    end
 
   end
 
 
   def show
-
   end
 
 
   def new
     generate_code
-    combo_box_leader
     combo_box_modalities
     combo_box_status_offers
     combo_box_status_yes_or_not
     combo_box_company
+    worker_all
     @offer = Offer.new
 
   end
 
 
   def edit
-    combo_box_leader
+    worker_all
     combo_box_modalities
     combo_box_status_offers
     combo_box_status_yes_or_not
@@ -53,7 +68,7 @@ class OffersController < ApplicationController
         @offer.sl =  "sl-#{@offer.id}"
         @offer.save
         create_register_offer(@offer,current_user)
-         redirect_to offers_path, notice: "Offer was successfully created."
+         redirect_to offers_path, notice: "Segto licitacion creado exitosamente"
       else
         combo_box_company
         generate_code
@@ -70,7 +85,7 @@ class OffersController < ApplicationController
   def update
     if @offer.update(offer_params)
        update_register_offer(@offer,current_user)
-       redirect_to @offer, notice: "Offer was successfully updated."
+       redirect_to @offer, notice: "Segto licitacion actualizado exitosamente"
     else
       combo_box_company
       combo_box_leader
@@ -89,7 +104,7 @@ class OffersController < ApplicationController
     if destroy_register_offer(@offer,current_user)
       if delete_ref_offer(@offer)
          if @offer.destroy
-          redirect_to offers_url, notice: "Offer was successfully destroyed."
+          redirect_to offers_url, notice: "Segto licitacion eliminada exitosamente"
          end
       end
     end

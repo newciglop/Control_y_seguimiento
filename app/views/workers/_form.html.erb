@@ -21,11 +21,14 @@
 
           <div class="card">
               <div class="card-header" id="headingOne">
-                <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h5 class="mb-0" style="display: inline-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     Datos Personales
                   </a>
                 </h5>
+
+                <% route = "workers" %>
+                <%= render "layouts/views_partials/link_to_back_form_especial", route: route %>
               </div>
 
               <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -100,33 +103,14 @@
               <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
                   <div class="row no-gutters">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <%= form.select(:profile_id, options_for_select(@profiles, worker.profile_id), {label:t('workers.profile'),:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <%= form.select(:profile_2, options_for_select(@profiles, worker.profile_2), { label:t('workers.profile_2'),:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <%= form.select(:profile_3, options_for_select(@profiles, worker.profile_3), { label:t('workers.profile_3'),:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <%= form.select(:profile_4, options_for_select(@profiles, worker.profile_4), { label:t('workers.profile_4'),:prompt => 'Selecciona un Perfil'},{class: "form-control width-95" }) %>
-                      </div>
-                    </div>
+
                     <div class="col-lg-12">
                       <%= form.rich_text_area :function, label: t('workers.function'), class: "control-form" %>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-
 
             <% if @worker.id? %>
              <div class="card">
@@ -197,7 +181,7 @@
   </div>
 </div>
 
-
+<%= render "layouts/views_partials/button" %>
 
 
 

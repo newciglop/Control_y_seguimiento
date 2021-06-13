@@ -1,26 +1,24 @@
 <%  if current_user.role_id == User.ADMINISTRATOR || @admin_control.user_id == current_user.id  || current_user.role_id == User.EDITOR %>
 <%= render 'form', admin_control: @admin_control %>
-  <% else %>
-<div class="row">
-  <div class="col-sm-12 text-center">
-    <h2 class="text-danger">NOT FOUND 404</h2>
-  </div>
-</div>
+  <script type="text/javascript" charset="utf-8">
+
+      (function()
+      {
+          if( window.localStorage )
+          {
+              if( !localStorage.getItem('firstLoad') )
+              {
+                  localStorage['firstLoad'] = true;
+                  window.location.reload();
+              }
+              else
+                  localStorage.removeItem('firstLoad');
+          }
+      })();
+  </script>
+<% else %>
+<% route = "admin_controls" %>
+<%= render "layouts/views_partials/not_found", route: route %>
 <% end %>
 
-<script type="text/javascript" charset="utf-8">
 
-    (function()
-    {
-        if( window.localStorage )
-        {
-            if( !localStorage.getItem('firstLoad') )
-            {
-                localStorage['firstLoad'] = true;
-                window.location.reload();
-            }
-            else
-                localStorage.removeItem('firstLoad');
-        }
-    })();
-</script>

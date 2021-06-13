@@ -10,14 +10,61 @@ class RegisterBooksController < ApplicationController
                 Date.today
               end
     @inputs = params[:inputs] || ""
+    @responsible = params[:responsible] || ""
 
-        @register_books = RegisterBook.by_month(@search).where(is_admin_control: true).where("(LOWER(create_user) like LOWER(?) OR LOWER(rol_responsible) like LOWER(?) OR LOWER(company) like LOWER(?) ) " ,"%#{@inputs}%","%#{@inputs}%","%#{@inputs}%").order('created_at desc')
+    if @inputs != "" && @responsible != ""
+      @register_books = RegisterBook.where(is_admin_control: true).by_month(@search)
+                                    .where("LOWER(rol_responsible) like LOWER(?)","%#{@responsible}%")
+                                    .where("(LOWER(create_user) like LOWER(?) OR LOWER(company) like LOWER(?) ) " ,"%#{@inputs}%","%#{@inputs}%")
+                                    .paginate(page: params[:page], per_page: 30).order('id desc')
+    elsif @responsible != ""
+      @register_books = RegisterBook.where(is_admin_control: true).by_month(@search)
+                            .where("LOWER(rol_responsible) like LOWER(?)","%#{@responsible}%")
+                            .paginate(page: params[:page], per_page: 30).order('id desc')
+    elsif @inputs != ""
+      @register_books = RegisterBook.where(is_admin_control: true).by_month(@search)
+                  .where("(LOWER(create_user) like LOWER(?) OR LOWER(company) like LOWER(?) ) " ,"%#{@inputs}%","%#{@inputs}%")
+                  .paginate(page: params[:page], per_page: 30).order('id desc')
+    else
+
+      @register_books =  RegisterBook.by_month(@search). where(is_admin_control: true)
+                             .paginate(page: params[:page], per_page: 30).order('id desc')
+    end
+
+
+
   end
 
   def index_offer
-    @register_books_offer =  RegisterBook.where(is_offer: true).order('create_time desc')
+    @months = (Date.today - 1.year..Date.today).map(&:beginning_of_month).uniq.reverse.map{|dt| [dt.strftime("%Y-%m"), dt] }
+    @search = if params[:search]
+                Date.parse(params[:search])
+              else
+                Date.today
+              end
+    @inputs = params[:inputs] || ""
+    @leader = params[:leader] || ""
+
+    if @inputs != "" && @leader != ""
+    @register_books_offer =  RegisterBook.where(is_offer: true).by_month(@search)
+                                 .where("lower(leader_sl) like lower(?)","%#{@leader}%")
+                                 .where("(lower(company) like lower(?) or lower(create_user) like (?) )","%#{@inputs}%", "%#{@inputs}%")
+                                 .paginate(page: params[:page], per_page: 30).order('id desc')
+
+    elsif @inputs != ""
+      @register_books_offer =  RegisterBook.where(is_offer: true).by_month(@search)
+                                   .where("(lower(company) like lower(?) or lower(create_user) like (?) )","%#{@inputs}%", "%#{@inputs}%")
+                                   .paginate(page: params[:page], per_page: 30).order('id desc')
+    elsif @leader != ""
+      @register_books_offer =  RegisterBook.where(is_offer: true).by_month(@search).where("lower(leader_sl) like lower(?)","%#{@leader}%")
+                                           .paginate(page: params[:page], per_page: 30).order('id desc')
+    else
+      @register_books_offer =  RegisterBook.where(is_offer: true).by_month(@search)
+                                   .paginate(page: params[:page], per_page: 30).order('id desc')
     end
-  # GET /register_books/1 or /register_books/1.json
+
+    end
+
   def show
   end
 

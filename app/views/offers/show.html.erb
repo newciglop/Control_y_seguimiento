@@ -12,11 +12,13 @@
 
         <div class="card">
           <div class="card-header" id="headingOne">
-            <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h5 class="mb-0" style="display: inline-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 Datos Generales
               </a>
             </h5>
+            <% route = "offers" %>
+            <%= render "layouts/views_partials/link_to_back_form_especial" , route: route %>
           </div>
 
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -286,7 +288,7 @@
   </div>
 </div>
 <div class="offset-sm-2"></div>
-
+<%= render "layouts/views_partials/button" %>
 
 
 

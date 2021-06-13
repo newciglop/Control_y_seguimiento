@@ -1,14 +1,3 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @title.name %>
-</p>
-
-<p>
-  <strong>Enable:</strong>
-  <%= @title.enable %>
-</p>
-
-<%= link_to 'Edit', edit_title_path(@title) %> |
-<%= link_to 'Back', titles_path %>
+<% route = "titles" %>
+<%= render "layouts/views_partials/not_found", route: route %>

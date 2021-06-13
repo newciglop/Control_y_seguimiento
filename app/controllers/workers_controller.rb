@@ -2,13 +2,15 @@ class WorkersController < ApplicationController
   include ComboBoxHelper
   include WorkersHelper
   include Deleteable
+  include Icons
   before_action :set_worker, only: %i[ show edit update destroy ]
 
   def index
-
-    @search = params[:fullname] || ""
+    show_icons
+    @search = params[:search] || ""
     @workers = Worker.where("(LOWER(first_name) like LOWER(?) OR LOWER(last_name) like LOWER(?) OR LOWER(identification) like LOWER(?)) " ,"%#{@search}%","%#{@search}%","%#{@search}%")
-                   .order('last_name')
+                   .paginate(page: params[:page], per_page: 30).order('id desc')
+
   end
 
 

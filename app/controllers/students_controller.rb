@@ -4,12 +4,14 @@ class StudentsController < ApplicationController
   include ComboBoxHelper
   include StudentsHelper
   include Deleteable
+  include Icons
 
   # GET /students or /students.json
   def index
+    show_icons
     @search = params[:fullname] || ""
     @students = Student.where("(LOWER(name) like LOWER(?) OR LOWER(last_name) like LOWER(?) OR LOWER(identification) like LOWER(?)) " ,"%#{@search}%","%#{@search}%","%#{@search}%")
-                    .order('last_name')
+                    .order('last_name').paginate(page: params[:page], per_page: 30).order('id desc')
   end
 
   # GET /students/1 or /students/1.json
@@ -44,15 +46,15 @@ class StudentsController < ApplicationController
           w = Worker.create(first_name: @student.name, last_name: @student.last_name, phone: @student.phone,
                         phone_2: @student.phone_2 , email: @student.mail, profile_id: profile_practice,
                         identification:@student.identification,type_identification_id:@student.type_identification_id,enable:true)
-          redirect_to @student, notice: "Student was successfully created."
+          redirect_to @student, notice: t('students.student') + "" + t('commons.create_success')
         end
-        redirect_to @student, notice: "Student was successfully created."
+        redirect_to @student, notice: t('students.student') + "" + t("commons.create_success")
       else
         combo_box_company
         worker_all
         states_students
         combo_box_type_identification
-       render :new, status: :unprocessable_entity
+       render :new, status: :unprocessable_entity , notice: t('commons.what_wrong')
       end
   end
 
@@ -60,7 +62,7 @@ class StudentsController < ApplicationController
   def update
 
       if @student.update(student_params)
-        redirect_to @student, notice: "Student was successfully updated."
+        redirect_to @student, notice:  t('students.student') + "" + t("commons.update_success")
       else
         combo_box_type_identification
         combo_box_company

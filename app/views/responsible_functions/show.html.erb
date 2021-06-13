@@ -1,11 +1,9 @@
-
-<%= render 'layouts/shared/notice' %>
-<br>
-<div class="col-lg-9 offset-lg-3">
+<%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
+<div class="col-sm-8 offset-sm-2">
   <div class="card card-margin mt-4">
     <div class="card-header">
       <h5 class="card-title">
-        Datos de la Asuntos
+        Datos del rol responsable
       </h5>
     </div>
 
@@ -48,4 +46,8 @@
     </div>
   </div>
 </div>
+<% else %>
+  <% route = "responsible_functions" %>
+  <%= render "layouts/views_partials/not_found", route: route %>
+<% end %>
 
