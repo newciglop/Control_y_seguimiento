@@ -5,5 +5,21 @@
 </div>
 
 <%= render 'form', offer: @offer %>
+<script type="text/javascript" charset="utf-8">
+
+    (function()
+    {
+        if( window.localStorage )
+        {
+            if( !localStorage.getItem('firstLoad') )
+            {
+                localStorage['firstLoad'] = true;
+                window.location.reload();
+            }
+            else
+                localStorage.removeItem('firstLoad');
+        }
+    })();
+</script>
 
 

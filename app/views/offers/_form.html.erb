@@ -47,7 +47,8 @@
 
                   <div class="col-lg-8">
                     <div class="form-group">
-                      <%= form.select(:worker_id , options_for_select(@workers, offer.worker_id), { label: t('offer.leader') ,:prompt => 'Selecciona un lider',class: "form-control " ,required: true}) %>
+                      <%= form.select(:worker_id , options_for_select(@workers, offer.worker_id), {label:t('offer.leader') ,:prompt => 'Selecciona un lider'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+
                     </div>
                   </div>
 
@@ -62,7 +63,7 @@
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <%= form.select(:status, options_for_select(@status, offer.status), {label: t('offer.status'),:prompt => 'Selecciona un estado',class: "form-control", required: true  }) %>
+                      <%= form.select(:status, options_for_select(@status, offer.status), {label: t('offer.status'),:prompt => '',class: "form-control", required: true  }) %>
                     </div>
                   </div>
                 </div>
@@ -109,7 +110,7 @@
 
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <%= form.select(:status_obs, options_for_select(@status_yes_not, offer.status_obs), { label: t('offer.status'),:prompt => 'Selecciona un estado'},{class: "form-control " , required: true }) %>
+                      <%= form.select(:status_obs, options_for_select(@status_yes_not, offer.status_obs), { label: 'Entregado',:prompt => ''},{class: "form-control " , required: true }) %>
                     </div>
                   </div>
                 </div>
@@ -161,7 +162,7 @@
 
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.select(:status_obs_report, options_for_select(@status_yes_not, offer.status_obs_report), {label: t('offer.status'),:prompt => 'Selecciona un estado'},{class: "form-control ", required:true}) %>
+                        <%= form.select(:status_obs_report, options_for_select(@status_yes_not, offer.status_obs_report), {label: 'Entregado',:prompt => ' '},{class: "form-control ", required:true}) %>
                       </div>
                     </div>
                   </div>
@@ -210,7 +211,7 @@
 
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.select(:status_submission_offers, options_for_select(@status_yes_not, offer.status_submission_offers), {label: t('offer.status'),:prompt => 'Selecciona un lider'},{class: "form-control " }) %>
+                        <%= form.select(:status_submission_offers, options_for_select(@status_yes_not, offer.status_submission_offers), {label: 'Entregado',:prompt => ''},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -260,7 +261,7 @@
 
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.select(:status_offer_evaluation_report, options_for_select(@status_yes_not, offer.status_offer_evaluation_report), {label: t('offer.status'),:prompt => 'Selecciona un estado'},{class: "form-control " , required: true}) %>
+                        <%= form.select(:status_offer_evaluation_report, options_for_select(@status_yes_not, offer.status_offer_evaluation_report), {label: 'Entregado',:prompt => ' '},{class: "form-control " , required: true}) %>
                       </div>
                     </div>
                   </div>
@@ -309,7 +310,7 @@
 
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.select(:status_obs_offer_evaluation_report, options_for_select(@status_yes_not, offer.status_obs_offer_evaluation_report), {label: t('offer.status'),:prompt => 'Selecciona un estado'},{class: "form-control " }) %>
+                        <%= form.select(:status_obs_offer_evaluation_report, options_for_select(@status_yes_not, offer.status_obs_offer_evaluation_report), {label: 'Entregado',:prompt => ' '},{class: "form-control " }) %>
                       </div>
                     </div>
                   </div>
@@ -358,7 +359,7 @@
 
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.select(:status_acceptance_offers, options_for_select(@status_yes_not, offer.status_acceptance_offers), {label: t('offer.status'),:prompt => 'Selecciona un lider'},{class: "form-control " ,required: true }) %>
+                        <%= form.select(:status_acceptance_offers, options_for_select(@status_yes_not, offer.status_acceptance_offers), {label: 'Entregado',:prompt => ''},{class: "form-control " ,required: true }) %>
                       </div>
                     </div>
                   </div>
@@ -411,12 +412,12 @@
                 <div class="row no-gutters">
                   <div class="col-lg-8 pr-2">
                     <div class="form-group">
-                      <%= form.select(:company_id, options_for_select(@companies, offer.company_id), {label: t('offer.company'), :prompt => 'Selecciona una entidad'},{class: "form-control " , required: true}) %>
+                      <%= form.select(:company_id , options_for_select(@companies, offer.company_id), {label:t('offer.company'),:prompt => 'Selecciona una compañia'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
                     </div>
                   </div>
                   <div class="col-lg-4">
                     <div class="form-group">
-                      <%= form.select(:city_id, options_for_select(@cities, offer.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{class: "form-control  " , required: true}) %>
+                      <%= form.select(:city_id , options_for_select(@cities, offer.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
                     </div>
                   </div>
                 </div>
