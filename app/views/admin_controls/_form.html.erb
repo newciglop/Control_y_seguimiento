@@ -123,14 +123,14 @@
               <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
                   <div class="row no-gutters">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 pr-2">
                       <div class="form-group">
-                                           <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {label:t('admin_control.company'),:prompt => 'Selecciona un Perfil'},{class: "form-control " }) %>
+                        <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {label:t('admin_control.company'),:prompt => 'Selecciona una entidad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                                     <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {label:t('admin_control.location'),:prompt => 'Selecciona un Perfil'},{class: "form-control " }) %>
+                        <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {label:t('admin_control.location'),:prompt => 'Selecciona una ciudad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
                       </div>
                     </div>
                   </div>

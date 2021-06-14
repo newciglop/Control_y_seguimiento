@@ -93,7 +93,7 @@ class AdminControlsController < ApplicationController
         @admin_control.save
         create_register_admin(@admin_control,current_user)
         # up_register =  RegisterBook.where(admin_control_id: @admin_control.id).update(code_sa: @admin_control.sa)
-         redirect_to @admin_control, notice: "Admin control was successfully created."
+         redirect_to @admin_control, notice: "Segto Admin fue creado exitosamente."
       else
         combo_box_data()
          render :new, status: :unprocessable_entity
@@ -112,7 +112,7 @@ class AdminControlsController < ApplicationController
         @admin_control.save_supports
         @admin_control.save_managers
         update_register_admin_control(@admin_control,current_user)
-        redirect_to @admin_control, notice: "Admin control was successfully updated."
+        redirect_to @admin_control, notice: "Segto Admin fue actualizado exitosamente."
       else
 
         combo_box_data()
@@ -129,7 +129,7 @@ class AdminControlsController < ApplicationController
     if destroy_register_admin_control(@admin_control,current_user)
         if delete_ref_admin_control(@admin_control)
            if @admin_control.destroy
-              redirect_to admin_controls_url, notice: "Admin control was successfully destroyed."
+              redirect_to admin_controls_url, notice: "Segto Admin fue destruido exitosamente."
            end
         end
     end

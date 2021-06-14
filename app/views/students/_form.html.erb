@@ -200,11 +200,11 @@
                 <div class="row no-gutters">
 
                   <div class="col-lg-6 pr-2">
-                    <%= form.select(:leader_first , options_for_select(@workers, student.leader_first), { label: t('students.leader_1') ,:prompt => 'Selecciona un lider',class: "form-control " ,required: true}) %>
+                    <%= form.select(:leader_first , options_for_select(@workers, student.leader_first), {label: t('students.leader_1'),:prompt => 'Selecciona un lider'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
                   </div>
 
                   <div class="col-lg-6">
-                       <%= form.select(:leader_second , options_for_select(@workers, student.leader_second), { label: t('students.leader_2') ,:prompt => 'Selecciona un lider',class: "form-control " ,required: true}) %>
+                    <%= form.select(:leader_second , options_for_select(@workers, student.leader_second), {label: t('students.leader_1'),:prompt => 'Selecciona un lider'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
                   </div>
 
                   <div class="col-lg-12">
