@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
   include Deleteable
   include Icons
 
-  # GET /students or /students.json
+
   def index
     show_icons
     @search = params[:fullname] || ""
@@ -58,7 +58,7 @@ class StudentsController < ApplicationController
       end
   end
 
-  # PATCH/PUT /students/1 or /students/1.json
+
   def update
 
       if @student.update(student_params)
