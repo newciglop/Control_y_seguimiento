@@ -35,7 +35,7 @@
             </td>
             <td>
               <% if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
-                  <%= link_to  edit_process_path(state_student) do %>
+                  <%= link_to edit_process_path(state_student) do %>
                      <%= @show_edit %>
                   <% end %>
                <% end %>
@@ -70,6 +70,6 @@
 
 <%= render "layouts/views_partials/button" %>
 <% else %>
-  <% route = "states_students" %>
+  <% route = "Processes" %>
   <%= render "layouts/views_partials/not_found", route: route %>
 <% end %>

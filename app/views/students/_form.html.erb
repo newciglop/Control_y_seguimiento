@@ -5,7 +5,7 @@
       <%= bootstrap_form_with(model: student, local: true,html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
 
         <% if student.errors.any? %>
-          <div id="error_explanation" style="display: none">
+          <div id="error_explanation" style="">
             <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
             <ul>
               <% student.errors.full_messages.each do |message| %>
@@ -36,7 +36,7 @@
 
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <%= form.select(:states_student_id, options_for_select(@c_states_students, student.states_student_id), { label: t('students.states_student') ,:prompt => 'Selecciona un estado',class: "form-control " ,required: true}) %>
+                      <%= form.select(:process_id, options_for_select(@c_states_students, student.process_id), { label: t('students.states_student') ,:prompt => 'Selecciona un estado',class: "form-control " ,required: true}) %>
                     </div>
                   </div>
 

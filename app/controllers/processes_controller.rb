@@ -18,20 +18,20 @@ class ProcessesController < ApplicationController
 
   end
 
-  # GET /states_students/1 or /states_students/1.json
+  # GET /Processes/1 or /Processes/1.json
   def show
   end
 
-  # GET /states_students/new
+  # GET /Processes/new
   def new
     @process = Process.new
   end
 
-  # GET /states_students/1/edit
+  # GET /Processes/1/edit
   def edit
   end
 
-  # POST /states_students or /states_students.json
+  # POST /Processes or /Processes.json
   def create
     @process = Process.new(states_student_params)
 
@@ -42,9 +42,9 @@ class ProcessesController < ApplicationController
          end
   end
 
-  # PATCH/PUT /states_students/1 or /states_students/1.json
+  # PATCH/PUT /Processes/1 or /Processes/1.json
   def update
-    enable_resources(@process,params)
+    enable_resources(@process, params)
       if @process.update(states_student_params)
        redirect_to processes_path, notice: t('states_students.states_students') + " " + t('commons.update_success')
       else
@@ -52,7 +52,7 @@ class ProcessesController < ApplicationController
      end
   end
 
-  # DELETE /states_students/1 or /states_students/1.json
+  # DELETE /Processes/1 or /Processes/1.json
   def destroy
     delete_with_references(@process, processes_path)
   end

@@ -32,6 +32,8 @@ gem 'coffee-rails', '~> 5.0.0'
 gem 'devise'
 gem 'bootstrap_form' ,  '~> 4.0'
 gem 'bootstrap-will_paginate'
+
+
 #gem "stimulus_reflex", "~> 3.4"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

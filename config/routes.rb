@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     post 'new_navigator' , to: "navigators#create_user"
     resources :lists
   resources :offers
-  resources :states_students
+  resources :processes
   resources :students
   resources :users, except: [:show]
   resources :profiles , except: [:new,:edit,:show,:index]
