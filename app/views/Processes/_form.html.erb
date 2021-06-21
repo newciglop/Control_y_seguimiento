@@ -35,11 +35,11 @@
 </div>
 
 
-          <% if @states_student.id? %>
+          <% if @process.id? %>
             <div class="form-group">
               <h4><%= t('commons.disabled&enabled') %></h4>
               <label class="switch">
-                <input type="checkbox" name="enable" id="enable" value="true" <%= @states_student.enable ? "checked='checked'":""%> >
+                <input type="checkbox" name="enable" id="enable" value="true" <%= @process.enable ? "checked='checked'":""%> >
                 <span class="slider round"></span>
               </label>
             </div>
@@ -52,7 +52,7 @@
 
         <div class="card-footer bg-white">
           <button type="submit" class="btn btn-primary mr-2 btn-action">Guardar</button>
-          <%= link_to 'Regresar', states_students_path ,class: "btn btn-light btn-action"  %>
+          <%= link_to 'Regresar', processes_path ,class: "btn btn-light btn-action"  %>
 
 
         </div>
