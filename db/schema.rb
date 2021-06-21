@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_214031) do
+ActiveRecord::Schema.define(version: 2021_06_21_221428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,14 @@ ActiveRecord::Schema.define(version: 2021_06_21_214031) do
 
   create_table "concepts", force: :cascade do |t|
     t.string "name"
+    t.boolean "enable"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "conditions", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
     t.boolean "enable"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -354,7 +362,9 @@ ActiveRecord::Schema.define(version: 2021_06_21_214031) do
     t.bigint "title_id", null: false
     t.bigint "university_id", null: false
     t.boolean "current_worker", default: false
+    t.bigint "condition_id", null: false
     t.index ["city_id"], name: "index_students_on_city_id"
+    t.index ["condition_id"], name: "index_students_on_condition_id"
     t.index ["title_id"], name: "index_students_on_title_id"
     t.index ["type_identification_id"], name: "index_students_on_type_identification_id"
     t.index ["university_id"], name: "index_students_on_university_id"
@@ -474,6 +484,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_214031) do
   add_foreign_key "register_books", "admin_controls"
   add_foreign_key "register_books", "offers"
   add_foreign_key "students", "cities"
+  add_foreign_key "students", "conditions"
   add_foreign_key "students", "titles"
   add_foreign_key "students", "type_identifications"
   add_foreign_key "students", "universities"

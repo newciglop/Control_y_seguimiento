@@ -1,7 +1,7 @@
 class Student < ApplicationRecord
 
 
-  belongs_to :process
+  belongs_to :condition
   belongs_to :type_identification
   belongs_to :city
   belongs_to :university

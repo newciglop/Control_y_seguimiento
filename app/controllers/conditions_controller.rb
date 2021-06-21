@@ -1,6 +1,6 @@
 class ConditionsController < ApplicationController
   before_action :set_states_student, only: %i[ show edit update destroy ]
-  include ConditionesHelper
+  include ConditionsHelper
   include Deleteable
   include Icons
 
@@ -24,7 +24,7 @@ class ConditionsController < ApplicationController
 
   # GET /Conditiones/new
   def new
-    @process = Condition.new
+    @condition = Condition.new
   end
 
   # GET /Conditiones/1/edit
@@ -33,10 +33,10 @@ class ConditionsController < ApplicationController
 
   # POST /Conditiones or /Conditiones.json
   def create
-    @process = Condition.new(states_student_params)
+    @condition = Condition.new(states_student_params)
 
-         if @process.save
-         redirect_to edit_process_path(@process), notice: t('states_students.states_students') + " " + t('commons.create_success')
+         if @condition.save
+         redirect_to edit_condition_path(@condition), notice: t('states_students.states_students') + " " + t('commons.create_success')
          else
             render :new, status: :unprocessable_entity
          end
@@ -46,7 +46,7 @@ class ConditionsController < ApplicationController
   def update
     enable_resources(@condition, params)
       if @condition.update(states_student_params)
-       redirect_to processes_path, notice: t('states_students.states_students') + " " + t('commons.update_success')
+       redirect_to conditions_path, notice: t('states_students.states_students') + " " + t('commons.update_success')
       else
      render :edit, status: :unprocessable_entity
      end
@@ -54,7 +54,7 @@ class ConditionsController < ApplicationController
 
   # DELETE /Conditions/1 or /Condition/1.json
   def destroy
-    delete_with_references(@condition, conditiones_path)
+    delete_with_references(@condition, conditions_path)
   end
 
   private

@@ -19,9 +19,11 @@ Rails.application.routes.draw do
   authenticated :user do
     get 'new_navigator' , to: "navigators#create_user" , as: 'create_navigator'
     post 'new_navigator' , to: "navigators#create_user"
-    resources :lists
+
+
+  resources :conditions
+  resources :lists
   resources :offers
-  resources :processes
   resources :students
   resources :users, except: [:show]
   resources :profiles , except: [:new,:edit,:show,:index]
