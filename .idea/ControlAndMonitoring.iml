@@ -45,7 +45,7 @@
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.8.1, RVM: ruby-2.7.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.7.5, RVM: ruby-2.7.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootstrap (v4.3.1, RVM: ruby-2.7.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bootstrap-datepicker-rails (v1.9.0.1, RVM: ruby-2.7.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bootstrap-select-rails (v1.13.8, RVM: ruby-2.7.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootstrap-will_paginate (v1.0.0, RVM: ruby-2.7.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootstrap_form (v4.5.0, RVM: ruby-2.7.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, RVM: ruby-2.7.0) [gem]" level="application" />
