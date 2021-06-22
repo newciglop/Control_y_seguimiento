@@ -2,7 +2,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import "/nav";
 @import "toggle-switch";
-@import "bootstrap-select";
+/*@import "bootstrap-select";*/
+@import 'bootstrap-select';
 
 .btn-nav-page{
   position: sticky;

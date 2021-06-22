@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  enable: false
+  color: MyString
 
 two:
   name: MyString
-  enable: false
+  color: MyString
