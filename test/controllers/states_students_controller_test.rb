@@ -2,47 +2,47 @@ require 'test_helper'
 
 class StatesStudentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @states_student = states_students(:one)
+    @process = states_students(:one)
   end
 
   test "should get index" do
-    get states_students_url
+    get processes_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_states_student_url
+    get new_process_url
     assert_response :success
   end
 
-  test "should create states_student" do
-    assert_difference('StatesStudent.count') do
-      post states_students_url, params: { states_student: { enable: @states_student.enable, name: @states_student.name } }
+  test "should create process" do
+    assert_difference('Process.count') do
+      post processes_url, params: {process: {enable: @process.enable, name: @process.name } }
     end
 
-    assert_redirected_to states_student_url(StatesStudent.last)
+    assert_redirected_to process_url(Process.last)
   end
 
-  test "should show states_student" do
-    get states_student_url(@states_student)
+  test "should show process" do
+    get process_url(@process)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_states_student_url(@states_student)
+    get edit_process_url(@process)
     assert_response :success
   end
 
-  test "should update states_student" do
-    patch states_student_url(@states_student), params: { states_student: { enable: @states_student.enable, name: @states_student.name } }
-    assert_redirected_to states_student_url(@states_student)
+  test "should update process" do
+    patch process_url(@process), params: {process: {enable: @process.enable, name: @process.name } }
+    assert_redirected_to process_url(@process)
   end
 
-  test "should destroy states_student" do
-    assert_difference('StatesStudent.count', -1) do
-      delete states_student_url(@states_student)
+  test "should destroy process" do
+    assert_difference('Process.count', -1) do
+      delete process_url(@process)
     end
 
-    assert_redirected_to states_students_url
+    assert_redirected_to processes_url
   end
 end

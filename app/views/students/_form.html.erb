@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-sm-8 offset-sm-2">
-    <div class="card card-margin">
+    <div  class="card card-margin">
 
       <%= bootstrap_form_with(model: student, local: true,html: { class: "forms-sample needs-validation", novalidate: true }) do |form| %>
 
         <% if student.errors.any? %>
-          <div id="error_explanation" style="display: none">
+          <div id="error_explanation" style="">
             <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
             <ul>
               <% student.errors.full_messages.each do |message| %>
@@ -36,7 +36,7 @@
 
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <%= form.select(:states_student_id, options_for_select(@c_states_students, student.states_student_id), { label: t('students.states_student') ,:prompt => 'Selecciona un estado',class: "form-control " ,required: true}) %>
+                      <%= form.select(:condition_id, options_for_select(@c_states_students, student.condition_id), { label: t('students.states_student') ,:prompt => 'Selecciona un estado',class: "form-control " ,required: true}) %>
                     </div>
                   </div>
 
@@ -84,9 +84,9 @@
                   </div>
 
 
-                  <div class="col-lg-6 pr-2" id="select_picker">
-                    <div class="form-group">
-                       <%= form.select(:city_id, options_for_select(@cities, student.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                  <div class="col-lg-6 pr-2">
+                    <div class="form-group" id="content-city">
+                       <%= form.select(:city_id, options_for_select(@cities, student.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{id:"city" , class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
                     </div>
                   </div>
 
@@ -264,5 +264,7 @@
     </div>
   </div>
 </div>
+<%= render "layouts/views_partials/button" %>
+
 
 

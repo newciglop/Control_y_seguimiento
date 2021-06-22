@@ -6,10 +6,10 @@
   </div>
 </div>
 
-<%= render 'form', states_student: @states_student %>
+  <%= render 'form', condition: @condition %>
 <% else %>
 
-  <% route = "states_students" %>
+  <% route = "conditions" %>
   <%= render "layouts/views_partials/not_found", route: route %>
 
 <% end %>

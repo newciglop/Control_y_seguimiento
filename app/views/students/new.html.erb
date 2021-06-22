@@ -1,31 +1,11 @@
 <%  if current_user.role_id == User.ADMINISTRATOR  || current_user.role_id == User.EDITOR %>
 <div class="row">
   <div class="col-sm-10 offset-sm-1 text-center">
-    <h3 class="my-4">Nuevo Practicante</h3>
+    <h3 class="my-4" >Nuevo Practicante</h3>
   </div>
 </div>
 
 <%= render 'form', student: @student %>
 
 
-
-    <script type="text/javascript" charset="utf-8">
-
-        (function()
-        {
-            if( window.localStorage )
-            {
-                if( !localStorage.getItem('firstLoad') )
-                {
-                    localStorage['firstLoad'] = true;
-                    window.location.reload();
-                }
-                else
-                    localStorage.removeItem('firstLoad');
-            }
-        })();
-</script>
-<% else %>
-  <% route = "students" %>
-  <%= render "layouts/views_partials/not_found", route: route %>
 <% end %>

@@ -27,11 +27,13 @@ gem 'i18n-active_record', :require => 'i18n/active_record'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'will_paginate', '~> 3.1.0'
-gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-select-rails', '~> 1.13', '>= 1.13.8'
 gem 'coffee-rails', '~> 5.0.0'
 gem 'devise'
 gem 'bootstrap_form' ,  '~> 4.0'
 gem 'bootstrap-will_paginate'
+
+
 #gem "stimulus_reflex", "~> 3.4"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
