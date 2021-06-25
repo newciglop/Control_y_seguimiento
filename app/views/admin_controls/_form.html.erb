@@ -125,7 +125,9 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6 pr-2">
                       <div class="form-group">
+                        <div id="content-dropdown">
                         <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {label:t('admin_control.company'),:prompt => 'Selecciona una entidad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                        </div>
                       </div>
                     </div>
                     <div class="col-lg-6">
