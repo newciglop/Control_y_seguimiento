@@ -85,8 +85,8 @@
 
 
                   <div class="col-lg-6 pr-2">
-                    <div class="form-group" id="content-city">
-                       <%= form.select(:city_id, options_for_select(@cities, student.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{id:"city" , class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                    <div id="content-dropdown">
+                       <%= form.select(:city_id, options_for_select(@cities, student.city_id), {label:t('offer.location'),:prompt => 'Selecciona un ciudad'},{id:"city" , class: "select2" , required: true , data: { live_search: 'true' }}) %>
                     </div>
                   </div>
 
@@ -149,13 +149,17 @@
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <%= form.select(:university_id, options_for_select(@universities, student.university_id), {label:t('students.university'),:prompt => 'Selecciona una universidad'},{class: "form-control selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                      <div id="content-dropdown">
+                      <%= form.select(:university_id, options_for_select(@universities, student.university_id), {label:t('students.university'),:prompt => 'Selecciona una universidad'},{style:'width:100%',class: "form-control select2" , required: true , data: { live_search: 'true' }}) %>
+                      </div>
                     </div>
                   </div>
 
                   <div class="col-lg-6 pr-2">
                     <div class="form-group">
-                      <%= form.select(:title_id, options_for_select(@titles, student.title_id), {label:t('students.title'),:prompt => 'Selecciona un grado'},{class: "form-control selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                      <div id="content-dropdown">
+                      <%= form.select(:title_id, options_for_select(@titles, student.title_id), {label:t('students.title'),:prompt => 'Selecciona un grado'},{style:'width:100%',class: "form-control select2" , required: true , data: { live_search: 'true' }}) %>
+                      </div>
                     </div>
                   </div>
 
@@ -200,11 +204,15 @@
                 <div class="row no-gutters">
 
                   <div class="col-lg-6 pr-2">
-                    <%= form.select(:leader_first , options_for_select(@workers, student.leader_first), {label: t('students.leader_1'),:prompt => 'Selecciona un lider'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                    <div id="content-dropdown">
+                    <%= form.select(:leader_first , options_for_select(@workers, student.leader_first), {label: t('students.leader_1'),:prompt => 'Selecciona un lider'},{class: "form-control select2" ,style:'width:100%', required: true , data: { live_search: 'true' }}) %>
+                    </div>
                   </div>
 
                   <div class="col-lg-6">
-                    <%= form.select(:leader_second , options_for_select(@workers, student.leader_second), {label: t('students.leader_1'),:prompt => 'Selecciona un lider'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                    <div id="content-dropdown">
+                    <%= form.select(:leader_second , options_for_select(@workers, student.leader_second), {label: t('students.leader_2'),:prompt => 'Selecciona un lider'},{class: "form-control select2" , style:'width:100%',required: true , data: { live_search: 'true' }}) %>
+                    </div>
                   </div>
 
                   <div class="col-lg-12">

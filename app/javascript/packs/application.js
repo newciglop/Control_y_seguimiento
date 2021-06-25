@@ -6,7 +6,7 @@
 require("jquery")
 require("flatpickr")
 import { Spanish } from "flatpickr/dist/l10n/es.js";
-require("../customize/bootstrap-select.min").start()
+require("../customize/bootstrap-select.min")
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
@@ -24,6 +24,14 @@ require("trix")
 require("@rails/actiontext")
 
 document.addEventListener('turbolinks:load', function() {
+
+    $('.select2').select2(
+        {
+            width: 'resolve',
+           }
+    );
+
+
     flatpickr(".datepicker", {
         "locale": Spanish, // locale for this instance only
         dateFormat: "Y-m-d",
