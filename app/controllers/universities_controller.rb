@@ -26,7 +26,7 @@ class UniversitiesController < ApplicationController
   def show
   end
 
-  # GET /universities/new
+
   def new
     agreement
     combo_box_company

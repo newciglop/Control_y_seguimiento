@@ -47,7 +47,9 @@
 
                   <div class="col-lg-8">
                     <div class="form-group">
-                      <%= form.select(:worker_id, options_for_select(@workers, offer.worker_id), {label:t('offer.leader'),:prompt => 'Selecciona un lider'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                      <div id="content-dropdown">
+                      <%= form.select(:worker_id, options_for_select(@workers, offer.worker_id), {label:t('offer.leader'),:prompt => 'Selecciona un lider'},{class: "select2" , required: true , data: { live_search: 'true' }}) %>
+                      </div>
                     </div>
                   </div>
 
@@ -411,12 +413,16 @@
                 <div class="row no-gutters">
                   <div class="col-lg-8 pr-2">
                     <div class="form-group">
-                      <%= form.select(:company_id, options_for_select(@companies, offer.company_id), {label:t('offer.company'),:prompt => 'Selecciona una entidad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                      <div id="content-dropdown">
+                      <%= form.select(:company_id, options_for_select(@companies, offer.company_id), {label:t('offer.company'),:prompt => 'Selecciona una entidad'},{class: "select2" , required: true , data: { live_search: 'true' }}) %>
+                      </div>
                     </div>
                   </div>
                   <div class="col-lg-4">
                     <div class="form-group">
-                      <%= form.select(:city_id, options_for_select(@cities, offer.city_id), {label:t('offer.location'),:prompt => 'Selecciona una entidad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                      <div id="content-dropdown">
+                      <%= form.select(:city_id, options_for_select(@cities, offer.city_id), {label:t('offer.location'),:prompt => 'Selecciona una entidad'},{ style:'width:100%' ,class: "select2" , required: true , data: { live_search: 'true' }}) %>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -443,7 +449,7 @@
                     <%= form.text_field :email_company ,label:t('offer.email_company') , class: "form-control" , required: true%>
                   </div>
                   <div class="col-lg-6  pr-2">
-                    <%= form.text_field :email_alternative , label:t('offer.email_company'),class: "form-control", required: true %>
+                    <%= form.text_field :email_alternative , label:"Correo alternativo",class: "form-control", required: true %>
                   </div>
                 </div>
                 <div class="row no-gutters">

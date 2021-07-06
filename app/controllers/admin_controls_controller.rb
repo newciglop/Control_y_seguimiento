@@ -45,7 +45,6 @@ class AdminControlsController < ApplicationController
 
   def show
     show_states
-    #combo_box_data
     percent_completed(@admin_control)
     show_tracking_type(@admin_control)
     show_state_admin_control(@admin_control)

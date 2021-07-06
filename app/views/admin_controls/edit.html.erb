@@ -1,4 +1,9 @@
 <%  if current_user.role_id == User.ADMINISTRATOR || @admin_control.user_id == current_user.id  || current_user.role_id == User.EDITOR %>
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1 text-center">
+      <h3 class="my-4">Editar Seguimiento Admin</h3>
+    </div>
+  </div>
 <%= render 'form', admin_control: @admin_control %>
 <% else %>
 <% route = "admin_controls" %>

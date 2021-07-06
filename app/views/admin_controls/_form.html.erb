@@ -125,12 +125,16 @@
                   <div class="row no-gutters">
                     <div class="col-lg-6 pr-2">
                       <div class="form-group">
-                        <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {label:t('admin_control.company'),:prompt => 'Selecciona una entidad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                        <div id="content-dropdown">
+                        <%= form.select(:company_id, options_for_select(@companies, admin_control.company_id), {label:t('admin_control.company'),:prompt => 'Selecciona una entidad'},{class: "select2" , required: true , data: { live_search: 'true' }}) %>
+                        </div>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {label:t('admin_control.location'),:prompt => 'Selecciona una ciudad'},{class: "selectpicker" , required: true , data: { live_search: 'true' }}) %>
+                        <div id="content-dropdown">
+                        <%= form.select(:city_id, options_for_select(@cities, admin_control.city_id), {label:t('admin_control.location'),:prompt => 'Selecciona una ciudad'},{class: "select2" , required: true , data: { live_search: 'true' }}) %>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -152,14 +156,18 @@
                   <div class="row no-gutters">
                     <div class="col-lg-12">
                       <div class="form-group">
-                        <%= form.select(:responsible_function_id, options_for_select(@responsible_functions, admin_control.responsible_function_id), {label: "Rol de Responsable",:prompt => 'Selecciona un tipo'},{class: "form-control " }) %>
+                        <div id="content-dropdown">
+                        <%= form.select(:responsible_function_id, options_for_select(@responsible_functions, admin_control.responsible_function_id), {label: "Rol de Responsable",:prompt => 'Selecciona un tipo'},{class: "form-control select2" }) %>
+                        </div>
                       </div>
                     </div>
 
                     <div class="col-lg-12">
                       <div class="form-group">
+                        <div id="content-dropdown">
                         <%= label_tag :manager_elements , "Responsable" %>
-                        <%= select_tag "manager_elements[]", options_for_select(@workers, admin_control.manager_elements),:prompt => 'Escoger un elemento' , class: "form-control selectpicker", multiple: true , data: { live_search: 'true' } %>
+                        <%= select_tag "manager_elements[]", options_for_select(@workers, admin_control.manager_elements),:prompt => 'Escoger un elemento' , class: "form-control select2", multiple: true , data: { live_search: 'true' } %>
+                        </div>
                       </div>
                     </div>
 
@@ -189,8 +197,10 @@
 
                     <div class="col-lg-12 pr-2">
                       <div class="form-group">
+                        <div id="content-dropdown">
                         <%= label_tag :supports_elements , "Ayudantes" %>
-                        <%= select_tag "support_elements[]", options_for_select(@workers, admin_control.support_elements),:prompt => 'Escoger un elemento' , class: "form-control selectpicker", multiple: true , data: { live_search: 'true' } %>
+                        <%= select_tag "support_elements[]", options_for_select(@workers, admin_control.support_elements),:prompt => 'Escoger un elemento' , class: "form-control select2", multiple: true , data: { live_search: 'true' } %>
+                        </div>
                       </div>
                     </div>
                     <div class="col-lg-12">
